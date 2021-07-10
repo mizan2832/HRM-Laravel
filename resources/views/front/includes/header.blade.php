@@ -184,9 +184,13 @@
                     </a>
 
                     <!-- item-->
-                    <a href="#" class="dropdown-item notify-item">
+                    <a href="{{ route('login') }}" class="dropdown-item notify-item">
                         <i class="fas fa-power-off"></i>
-                        <span>Logout</span>
+                        <span>Login</span>
+                    </a>
+                    <a href="{{ route('register') }}" class="dropdown-item notify-item">
+                        <i class="fas fa-power-off"></i>
+                        <span>Register</span>
                     </a>
                 </div>
             </li>
