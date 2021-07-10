@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Auth;
 class AdminMiddleware
 {
     /**
@@ -15,10 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role->role_id == 1)
-        {
-            return $next($request);
-        }elseif (Auth::check() && Auth::user()->role->role_id == 2)
+        if (Auth::check() && Auth::user()->role->id == 1)
         {
             return $next($request);
         } else {

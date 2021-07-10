@@ -171,9 +171,13 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
+                  
+
+                    <!-- item-->
+                    @if (Auth::check())
                     <div class="dropdown-item noti-title">
                         <h5 class="text-overflow">
-                            <small>Hello, admin</small>
+                            <small>Hello, {{ Auth::user()->name }}</small>
                         </h5>
                     </div>
 
@@ -182,16 +186,26 @@
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
-
-                    <!-- item-->
-                    <a href="{{ route('login') }}" class="dropdown-item notify-item">
-                        <i class="fas fa-power-off"></i>
-                        <span>Login</span>
-                    </a>
-                    <a href="{{ route('register') }}" class="dropdown-item notify-item">
-                        <i class="fas fa-power-off"></i>
-                        <span>Register</span>
-                    </a>
+                        <a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();" class="dropdown-item notify-item">
+                            <i class="fas fa-power-off"></i>
+                            <span>Logout</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        @else 
+                        <a href="{{ route('login') }}" class="dropdown-item notify-item">
+                            <i class="fas fa-power-off"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="{{ route('register') }}" class="dropdown-item notify-item">
+                            <i class="fas fa-power-off"></i>
+                            <span>Register</span>
+                        </a>
+                    @endif
+                    
+                   
                 </div>
             </li>
 

@@ -21,6 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'admin'], function()
+{
+    Route::get('add-user', function () {
+        return view('front.pages.add_user');
+    })->name('add-user');
+});

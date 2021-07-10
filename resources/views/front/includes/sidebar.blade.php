@@ -13,10 +13,20 @@
                 </li>
 
                 <li class="submenu">
-                    <a href="users.html">
-                        <i class="fas fa-user"></i>
+                    <a id="tables" href="#">
+                        <i class="fas fa-table"></i>
                         <span> Users </span>
+                        <span class="menu-arrow"></span>
                     </a>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ route('add-user') }}"> <i class="fas fa-user-plus"></i>Add User</a>
+
+                        </li>
+                        <li>
+                            <a href="#"> <i class="far fa-calendar-alt"></i>Manage User</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="submenu">
