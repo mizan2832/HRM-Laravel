@@ -18,7 +18,16 @@ class AdminMiddleware
         if (Auth::check() && Auth::user()->role->id == 1)
         {
             return $next($request);
-        } else {
+        }
+        elseif (Auth::check() && Auth::user()->role->id == 2)
+        {
+            return $next($request);
+        }
+        elseif (Auth::check() && Auth::user()->role->id == 3)
+        {
+            return $next($request);
+        }
+         else {
             return redirect()->route('home');
         }
     }

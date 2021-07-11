@@ -84,14 +84,108 @@
                                     <input type="file" name="photo">
                                 </div>
                             </div>
-                        </form>
+                       
 
                     </div>
                     
                   </div>
             </div>
             <div class="col-md-6 col-sm-6">
-                <div class="card-header">Person Details</div>
+              <div class="card per-del">
+                <div class="card-header">
+                    Account Login
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" name="email" class="form-control" id="inputEmail3"  autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password" class="form-control" id="password"  autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-2 col-form-label">Confirm Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password_confirmation" class="form-control" id="password"  autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card per-del">
+                <div class="card-header">
+                    Module Access
+                </div>
+                <div class="card-body">
+                     <div class="form-group row">
+                        <label style="margin-top: -8px;" for="employee" class="col-sm-3 col-form-label">Employee</label>
+                        <div class="col-sm-9">
+                            <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="attd_view" id="attd_view" value="attd_view">
+                                    <label class="form-check-label" for="attd_view">view</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="attd_add" id="attd_add" value="attd_add">
+                                    <label class="form-check-label" for="attd_add">Add</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="attd_edit" id="attd_edit" value="attd_edit" >
+                                    <label class="form-check-label" for="attd_edit">Edit</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="attd_delete" id="attd_delete" value="attd_delete" >
+                                    <label class="form-check-label" for="attd_delete">Delete</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label style="margin-top: -8px;" for="department" class="col-sm-3 col-form-label">Department</label>
+                        <div class="col-sm-9">
+                            <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="emp_view" id="dept_view" value="dept_view">
+                                    <label class="form-check-label" for="dept_view">view</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="dept_add" id="dept_add" value="dept_add">
+                                    <label class="form-check-label" for="dept_add">Add</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="dept_edit" id="dept_edit" value="dept_edit" >
+                                    <label class="form-check-label" for="dept_edit">Edit</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="dept_delete" id="dept_delete" value="dept_delete" >
+                                    <label class="form-check-label" for="dept_delete">Delete</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label style="margin-top: -8px;" for="attendance" class="col-sm-3 col-form-label">Attendance</label>
+                        <div class="col-sm-9">
+                            <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="attd_view" id="dept_view" value="dept_view">
+                                    <label class="form-check-label" for="dept_view">view</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="dept_add" id="dept_add" value="dept_add">
+                                    <label class="form-check-label" for="dept_add">Add</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="dept_edit" id="dept_edit" value="dept_edit" >
+                                    <label class="form-check-label" for="dept_edit">Edit</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="dept_delete" id="dept_delete" value="dept_delete" >
+                                    <label class="form-check-label" for="dept_delete">Delete</label>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
     </div>
