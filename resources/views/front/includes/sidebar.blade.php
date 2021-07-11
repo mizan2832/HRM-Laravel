@@ -61,7 +61,7 @@
                     </a>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#"><i class="fas fa-user-plus"></i> New Employee</a>
+                            <a href="{{ route('employee.create') }}"><i class="fas fa-user-plus"></i> Add Employee</a>
 
                         </li>
                         <li>

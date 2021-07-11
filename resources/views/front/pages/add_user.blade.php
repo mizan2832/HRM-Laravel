@@ -97,9 +97,15 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                        <label for="username" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                            <input type="email" name="email" class="form-control" id="inputEmail3"  autocomplete="off">
+                            <input type="username" name="username" class="form-control" id="username"  autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" name="email" class="form-control" id="email"  autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">

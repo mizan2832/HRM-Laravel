@@ -26,4 +26,8 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('add-user', function () {
         return view('front.pages.add_user');
     })->name('add-user');
+
+    Route::resource('employee','EmployeeController');
+
+
 });
