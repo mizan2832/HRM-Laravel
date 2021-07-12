@@ -442,7 +442,6 @@ a {
     margin-top: 50px
 }
 
-
 body.adminbody .main-sidebar.left {
     bottom: 0;
     margin-bottom: 0;
@@ -1626,28 +1625,28 @@ a.btn:focus {
 }
 
 .blog_list {
-    float: left; 
-    margin-right:10px;
+    float: left;
+    margin-right: 10px;
 }
 
 .blog_list img {
-    max-width:180px; 
-    height:auto;
+    max-width: 180px;
+    height: auto;
 }
 
 .mail_list {
-    float: left; 
-    margin-right:10px;
+    float: left;
+    margin-right: 10px;
 }
 
 .mail_list img {
-    max-width:25px; 
-    height:auto;
+    max-width: 25px;
+    height: auto;
 }
 
 .img_slider {
-    max-width:200px; 
-    height:auto;
+    max-width: 200px;
+    height: auto;
 }
 
 .jFiler-input-dragDrop {
@@ -1656,5 +1655,5 @@ a.btn:focus {
 }
 
 div.dataTables_wrapper div.dataTables_paginate ul.pagination {
-    justify-content: normal !important; 
+    justify-content: normal !important;
 }
