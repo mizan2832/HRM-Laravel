@@ -24,4 +24,5 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/plugins/chart.js/Chart.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/plugins/datatables/datatables.min.css') }}" />
     <!-- END CSS for this page -->
+    @stack('head')
 </head>

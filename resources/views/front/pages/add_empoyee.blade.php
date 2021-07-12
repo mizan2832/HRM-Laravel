@@ -1,5 +1,8 @@
 @extends('front.master')
 @section('title','Add new employee')
+@push('head')
+
+@endpush
 @section('content')
 <h3 style="margin-left: 10px;">Add Employee</h3>
 <div class="container">
@@ -197,10 +200,10 @@
             <div class="card-header">
                 Financial Details
             </div>
-            <div class="card-body">
+            <div class="card-body wrapper">
                 <div class="form-group row">
                     <label for="employee_id" class="col-sm-3 col-form-label">Basic Salary</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-7">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
@@ -209,15 +212,23 @@
                          </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <select name="salary" id=""></select>
-                    <div class="col-sm-9">
+                <div class="form-group rem row">
+                    <select name="salary" class="col-sm-4 ml-2" id="">
+                        <option value="hr">House</option>
+                        <option value="hr">Transportation</option>
+                        <option value="hr">Telephone</option>
+                    </select>
+                    <div class="col-sm-4">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
                            <input type="text" class="form-control">
                          </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="javascript:void(0);" class="add_button"><i class="far fa-plus-square"></i></a>
+                        
                     </div>
                 </div>
                 
@@ -228,3 +239,32 @@
     </div>
 </div>
 @endsection
+@push('js')
+     <script type="text/javascript">
+            $(document).ready(function(){
+
+               
+                var maxField = 10; //Input fields increment limitation
+                var addButton = $('.add_button'); //Add button selector
+                var wrapper = $('.wrapper'); //Input field wrapper
+                var fieldHTML = '<div class="form-group rem row"><select name="salary" class="col-sm-4 ml-2" id=""><option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text" class="form-control"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'; 
+
+                var x = 1; //Initial field counter is 1
+                
+                //Once add button is clicked
+                $(addButton).click(function(){
+                    //Check maximum number of input fields
+                    if(x < maxField){ 
+                        x++; //Increment field counter
+                        $(wrapper).append(fieldHTML); //Add field html
+                    }
+                });
+                
+                //Once remove button is clicked
+                $(wrapper).on('click', '.remove', function(e){
+                    $(this).parents('.rem').remove(); //Remove field html
+                    x--; //Decrement field counter
+                });
+            });
+    </script>
+@endpush
