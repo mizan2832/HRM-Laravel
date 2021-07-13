@@ -213,7 +213,7 @@
                     </div>
                 </div>
                 <div class="form-group rem row">
-                    <select name="salary" class="col-sm-4 ml-2" id="">
+                    <select name="salary" class="col-sm-4 ml-2" id="salary">
                         <option value="hr">House</option>
                         <option value="hr">Transportation</option>
                         <option value="hr">Telephone</option>
@@ -223,14 +223,34 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="text" class="form-control">
+                           <input type="text" name="amount" class="form-control">
                          </div>
                     </div>
                     <div class="col-sm-2">
                         <a href="javascript:void(0);" class="add_button"><i class="far fa-plus-square"></i></a>
                         
                     </div>
+                </div><br>
+                <div class="form-group deduct row">
+                    <select name="deduction" class="col-sm-4 ml-2" id="deduction">
+                        <option value="">Deduction</option>
+                        <option value="hr">Monthly tax</option>
+                        <option value="hr">Income Tax</option>
+                    </select>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                           </div>
+                           <input type="text" name="damount" class="form-control">
+                         </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="javascript:void(0);" class="add_deduction"><i class="far fa-plus-square"></i></a>
+                        
+                    </div>
                 </div>
+                
                 
             </div>
           </div>
@@ -247,16 +267,23 @@
                 var maxField = 10; //Input fields increment limitation
                 var addButton = $('.add_button'); //Add button selector
                 var wrapper = $('.wrapper'); //Input field wrapper
-                var fieldHTML = '<div class="form-group rem row"><select name="salary" class="col-sm-4 ml-2" id=""><option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text" class="form-control"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'; 
+                // var fieldHTML = '<div class="form-group rem row"><select name="salary" class="col-sm-4 ml-2" id=""><option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text" name=\"" + id + "\"class="form-control"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'; 
 
-                var x = 1; //Initial field counter is 1
+                var x = 0; //Initial field counter is 1
                 
                 //Once add button is clicked
                 $(addButton).click(function(){
                     //Check maximum number of input fields
                     if(x < maxField){ 
                         x++; //Increment field counter
-                        $(wrapper).append(fieldHTML); //Add field html
+                        $(wrapper).append(
+                            
+                            '<div class="form-group rem row"><select name="salary'+x+'" ' 
+                            + 'class="col-sm-4 ml-2"  id="'+x+'">'
+                            + '<option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text"'
+                            + 'name="amount'+x+'" class="form-control"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'
+                            
+                            ); //Add field html
                     }
                 });
                 
@@ -265,6 +292,8 @@
                     $(this).parents('.rem').remove(); //Remove field html
                     x--; //Decrement field counter
                 });
+
+                
             });
     </script>
 @endpush
