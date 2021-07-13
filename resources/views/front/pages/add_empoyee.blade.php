@@ -208,7 +208,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="text" class="form-control">
+                           <input type="number" name="basic" class="inst_amount form-control">
                          </div>
                     </div>
                 </div>
@@ -223,7 +223,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="text" class="form-control">
+                           <input type="number" name="amount" class="inst_amount form-control">
                          </div>
                     </div>
                     <div class="col-sm-2">
@@ -231,11 +231,47 @@
                         
                     </div>
                 </div>
-                
+               
             </div>
           </div>
-
+          <div class="card per-del">
+             <div class="card-body dedu">
+                <div class="form-group deduct row">
+                    <select name="deduction" class="col-sm-4 ml-2" id="">
+                        <option value="">Deduction</option>
+                        <option value="tax">Tax</option>
+                        <option value="hr">Montly Tax</option>
+                    </select>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                           </div>
+                           <input type="number" name="deduct_amount" class="minus_amount form-control">
+                         </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="javascript:void(0);" class="add_deduction"><i class="far fa-plus-square"></i></a>
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="total_salary" class="col-sm-3 col-form-label">Total Salary</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                           </div>
+                           <input type="text" name="total_salary" class="form-control total_salary">
+                         </div>
+                    </div>
+                </div>
+               
+            </div>
+          </div>
+        
         </div>
+       
     </div>
 </div>
 @endsection
@@ -246,25 +282,68 @@
                
                 var maxField = 10; //Input fields increment limitation
                 var addButton = $('.add_button'); //Add button selector
-                var wrapper = $('.wrapper'); //Input field wrapper
-                var fieldHTML = '<div class="form-group rem row"><select name="salary" class="col-sm-4 ml-2" id=""><option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text" class="form-control"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'; 
-
                 var x = 1; //Initial field counter is 1
-                
+                var wrapper = $('.wrapper');
                 //Once add button is clicked
+             
                 $(addButton).click(function(){
                     //Check maximum number of input fields
                     if(x < maxField){ 
                         x++; //Increment field counter
-                        $(wrapper).append(fieldHTML); //Add field html
+                        $(wrapper).append(
+                            '<div class="form-group rem row"><select name='
+                            + '"salary'+x+'" class=" col-sm-4 ml-2" id=""><option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text" '
+                            +' name="amount'+x+'" class="inst_amount form-control"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>');
                     }
+                    sumIt();  
                 });
                 
                 //Once remove button is clicked
                 $(wrapper).on('click', '.remove', function(e){
                     $(this).parents('.rem').remove(); //Remove field html
                     x--; //Decrement field counter
+                    sumIt();  
                 });
+                var y = 1; //Initial field counter is 1
+                
+                //Once add button is clicked
+                
+                $('.add_deduction').click(function(){
+                    
+                    if(y < maxField){ 
+                        y++; //Increment field counter
+                        $('.dedu').append(
+                            '<div class="form-group deduct row"><select name='
+                            + '"deduct_type'+y+'" class="col-sm-4 ml-2" id=""><option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text" '
+                            +' name="deduct_amount'+y+'" class="minus_amount form-control"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="deduction" title="Add field"><i class="fas fa-minus"></i></button> </div></div>');
+                            sumIt();  
+                    }
+                });
+                
+                //Once remove button is clicked
+                $('.dedu').on('click', '.deduction', function(e){
+                    $(this).parents('.deduct').remove(); //Remove field html
+                    x--; //Decrement field counter
+                    sumIt();  
+                });
+
+                $(".inst_amount").focusout(function(){
+                    sumIt();
+                });
+
+                function sumIt() {
+                    var total = 0, val;
+                        $('.inst_amount').each(function() {
+                            val = $(this).val();
+                            total = total + val;
+                          
+                        });
+
+                         $('.total_salary').val(total);
+                    }
+              
             });
+
+
     </script>
 @endpush
