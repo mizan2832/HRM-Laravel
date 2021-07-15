@@ -1,7 +1,7 @@
 @extends('front.master')
 @section('title','Add new employee')
 @push('head')
-
+<link rel="stylesheet" href="{{ asset('front/assets/validation/styles.css') }} ">
 @endpush
 @section('content')
 <h3 style="margin-left: 10px;">Add Employee</h3>
@@ -9,114 +9,129 @@
     <div class="row col-md-12 col-sm-12 mt-2">
         <div class="col-md-6 col-sm-6">
             <div class="card per-del">
-                <div class="card-header">Person Details</div>
+                <div class="card-header"  style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">Person Details</div>
                 <div class="card-body">
 
-                    <form autocomplete="off" action="#">
+                    <form  action="{{ route('employee.store') }}" id="validate_form" method="POST">
+                        {{ csrf_field() }}
                         <div class="form-group row">
                             <label for="name" class="col-sm-3 col-form-label">Name</label>
                             <div class="col-sm-9">
-                                <input type="text" name="name" class="form-control" id="name" autocomplete="off">
+                                <input type="text" name="name" class="form-control" id="name" data-parsley-required-message="Empoyee name is required.
+                                " data-parsley-required="true"  data-parsley-pattern="[a-zA-Z]+$" data-parsley-trigger="keyup"  autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="father_name" class="col-sm-3 col-form-label">Father Name</label>
                             <div class="col-sm-9">
-                                <input type="text" name="father_name" class="form-control" id="father_name" autocomplete="off">
+                                <input type="text" name="father_name" class="form-control " data-parsley-required-message="Father name is required.
+                                " data-parsley-required="true"  data-parsley-pattern="[a-zA-Z]+$" data-parsley-trigger="keyup" id="father_name" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="gender" class="col-sm-3 col-form-label">Gender</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="gender" id="gender">
-                                    <option value="">Male</option>
-                                    <option value="">Female</option>
+                                <select class="form-control" data-parsley-required-message="Gender is required.
+                                " data-parsley-required="true"   name="gender" id="gender">
+                                    <option value="m">Male</option>
+                                    <option value="f">Female</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="birth" class="col-sm-3 col-form-label">Date of birth</label>
                             <div class="col-sm-9">
-                                <input type="date" name="date" class="form-control" id="birth" autocomplete="off">
+                                <input type="date" name="date" class="form-control" id="birth" data-parsley-required-message="Birth date is required."
+                                data-parsley-type="date" data-parsley-required="true"	
+                                required autocomplete="off">
                             </div>
                         </div>
                     
                         <div class="form-group row">
                             <label for="phone1" class="col-sm-3 col-form-label">Phone 1</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="phone1" name="phone1" autocomplete="off">
+                                <input type="text" class="form-control" id="phone1" name="phone1" data-parsley-type="number" data-parsley-range="[0, 9]" data-parsley-required="true"	data-parsley-required-message="Phone number is required." data-parsley-max="15"	 autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="phone2" class="col-sm-3 col-form-label">Phone 2</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="phone2" name="phone2" autocomplete="off">
+                                <input type="text" data-parsley-type="number" data-parsley-range="[0, 9]" data-parsley-max="15" data-parsley-required="true"	 class="form-control" id="phone2" name="phone2" data-parsley-required-message="Phone number is required.
+                                " data-parsley-required="true"  autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="local_address" class="col-sm-3 col-form-label">Local Address</label>
                             <div class="col-sm-9">
-                                <textarea name="local_area" id="local_area" class="form-controll" cols="43" rows="4"></textarea>
+                                <textarea name="local_address" data-parsley-required-message="Present address is required.
+                                " data-parsley-required="true"  	 id="local_address" class="form-controll" cols="43" rows="4"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="permanent_address" class="col-sm-3 col-form-label">Parmanent Address</label>
                             <div class="col-sm-9">
-                                <textarea name="permanent_area" id="permanent_area" class="form-controll" cols="43" rows="4"></textarea>
+                                <textarea name="permanent_area" id="permanent_area" class="form-controll" data-parsley-required-message="Permanent address is required.
+                                " data-parsley-required="true" cols="43" rows="4"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="nationality" class="col-sm-3 col-form-label">Nationality</label>
+                            <label for="nationality" data-parsley-required="true"	 class="col-sm-3 col-form-label">Nationality</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nationality" name="nationality" autocomplete="off">
+                                <input type="text" data-parsley-required-message="Nationality is required.
+                                " data-parsley-required="true"  class="form-control" id="nationality" name="nationality" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="reference1" class="col-sm-3 col-form-label">Reference 1</label>
+                            <label for="reference1" data-parsley-required="true"	 class="col-sm-3 col-form-label">Reference 1</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="reference1" name="reference1" autocomplete="off">
+                                <input type="text" class="form-control" data-parsley-required-message="Reference is required.
+                                " data-parsley-required="true"  id="reference1" name="reference1" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="reference1_phone" class="col-sm-3 col-form-label">Reference 1 Phone</label>
+                            <label for="reference1_phone" data-parsley-required="true"	 class="col-sm-3 col-form-label">Reference 1 Phone</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="reference1_phone" name="reference1_phone" autocomplete="off">
+                                <input type="text" class="form-control" id="reference1_phone" data-parsley-required-message="Phone number is required.
+                                " data-parsley-required="true"  name="reference1_phone" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="reference2" class="col-sm-3 col-form-label">Reference 2</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="reference2" name="reference2" autocomplete="off">
+                                <input type="text" data-parsley-required="true"	 class="form-control" data-parsley-required-message="Phone number is required.
+                                " data-parsley-required="true"  id="reference2" name="reference2" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="reference2_phone" class="col-sm-3 col-form-label">Reference 2 Phone</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="reference2_phone" name="reference2_phone" autocomplete="off">
+                                <input type="text" data-parsley-required-message="Phone number is required.
+                                " data-parsley-required="true" 	 class="form-control" id="reference2_phone" name="reference2_phone" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="zip_code" class="col-sm-3 col-form-label">Zip Code</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="zip_code" name="zip_code" autocomplete="off">
+                                <input type="text" data-parsley-required-message="Zip code is required.
+                                " data-parsley-required="true" 	 class="form-control" id="zip_code" name="zip_code" autocomplete="off">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="meritial_status" class="col-sm-3 col-form-label">Meritial status</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="meritial_status" id="meritial_status">
+                                <select class="form-control" data-parsley-required="true" name="meritial_status" id="meritial_status">
                                     <option value="">Select</option>
-                                    <option value="">Bachelor</option>
-                                    <option value="">Merried</option>
+                                    <option value="b">Bachelor</option>
+                                    <option value="m">Merried</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="photo" class="col-sm-3 col-form-label">Photo</label>
                             <div class="col-sm-9">
-                                <input type="file" name="photo">
+                                <input data-parsley-required="true"	 type="file" name="photo">
                             </div>
                         </div>
                    
@@ -124,10 +139,42 @@
                 </div>
                 
               </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
+              <div class="card per-del">
+                  <div class="card-header">Documents</div>
+                  <div class="card-body">
+                    <div class="form-group row">
+                        <label for="resume" style="margin-top: -15px" class="col-sm-3 col-form-label">Resume File</label>
+                        <div class="col-sm-9">
+                            <input type="file" data-parsley-required-message="Resume is required.
+                            " data-parsley-required="true"  name="resume">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Offer" style="margin-top: -15px"  class="col-sm-3 col-form-label">Offer Letter</label>
+                        <div class="col-sm-9">
+                            <input type="file" name="offer">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="joining letter" style="margin-top: -15px"  class="col-sm-3 col-form-label">Joining Letter</label>
+                        <div class="col-sm-9">
+                            <input type="file" name="joining_letter">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="other" style="margin-top: -15px"  class="col-sm-3 col-form-label">Other</label>
+                        <div class="col-sm-9">
+                            <input type="file" name="other">
+                        </div>
+                    </div>
+                  </div>
+              </div>
+
+        
+            </div>
+         <div class="col-md-6 col-sm-6">
           <div class="card per-del">
-            <div class="card-header">
+            <div class="card-header"  style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">
                 Account Login
             </div>
             <div class="card-body">
@@ -140,7 +187,7 @@
                 <div class="form-group row">
                     <label for="username" class="col-sm-3 col-form-label">Username</label>
                     <div class="col-sm-9">
-                        <input type="username" name="username" class="form-control" id="username"  autocomplete="off">
+                        <input type="text" name="username" class="form-control" id="username"  autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -157,8 +204,8 @@
                 </div>
             </div>
           </div>
-          <div class="card per-del">
-            <div class="card-header">
+          <div class="card per-del mt-2 ">
+            <div class="card-header"  style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">
                 Employee Details
             </div>
             <div class="card-body">
@@ -196,8 +243,8 @@
                 </div>
             </div>
           </div>
-          <div class="card per-del">
-            <div class="card-header">
+          <div class="card per-del mt-2">
+            <div class="card-header"  style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">
                 Financial Details
             </div>
             <div class="card-body wrapper">
@@ -212,49 +259,90 @@
                          </div>
                     </div>
                 </div>
-                <div class="form-group rem row">
-                    <select name="salary" class="col-sm-4 ml-2" id="salary">
-                        <option value="hr">House</option>
-                        <option value="hr">Transportation</option>
-                        <option value="hr">Telephone</option>
-                    </select>
-                    <div class="col-sm-4">
+                <div class="form-group row">
+                    <label for="employee_id" class="col-sm-3 col-form-label">Medical Allowance</label>
+                    <div class="col-sm-7">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="number" name="amount" class="amount form-control">
+                           <input type="number" name="medical" class="amount form-control">
                          </div>
                     </div>
-                    <div class="col-sm-2">
-                        <a href="javascript:void(0);" class="add_button"><i class="far fa-plus-square"></i></a>
-                        
+                </div>
+                <div class="form-group row">
+                    <label for="employee_id" class="col-sm-3 col-form-label"><pre></pre>Transport</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                           </div>
+                           <input type="number" name="transportation" class="amount form-control">
+                         </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="employee_id" class="col-sm-3 col-form-label">House Rent</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                           </div>
+                           <input type="number" name="house_rent" class="amount form-control">
+                         </div>
+                    </div>
+                </div>
+               
+
+            </div>
+          </div>
+          <div class="card per-del">
+            <div class="card-header">
+               Deduction
+            </div>
+            <div class="card-body wrapper">
+                <div class="form-group row">
+                    <label for="employee_id" class="col-sm-3 col-form-label">Tax</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                           </div>
+                           <input type="number" name="tax" class="minus_amount form-control">
+                         </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="employee_id" class="col-sm-3 col-form-label">Absent Fee</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                           </div>
+                           <input type="number" name="absent" class="minus_amount form-control">
+                         </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="employee_id" class="col-sm-3 col-form-label"><pre></pre>Meal Cost</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                           </div>
+                           <input type="number" name="meal" class="minus_amount
+                             form-control">
+                         </div>
+                    </div>
+                </div>
+            
+               
 
             </div>
           </div>
           <div class="card per-del">
              <div class="card-body dedu">
-                <div class="form-group deduct row">
-                    <select name="deduction" class="col-sm-4 ml-2" id="">
-                        <option value="">Deduction</option>
-                        <option value="tax">Tax</option>
-                        <option value="hr">Montly Tax</option>
-                    </select>
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">$</span>
-                           </div>
-                           <input type="number" name="deduct_amount" class="minus_amount form-control">
-                         </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <a href="javascript:void(0);" class="add_deduction"><i class="far fa-plus-square"></i></a>
-                        
-                    </div>
-                </div>
+               
                 <div class="form-group row">
                     <label for="total_salary" class="col-sm-3 col-form-label">Total Salary</label>
                     <div class="col-sm-7">
@@ -269,25 +357,50 @@
                
             </div>
           </div>
-        
-        </div>
-       
+          <div class="card per-del mt-2">
+            <div class="card-header"  style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">
+                Bank Account Details
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label for="holder name" class="col-sm-3 col-form-label">Account Holder Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="holder_name" name="holder_name" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="account number" class="col-sm-3 col-form-label">Account Number</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="account_number" name="account_number" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Bank Name" class="col-sm-3 col-form-label">Bank Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="bank_name" name="bank_name" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Branch" class="col-sm-3 col-form-label">Branch</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="branch" name="branch" autocomplete="off">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">SUBMIT</button>
+            </div>
+          </div>
+        </form>
+        </div>      
     </div>
 </div>
 @endsection
 @push('js')
      <script type="text/javascript">
             $(document).ready(function(){
-
-               
                 var maxField = 10; //Input fields increment limitation
                 var addButton = $('.add_button'); //Add button selector
-
                 var wrapper = $('.wrapper'); 
-
                 var x = 0; //Initial field counter is 1
-                
-
                 var x = 1; //Initial field counter is 1
                 var wrapper = $('.wrapper');
                 //Once add button is clicked
@@ -296,18 +409,13 @@
                     //Check maximum number of input fields
                     if(x < maxField){ 
                         x++; //Increment field counter
-                        $(wrapper).append(
-
-                            
-                            '<div class="form-group rem row"><select name="salary'+x+'" ' 
+                        $(wrapper).append(     
+                            '<div class="form-group rem row"><select name="salary[]" ' 
                             + 'class="col-sm-4 ml-2"  id="'+x+'">'
                             + '<option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text"'
-                            + 'name="amount'+x+'" class="form-control amount"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'
+                            + 'name="amount[]" class="form-control amount"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'
                             
                             ); //Add field html
-
-                          
-
                     }
                     sumIt();  
                 });
@@ -363,5 +471,11 @@
                 sum = sum - deduction;
                 $(".total_salary").val(sum.toFixed(2));
             }
+            $(document).ready(function(){
+
+                $('#validate_form').parsley();
+                });
     </script>
+<script src="http://parsleyjs.org/dist/parsley.js"></script>
+
 @endpush
