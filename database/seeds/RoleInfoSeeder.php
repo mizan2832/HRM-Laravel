@@ -16,7 +16,13 @@ class RoleInfoSeeder extends Seeder
                 
         ]);
         DB::table('roles')->insert([
-            'name' => 'Tuitor',      
+            'name' => 'Super Admin',      
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'Manager',      
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'Staff',      
         ]);
     }
 }

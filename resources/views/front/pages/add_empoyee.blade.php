@@ -1,19 +1,21 @@
 @extends('front.master')
 @section('title','Add new employee')
 @push('head')
-<link rel="stylesheet" href="{{ asset('front/assets/validation/styles.css') }} ">
+<link href="https://parsleyjs.org/src/parsley.css" rel="stylesheet" />
+
 @endpush
 @section('content')
 <h3 style="margin-left: 10px;">Add Employee</h3>
 <div class="container">
+    <form  action="{{ route('employee.store') }}" id="validate_form" method="POST" enctype="multipart/form-data">
+        {{ csrf_field() }}
     <div class="row col-md-12 col-sm-12 mt-2">
         <div class="col-md-6 col-sm-6">
             <div class="card per-del">
                 <div class="card-header"  style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">Person Details</div>
                 <div class="card-body">
 
-                    <form  action="{{ route('employee.store') }}" id="validate_form" method="POST">
-                        {{ csrf_field() }}
+                  
                         <div class="form-group row">
                             <label for="name" class="col-sm-3 col-form-label">Name</label>
                             <div class="col-sm-9">
@@ -143,22 +145,22 @@
                   <div class="card-header">Documents</div>
                   <div class="card-body">
                     <div class="form-group row">
-                        <label for="resume" style="margin-top: -15px" class="col-sm-3 col-form-label">Resume File</label>
+                        <label for="resume" style="margin-top: -15px" class="col-sm-3 col-form-label">Resume </label>
                         <div class="col-sm-9">
-                            <input type="file" data-parsley-required-message="Resume is required.
-                            " data-parsley-required="true"  name="resume">
+                            <input data-parsley-required="true"	 type="file" name="resume">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="Offer" style="margin-top: -15px"  class="col-sm-3 col-form-label">Offer Letter</label>
                         <div class="col-sm-9">
-                            <input type="file" name="offer">
+                            <input type="file" data-parsley-required="true" name="offer">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="joining letter" style="margin-top: -15px"  class="col-sm-3 col-form-label">Joining Letter</label>
                         <div class="col-sm-9">
-                            <input type="file" name="joining_letter">
+                            <input type="file" data-parsley-required-message="Joining letter is required.
+                            " data-parsley-required="true"  name="joining_letter">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -181,25 +183,27 @@
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-9">
-                        <input type="email" name="email" class="form-control" id="email"  autocomplete="off">
+                        <input type="email" name="email" data-parsley-required-message="Email is required.
+                        " data-parsley-required="true" data-parsley-type="email"	  class="form-control" id="email"  autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="username" class="col-sm-3 col-form-label">Username</label>
                     <div class="col-sm-9">
-                        <input type="text" name="username" class="form-control" id="username"  autocomplete="off">
+                        <input type="text" name="username" data-parsley-required-message="Username is required.
+                        " data-parsley-required="true" class="form-control" id="username"  autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-3 col-form-label">Password</label>
                     <div class="col-sm-9">
-                        <input type="password" name="password" class="form-control" id="password"  autocomplete="off">
+                        <input type="password"  id="pass" required data-parsley-required-message="Please enter password"  name="password" class="form-control" id="passwordCheck"  autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-3 col-form-label">Confirm Password</label>
                     <div class="col-sm-9">
-                        <input type="password" name="password_confirmation" class="form-control" id="password"  autocomplete="off">
+                        <input type="password" name="password_confirmation" class="form-control" id="password" data-parsley-required="true" data-parsley-equalto="#passwordCheck"  data-parsley-required-message="Please re-enter your new password."  autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -218,7 +222,8 @@
                 <div class="form-group row">
                     <label for="department" class="col-sm-3 col-form-label">Department</label>
                     <div class="col-sm-9">
-                       <select name="department" id="department" class="form-control">
+                       <select name="department" data-parsley-required-message="Department is required.
+                       " data-parsley-required="true" id="department" required class="form-control">
                            <option>Select a department</option>
                            <option value="">Accounts</option>
                            <option value="">Marketing</option>
@@ -229,13 +234,15 @@
                 <div class="form-group row">
                     <label for="joining_date" class="col-sm-3 col-form-label">Date of joining</label>
                     <div class="col-sm-9">
-                        <input type="date" name="joining_date" class="form-control" id="joining_date">
+                        <input type="date" data-parsley-required-message="Date is required.
+                        " data-parsley-required="true"  data-parsley-type="date"  name="joining_date" class="form-control" id="joining_date">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="status" class="col-sm-3 col-form-label">Status</label>
                     <div class="col-sm-9">
-                       <select name="status" id="status" class="form-control">
+                       <select name="status" data-parsley-required-message="Statis is required.
+                       " data-parsley-required="true" id="status" class="form-control">
                            <option value="">Active</option>
                            <option value="">Inactive</option>
                        </select>
@@ -250,45 +257,49 @@
             <div class="card-body wrapper">
                 <div class="form-group row">
                     <label for="employee_id" class="col-sm-3 col-form-label">Basic Salary</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="number" name="basic" class="amount form-control">
+                           <input type="number" ata-parsley-required-message="Basic amount is required.
+                           " data-parsley-required="true" min=0 oninput="validity.valid||(value='');" name="basic" class="amount form-control">
                          </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="employee_id" class="col-sm-3 col-form-label">Medical Allowance</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="number" name="medical" class="amount form-control">
+                           <input type="number" ata-parsley-required-message="MA is required.
+                           " data-parsley-required="true" min=0 oninput="validity.valid||(value='');" name="medical" class="amount form-control">
                          </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="employee_id" class="col-sm-3 col-form-label"><pre></pre>Transport</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="number" name="transportation" class="amount form-control">
+                           <input type="number" ata-parsley-required-message="TR is required.
+                           " data-parsley-required="true" min=0 oninput="validity.valid||(value='');" name="transportation" class="amount form-control">
                          </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="employee_id" class="col-sm-3 col-form-label">House Rent</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="number" name="house_rent" class="amount form-control">
+                           <input type="number" ata-parsley-required-message="HR is required.
+                           " data-parsley-required="true" min=0 oninput="validity.valid||(value='');" name="house_rent" class="amount form-control">
                          </div>
                     </div>
                 </div>
@@ -303,7 +314,7 @@
             <div class="card-body wrapper">
                 <div class="form-group row">
                     <label for="employee_id" class="col-sm-3 col-form-label">Tax</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
@@ -314,7 +325,7 @@
                 </div>
                 <div class="form-group row">
                     <label for="employee_id" class="col-sm-3 col-form-label">Absent Fee</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
@@ -325,7 +336,7 @@
                 </div>
                 <div class="form-group row">
                     <label for="employee_id" class="col-sm-3 col-form-label"><pre></pre>Meal Cost</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
@@ -345,7 +356,7 @@
                
                 <div class="form-group row">
                     <label for="total_salary" class="col-sm-3 col-form-label">Total Salary</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
@@ -365,33 +376,38 @@
                 <div class="form-group row">
                     <label for="holder name" class="col-sm-3 col-form-label">Account Holder Name</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="holder_name" name="holder_name" autocomplete="off">
+                        <input type="text" ata-parsley-required-message="Holder is required.
+                        " data-parsley-required="true" class="form-control" id="holder_name" name="holder_name" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="account number" class="col-sm-3 col-form-label">Account Number</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="account_number" name="account_number" autocomplete="off">
+                        <input type="text"  ata-parsley-required-message="Account Number is required.
+                        " data-parsley-required="true" class="form-control" id="account_number" name="account_number" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="Bank Name" class="col-sm-3 col-form-label">Bank Name</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="bank_name" name="bank_name" autocomplete="off">
+                        <input type="text"  ata-parsley-required-message="Bank Name is required.
+                        " data-parsley-required="true" class="form-control" id="bank_name" name="bank_name" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="Branch" class="col-sm-3 col-form-label">Branch</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="branch" name="branch" autocomplete="off">
+                        <input type="text"  ata-parsley-required-message="Branch is required.
+                        " data-parsley-required="true" class="form-control" id="branch" name="branch" autocomplete="off">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">SUBMIT</button>
             </div>
           </div>
-        </form>
+        
         </div>      
     </div>
+</form>
 </div>
 @endsection
 @push('js')
@@ -476,6 +492,7 @@
                 $('#validate_form').parsley();
                 });
     </script>
-<script src="http://parsleyjs.org/dist/parsley.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.3.4/parsley.min.js"></script>
+
 
 @endpush

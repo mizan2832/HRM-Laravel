@@ -34,7 +34,7 @@ class CreateEmployeesTable extends Migration
             $table->string('resume');
             $table->string('offer');
             $table->string('joining_letter');
-            $table->string('other');
+            $table->string('other')->nullable();
             $table->string('email');
             $table->string('username');
             $table->string('password');
