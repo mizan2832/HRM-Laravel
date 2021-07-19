@@ -35,9 +35,6 @@ class CreateEmployeesTable extends Migration
             $table->string('offer');
             $table->string('joining_letter');
             $table->string('other')->nullable();
-            $table->string('email');
-            $table->string('username');
-            $table->string('password');
             $table->string('employee_id');
             $table->string('department');
             $table->date('joining_date');
@@ -46,9 +43,9 @@ class CreateEmployeesTable extends Migration
             $table->integer('medical_allowance');
             $table->integer('transport');
             $table->integer('house_rent');
-            $table->integer('tax');
-            $table->integer('absent');
-            $table->integer('meal');
+            $table->integer('tax')->nullable();
+            $table->integer('absent')->nullable();
+            $table->integer('meal')->nullable();
             $table->integer('total_salary');
             $table->string('holder_name');
             $table->string('account_number');

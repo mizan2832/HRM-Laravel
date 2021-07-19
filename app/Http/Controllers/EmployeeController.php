@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\User;
+use Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -22,7 +24,10 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
        $employee = new Employee();
+       $user = new User();
+
        $employee->name = $request->name;
        $employee->father_name = $request->father_name;
        $employee->gender = $request->gender;
@@ -49,11 +54,19 @@ class EmployeeController extends Controller
 
        $resume = $request->name . '.' . 
        $request->file('resume')->getClientOriginalExtension();
-
        $request->file('resume')->move(
            base_path() . '/public/front/assets/images/resume', $resume
        );
        $employee->resume = $resume;
+
+       $offer = $request->name . '.' . 
+       $request->file('offer')->getClientOriginalExtension();
+       $request->file('offer')->move(
+           base_path() . '/public/front/assets/images/offer', $offer
+       );
+       $employee->offer = $offer;
+
+       
 
        $joining_letter = $request->name . '.' . 
        $request->file('joining_letter')->getClientOriginalExtension();
@@ -68,6 +81,39 @@ class EmployeeController extends Controller
            base_path() . '/public/front/assets/images/other', $other
        );
        $employee->other = $other;
+       $employee->employee_id = $request->employee_id;
+       $employee->department = $request->department;
+       $employee->joining_date = $request->joining_date;
+       $employee->status = $request->status;
+       $employee->basic = $request->basic;
+       $employee->medical_allowance = $request->medical;
+       $employee->transport = $request->transport;
+       $employee->house_rent = $request->house_rent;
+       $employee->tax = $request->tax;
+       $employee->absent = $request->absent;
+       $employee->meal = $request->meal;
+       $employee->total_salary = $request->total_salary;
+       $employee->holder_name = $request->holder_name;
+       $employee->account_number = $request->account_number;
+       $employee->bank_name = $request->bank_name;
+       $employee->branch_name = $request->branch;
+       $employee->save();
+
+       $user->name = $request->name;
+
+       $username = array("1"=>"Admin", "2"=>"Super Admin", "3"=>"Manager","4"=>"Staff");
+       foreach($username as $x => $value) {
+        if ($x == $request->username) {
+            $user->username = $value;
+        }
+      }
+       $user->email = $request->email;
+       $user->role_id = $request->username;
+       $user->password = Hash::make($request->password);
+       $user->save();
+     
+       return redirect()->route('employee.index');
+      
 
 
 

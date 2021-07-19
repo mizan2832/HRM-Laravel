@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Brian2694\Toastr\ToastrServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -226,6 +228,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+
 
     ],
 

@@ -21,6 +21,7 @@
 
 <!-- App js -->
 <script src="{{ asset('front/assets/js/admin.js') }} "></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
 </div>
 <!-- END main -->
