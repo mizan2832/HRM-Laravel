@@ -7,7 +7,7 @@ use App\User;
 use Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use DB;
 class EmployeeController extends Controller
 {
   
@@ -30,6 +30,7 @@ class EmployeeController extends Controller
 
        $employee->name = $request->name;
        $employee->father_name = $request->father_name;
+       $employee->email = $request->email;
        $employee->gender = $request->gender;
        $employee->birth_date = $request->date;
        $employee->phone1 = $request->phone1;
@@ -158,4 +159,6 @@ class EmployeeController extends Controller
     {
         //
     }
+
+  
 }

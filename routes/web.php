@@ -28,6 +28,9 @@ Route::group(['middleware' => 'admin'], function()
     })->name('add-user');
 
     Route::resource('employee','EmployeeController');
+    
 
 
 });
+Route::get('/emp', 'EmpController@index')->middleware('admin');
+Route::get('/emp/search', 'EmpController@action')->name('list.employees')->middleware('admin');;
