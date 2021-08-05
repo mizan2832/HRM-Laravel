@@ -8,14 +8,15 @@ use Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Auth;
 class EmployeeController extends Controller
 {
   
     public function index()
     {
-       return view('front.pages.employee_list');
+       $list = Employee::paginate(5);
+       return view('front.pages.employee_list')->withList($list);
     }
-
 
     public function create()
     {
@@ -134,7 +135,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        
     }
 
     /**

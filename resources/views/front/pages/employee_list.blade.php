@@ -1,64 +1,46 @@
 @extends('front.master')
 @section('title','Employee List')
 @push('head')
-<meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 @section('content')
-<div class="container box">
-    <div class="panel panel-default">
-     <div class="panel-body">
-      <div class="form-group">
-       <input type="text" name="search" id="search" class="form-control" placeholder="Search employee" />
-      </div>
-      <div class="table-responsive">
-       <h3 align="center">Total Employee : <span id="total_records"></span></h3>
-       <table class="table table-striped table-bordered">
-        <thead>
-         <tr>
-          <th>No.</th>
+<div class="container">
+    <h2>Employee List</h2>
+    <table class="table table-bordered table-hover table-striped">
+      <thead>
+        <tr>
+          <th>SI</th>
           <th>Name</th>
           <th>Department</th>
-          <th>Joining Date</th>
-          <th>Phone</th>
+          <th>Email</th>
           <th>Salary</th>
+          <th>Phone</th>
           <th>Action</th>
-         </tr>
-        </thead>
-        <tbody>
- 
-        </tbody>
-       </table>
-      </div>
-     </div>    
-    </div>
-   </div>
+          
+        </tr>
+      </thead>
+      <tbody>
+        @php
+            $i = 1;
+        @endphp
+      @foreach ($list as $item)
+          
+        <tr>
+          <td>{{ $i++ }}</td>
+          <td>{{ $item->name }}</td>
+          <td>{{ $item->department }}</td>
+          <td>{{ $item->email }}</td>
+          <td>{{ $item->total_salary }}</td>
+          <td>{{ $item->phone1 }}</td>
+          <td>
+            <a href="{{ route('employee.edit',$item->id) }}"><i class="far fa-edit"></i></a>
+            <a href="#"><i class="fas fa-trash-alt"></i></a>
+            <a href="{{ route('emp.details',$item->id) }}"><i class="fab fa-dashcube"></i></a>
+          
+          </td>
+        </tr>
+        @endforeach
+        
+      </tbody>
+    </table>
+  </div>
 @endsection
-@push('js')
-<script>
-    $(document).ready(function(){
-    
-     fetch_employee_data();
-    
-     function fetch_employee_data(query = '')
-     {
-
-      $.ajax({
-       url:"{{ route('list.employees') }}",
-       method:'GET',
-       data:{query:query},
-       dataType:'json',
-       success:function(data)
-       {
-        $('tbody').html(data.table_data);
-        $('#total_records').text(data.total_data);
-       }
-      })
-     }
-    
-     $(document).on('keyup', '#search', function(){
-      var query = $(this).val();
-      fetch_employee_data(query);
-     });
-    });
-    </script>
-@endpush

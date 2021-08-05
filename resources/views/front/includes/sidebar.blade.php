@@ -65,7 +65,7 @@
 
                         </li>
                         <li>
-                            <a href="{{ url('emp') }}"> <i class="fas fa-th-list"></i>Employee List</a>
+                            <a href="{{ route('employee.index') }}"> <i class="fas fa-th-list"></i>Employee List</a>
                         </li>
                     </ul>
                 </li>
