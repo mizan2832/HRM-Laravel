@@ -17,15 +17,17 @@
                         <div style="color: red;">{{$error}}</div>
                     @endforeach
                  @endif
-                <form class="form-inline" action="{{ route('department.store') }}" method="POST" >
+                <form class="form-inline" action="{{ route('department.update', $singleDept->id) }}" method="POST" >
                     @csrf
+                    @method('PUT')
                     <label for="department" class="mb-2 mr-sm-2">Department:</label>
-                    <input type="text" value="{{ old('dpt_name') }}" class="form-control mb-2 mr-sm-2" id="department" placeholder="Enter Department" name="dpt_name">
+                    <input type="text" value="{{ $singleDept->dpt_name }}" class="form-control mb-2 mr-sm-2" id="department" placeholder="Enter Department" name="dpt_name">
                     
                     <button type="submit" class="btn btn-primary mb-2">Submit</button>
                   </form>
             </div>
             <div class="col-md-6 col-sm-6 col-lg-6">
+                <a href="{{ route('department.index') }}"><button class="btn btn-primary btn-sm">Add New Department</button></a>
                 <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -34,10 +36,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($department as $dept)
+                      @foreach ($allDepartment as $dept)
                           <tr>
                               <td>{{ $dept->dpt_name }}</td>
-                              <td>
+                              
                                 <td>
                                   <a href="{{ route('department.edit',$dept->id) }}"><i class="far fa-edit"></i></a>
                               
@@ -50,7 +52,7 @@
                                  </a>
                                 
                                 </td>
-                              </td>
+                        
                           </tr>
                       @endforeach
                       

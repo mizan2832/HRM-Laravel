@@ -36,7 +36,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
 
-     $validated = $request->validate([
+      $validated = $request->validate([
                 'dpt_name' => 'required|unique:departments|max:255',
             ]);
             $dept = new Department();
@@ -66,29 +66,27 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dept = Department::find($id);
+        $allDept = Department::all();
+        return view('front.pages.department.edit')->withAllDepartment($allDept)->withSingleDept($dept);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'dpt_name' => 'required|unique:departments|max:255',
+        ]);
+        $dept = Department::find($id);
+        $dept->dpt_name = $request->dpt_name;
+        $dept->save();
+        return redirect()->route('department.index')->with('success','Department updated successfully!');
+    
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Department $department)
     {
-        //
+        $department->delete();
+        return redirect()->back()->with('success','Department deleted successfully!');
     }
 }
