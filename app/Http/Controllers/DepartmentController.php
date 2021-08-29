@@ -35,17 +35,14 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-    
 
-        $validated = $request->validate([
-            'dpt_name' => 'required|unique:departments|max:255',
-        ]);
-      
-            
+     $validated = $request->validate([
+                'dpt_name' => 'required|unique:departments|max:255',
+            ]);
             $dept = new Department();
             $dept->dpt_name = $request->dpt_name;
             $dept->save();
-            return redirect()->route('department.index');
+            return redirect()->route('department.index')->with('success','Department has been added successfully!');
         
         
     }
