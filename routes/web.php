@@ -30,5 +30,6 @@ Route::group(['middleware' => 'admin'], function()
     Route::resource('employee','EmployeeController');
     Route::resource('department','DepartmentController');
     Route::get('employee/details/{id}','EmpController@details')->name('emp.details');
+    Route::get('file/resume/{id}','FileController@resume');
 
 });

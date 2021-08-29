@@ -90,23 +90,22 @@
          <tbody>
              <tr>
                  <td>Resume Letter</td>
-                 <td></td>
-                 <td></td>
+                 <td><a href="{{ url('file/resume', $employee->id) }}">View</a></td>
              </tr>
              <tr>
                  <td>Offer Letter</td>
-                 <td></td>
-                 <td></td>
+                 <td><a href="">View</a></td>
+                 <td><a href="">Download</a></td>
              </tr>
              <tr>
                  <td>Joining Letter</td>
-                 <td></td>
-                 <td></td>
+                 <td><a href="">View</a></td>
+                 <td><a href="">Download</a></td>
              </tr>
              <tr>
                  <td>Other Document</td>
-                 <td></td>
-                 <td></td>
+                 <td><a href="">View</a></td>
+                 <td><a href="">Download</a></td>
              </tr>
          </tbody>
      </table>

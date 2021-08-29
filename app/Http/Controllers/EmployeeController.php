@@ -15,12 +15,12 @@ class EmployeeController extends Controller
     public function index()
     {
        $list = Employee::paginate(5);
-       return view('front.pages.employee_list')->withList($list);
+       return view('front.pages.employee.employee_list')->withList($list);
     }
 
     public function create()
     {
-        return view('front.pages.add_empoyee');
+        return view('front.pages.employee.add_empoyee');
     }
 
     public function store(Request $request)

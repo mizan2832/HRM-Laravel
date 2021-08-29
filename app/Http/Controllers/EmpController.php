@@ -9,12 +9,12 @@ use App\User;
 class EmpController extends Controller
 {
      function index(){
-        return view('front.pages.employee_list');
+        return view('front.pages.employee.employee_list');
     }
 
     public function details(Request $request)
     {
        $employee = Employee::find($request->id);
-       return view('front.pages.employee_details')->withEmployee($employee);
+       return view('front.pages.employee.employee_details')->withEmployee($employee);
     }
 }
