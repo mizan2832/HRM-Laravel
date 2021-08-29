@@ -28,6 +28,7 @@ Route::group(['middleware' => 'admin'], function()
     })->name('add-user');
 
     Route::resource('employee','EmployeeController');
+    Route::resource('department','DepartmentController');
     Route::get('employee/details/{id}','EmpController@details')->name('emp.details');
 
 });

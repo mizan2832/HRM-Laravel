@@ -71,7 +71,7 @@
                 </li>
 
                 <li class="submenu">
-                    <a href="users.html">
+                    <a href="{{ route('department.index') }}">
                         <i class="fas fa-building"></i>
                         <span> Departments </span>
                     </a>
