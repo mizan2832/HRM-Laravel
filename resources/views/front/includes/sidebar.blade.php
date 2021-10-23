@@ -77,7 +77,7 @@
                     </a>
                 </li>
                 <li class="submenu">
-                    <a href="users.html">
+                    <a href="{{route('section.index')}}">
                         <i class="fas fa-cut"></i>
                         <span> Sections </span>
                     </a>
