@@ -5,7 +5,7 @@
     @endpush
 @section('content')
     <h3 style="margin-left: 10px;">Add Employee</h3>
-    <div class="container">
+    <div class="container-fluid">
         <form action="{{ route('employee.store') }}" id="validate_form" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row col-md-12 col-sm-12 mt-2">

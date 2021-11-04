@@ -1657,3 +1657,7 @@ a.btn:focus {
 div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     justify-content: normal !important;
 }
+
+.bg-attn {
+    background: #ffffff;
+}

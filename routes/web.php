@@ -32,6 +32,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::resource('section','SectionController');
     Route::get('employee/details/{id}','EmpController@details')->name('emp.details');
     Route::get('file/resume/{id}','FileController@resume');
+    Route::resource('daily-attendance','DailyAttendanceController');
 
 
 });

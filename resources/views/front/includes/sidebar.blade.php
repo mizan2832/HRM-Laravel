@@ -45,7 +45,7 @@
                     </a>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#"> <i class="far fa-file-powerpoint"></i>Daily Attendance</a>
+                            <a href="{{ route('daily-attendance.index') }}"> <i class="far fa-file-powerpoint"></i>Daily Attendance</a>
 
                         </li>
                         <li>
