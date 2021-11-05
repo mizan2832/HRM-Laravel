@@ -1659,5 +1659,31 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .bg-attn {
-    background: #ffffff;
+    background-color: #ffffff;
+}
+
+.entities {
+    float: left;
+}
+
+.entities {
+    margin-left: 30px;
+}
+
+.entities>* {
+    display: inline;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1
+}
+
+.attn-search {
+    position: absolute;
+    right: 100px;
+}
+
+thead th,
+td {
+    text-align: left;
 }
