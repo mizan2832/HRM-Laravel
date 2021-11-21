@@ -136,3 +136,11 @@
     </div>
 
 </div>
+@push('name')
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+@endpush
+users::wherebetween('crated_at',[$firstdate,$last_date])
