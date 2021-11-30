@@ -10,8 +10,10 @@
 <form class="form-inline  bg-attn" action="/action_page.php">
       <label for="emp_dept" class="mb-2 mr-sm-2">Employee by department:</label>
       <select name="" id="emp_dept" class="form-control col-md-3">
-          <option value="">Operator</option>
-          <option value="">Programmer</option>
+          <option value="all">All Department</option>
+          @foreach ($departments as $dept)
+              <option value="{{$dept->id}}">{{$dept->dpt_name}}</option>
+          @endforeach
       </select>
       <label for="date" class="mb-2 mr-sm-2">Date:</label>
       <input type="date" class="form-control mb-2 mr-sm-2" id="date"  name="pswd">
@@ -38,58 +40,14 @@
         <thead>
           <th style="width: 5%">SI</th>
           <th style="width:20%">Employee Name</th>
-          <th style="width: 20%">Attendance Type</th>
+          <th style="width: 10%">Attendance Type</th>
           <th style="width: 10%">In Time</th>
           <th style="width: 10%">Out Time</th>
           <th style="width: 10%">Overtime</th>
           <th style="width: 10%">Status</th>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mizanur Rahman</td>
-            <td>Manual</td>
-            <td>8:00 AM</td>
-            <td>8:00 PM</td>
-            <td>2 HOURS</td>
-            <td>
-              <select name="" id="">
-                <option value="">Absent</option>
-                <option value="">Present</option>
-                <option value="">On leave</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mizanur Rahman</td>
-            <td>Manual</td>
-            <td>8:00 AM</td>
-            <td>8:00 PM</td>
-            <td>2 HOURS</td>
-            <td>
-              <select name="" id="">
-                <option value="">Absent</option>
-                <option value="">Present</option>
-                <option value="">On leave</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mizanur Rahman</td>
-            <td>Manual</td>
-            <td>8:00 AM</td>
-            <td>8:00 PM</td>
-            <td>2 HOURS</td>
-            <td>
-              <select name="" id="">
-                <option value="">Absent</option>
-                <option value="">Present</option>
-                <option value="">On leave</option>
-              </select>
-            </td>
-          </tr>
+   
          
         </tbody>
       </table>
@@ -103,8 +61,44 @@
               </div>
             </div>
       </div>
+      <input type="submit" value="save" class="btn btn-success attn-save">
+
     </div>
   </div>
 
   
 @endsection
+@push('js')
+    <script>
+       $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        function allData()
+        {
+            $.ajax({
+                type:"GET",
+                dataType:'json',
+                url: "attendance/show",
+                success:function(data){
+                  var $i=1;
+                    $.each(data,function(key,value){
+                      data = data+ "<tr>"
+                      data = data + "<td>"+ ($i++) +"</td>"
+                      data = data + "<td>"+ value.name +"</td>"
+                      data = data + "<td>Manual</td>"
+                      data = data + "<td><input type='time' id='inTime'></td>"
+                      data = data + "<td><input type='time' id='outTime'></td>"
+                      data = data + "<td><input type='number' id='otTime'></td>"
+                      data = data + "<td><select name='attn_type' id='attn_type'><option value=''>Absent</option><option value=''>Present</option> <option value=''>On leave</option></select>  </td>"
+                      data = data + "</tr>"
+                    })
+                      $('tbody').html(data);
+                 }
+              })
+        }
+        
+          allData();
+    </script>
+@endpush

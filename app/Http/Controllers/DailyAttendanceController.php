@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\DailyAttendance;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use App\Department;
+use App\Employee;
 class DailyAttendanceController extends Controller
 {
     /**
@@ -14,14 +16,18 @@ class DailyAttendanceController extends Controller
      */
     public function index()
     {
-        return view('front.pages.attendance.daily_attendance');
+        $department = Department::all();
+        return view('front.pages.attendance.daily_attendance')->withDepartments($department);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function showAttendance()
+    {
+        $employees = Employee::all();
+        return response()->json($employees);
+
+    }
+ 
+
     public function create()
     {
         //

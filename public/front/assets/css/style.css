@@ -1687,3 +1687,9 @@ thead th,
 td {
     text-align: left;
 }
+.attn-save{
+    margin:0 auto;
+    margin-top: 20px;
+    width: 100px;
+    text-align: center;
+}
