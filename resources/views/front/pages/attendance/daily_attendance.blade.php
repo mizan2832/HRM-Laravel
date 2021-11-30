@@ -7,9 +7,9 @@
     </div>
 </div>
 <div class="container  bg-attn">
-<form class="form-inline  bg-attn" action="/action_page.php">
+<div class="form-inline  bg-attn" >
       <label for="emp_dept" class="mb-2 mr-sm-2">Employee by department:</label>
-      <select name="" id="emp_dept" class="form-control col-md-3">
+      <select name="emp_dept" id="emp_dept" class="form-control col-md-3">
           <option value="all">All Department</option>
           @foreach ($departments as $dept)
               <option value="{{$dept->id}}">{{$dept->dpt_name}}</option>
@@ -18,8 +18,8 @@
       <label for="date" class="mb-2 mr-sm-2">Date:</label>
       <input type="date" class="form-control mb-2 mr-sm-2" id="date"  name="pswd">
           
-      <button type="submit" class="btn btn-primary mb-2">Submit</button>
-    </form>
+      <button type="submit" id="submit"  class="btn btn-primary mb-2" onclick="departmentData()">Submit</button>
+    </div>
 
 
   </div>
@@ -27,7 +27,7 @@
     <div class="row">
       <div class="entities">
           <p>Show</p>
-          <input type="number"  spinbutt id="numOfEmployee">
+          <input type="number"  id="numOfEmployee">
           <p>Entities</p>
       </div>
       <div class="attn-search">
@@ -61,7 +61,8 @@
               </div>
             </div>
       </div>
-      <input type="submit" value="save" class="btn btn-success attn-save">
+      <button></button>
+      <input type="submit" value="save" id="save" onclick="saveE" class="btn btn-success attn-save">
 
     </div>
   </div>
@@ -77,26 +78,60 @@
         })
         function allData()
         {
+          // console.log(dept)
             $.ajax({
                 type:"GET",
                 dataType:'json',
-                url: "attendance/show",
+                url: "attendance/show/",
                 success:function(data){
                   var $i=1;
                     $.each(data,function(key,value){
                       data = data+ "<tr>"
                       data = data + "<td>"+ ($i++) +"</td>"
                       data = data + "<td>"+ value.name +"</td>"
+                      data = data + "<input type='number' id='emp_id' name='emp_id[]' hidden value="+value.employee_id+">"
                       data = data + "<td>Manual</td>"
-                      data = data + "<td><input type='time' id='inTime'></td>"
-                      data = data + "<td><input type='time' id='outTime'></td>"
-                      data = data + "<td><input type='number' id='otTime'></td>"
-                      data = data + "<td><select name='attn_type' id='attn_type'><option value=''>Absent</option><option value=''>Present</option> <option value=''>On leave</option></select>  </td>"
+                      data = data + "<td><input type='time' id='inTime' name='inTime[]'></td>"
+                      data = data + "<td><input type='time' id='outTime' name='outTime[]'></td>"
+                      data = data + "<td><input type='number' name='otTime[]' id='otTime'></td>"
+                      data = data + "<td><select name='attn_type[]' id='attn_type'><option value=''>Absent</option><option value=''>Present</option> <option value=''>On leave</option></select>  </td>"
                       data = data + "</tr>"
                     })
                       $('tbody').html(data);
                  }
               })
+        }
+
+        function departmentData()
+        {
+          var emp_dept = $('#emp_dept').val();
+          var date = $('#date').val();
+
+           
+          $.ajax({
+                type:"GET",
+                dataType:'json',
+                url: "attendance/show/"+emp_dept,
+                success:function(data){
+                  var $i=1;
+                    $.each(data,function(key,value){
+                      data = data+ "<tr>"
+                      data = data + "<td>"+ ($i++) +"</td>"
+                      data = data + "<td>"+ value.name +"</td>"
+                      data = data + "<input type='number' id='emp_id' name='emp_id[]' hidden value="+value.employee_id+">"
+                      data = data + "<td>Manual</td>"
+                      data = data + "<td><input type='time' id='inTime' name='inTime[]'></td>"
+                      data = data + "<td><input type='time' id='outTime' name='outTime[]'></td>"
+                      data = data + "<td><input type='number' name='otTime[]' id='otTime'></td>"
+                      data = data + "<td><select name='attn_type[]' id='attn_type'><option value=''>Absent</option><option value=''>Present</option> <option value=''>On leave</option></select>  </td>"
+                      data = data + "</tr>"
+                    })
+                      $('tbody').html(data);
+
+                  // console.log(data);
+                 }
+              })
+          
         }
         
           allData();

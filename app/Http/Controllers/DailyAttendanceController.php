@@ -26,6 +26,12 @@ class DailyAttendanceController extends Controller
         return response()->json($employees);
 
     }
+    public function showAttendanceDept($dpt_id)
+    {
+        $employees = Employee::where('department','=',$dpt_id)->get();
+        return response()->json($employees);
+
+    }
  
 
     public function create()
