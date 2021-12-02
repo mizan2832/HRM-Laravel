@@ -47,7 +47,11 @@ class DailyAttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json($request);
+    }
+    public function storeAttendanceDept(Request $request)
+    {
+        return response()->json($request);
     }
 
     /**

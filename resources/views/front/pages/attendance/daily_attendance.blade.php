@@ -24,6 +24,7 @@
 
   </div>
   <div class="container bg-attn  mt-2">
+    z
     <div class="row">
       <div class="entities">
           <p>Show</p>
@@ -61,9 +62,10 @@
               </div>
             </div>
       </div>
-      <button></button>
-      <input type="submit" value="save" id="save" onclick="saveE" class="btn btn-success attn-save">
+      <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
+      <input type="submit" value="save" id="save" onclick="attendance_save()" class="btn btn-success attn-save">
+ 
     </div>
   </div>
 
@@ -71,11 +73,11 @@
 @endsection
 @push('js')
     <script>
-       $.ajaxSetup({
-            headers:{
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        })
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
         function allData()
         {
           // console.log(dept)
@@ -86,16 +88,16 @@
                 success:function(data){
                   var $i=1;
                     $.each(data,function(key,value){
-                      data = data+ "<tr>"
+                      data = data+ " <tr>"
                       data = data + "<td>"+ ($i++) +"</td>"
                       data = data + "<td>"+ value.name +"</td>"
-                      data = data + "<input type='number' id='emp_id' name='emp_id[]' hidden value="+value.employee_id+">"
+                      data = data + "<td><input type='number'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" hidden></td>"
                       data = data + "<td>Manual</td>"
-                      data = data + "<td><input type='time' id='inTime' name='inTime[]'></td>"
-                      data = data + "<td><input type='time' id='outTime' name='outTime[]'></td>"
-                      data = data + "<td><input type='number' name='otTime[]' id='otTime'></td>"
-                      data = data + "<td><select name='attn_type[]' id='attn_type'><option value=''>Absent</option><option value=''>Present</option> <option value=''>On leave</option></select>  </td>"
-                      data = data + "</tr>"
+                      data = data + "<td><input type='time'  class='inTime' name='inTime[]'></td>"
+                      data = data + "<td><input type='time'  class='outTime' name='outTime[]'></td>"
+                      data = data + "<td><input type='number' name='otTime[]'  class='otTime'></td>"
+                      data = data + "<td><select name='attn_type[]'  class='attn_type'><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
+                      data = data + "</tr> "
                     })
                       $('tbody').html(data);
                  }
@@ -106,8 +108,6 @@
         {
           var emp_dept = $('#emp_dept').val();
           var date = $('#date').val();
-
-           
           $.ajax({
                 type:"GET",
                 dataType:'json',
@@ -118,12 +118,12 @@
                       data = data+ "<tr>"
                       data = data + "<td>"+ ($i++) +"</td>"
                       data = data + "<td>"+ value.name +"</td>"
-                      data = data + "<input type='number' id='emp_id' name='emp_id[]' hidden value="+value.employee_id+">"
                       data = data + "<td>Manual</td>"
-                      data = data + "<td><input type='time' id='inTime' name='inTime[]'></td>"
-                      data = data + "<td><input type='time' id='outTime' name='outTime[]'></td>"
+                      data = data + "<td><input type='time' class='inTime' name='inTime[]'></td>"
+                      data = data + "<input type='number'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" hidden>"
+                      data = data + "<td><input type='time' class='outTime' name='outTime[]'></td>"
                       data = data + "<td><input type='number' name='otTime[]' id='otTime'></td>"
-                      data = data + "<td><select name='attn_type[]' id='attn_type'><option value=''>Absent</option><option value=''>Present</option> <option value=''>On leave</option></select>  </td>"
+                      data = data + "<td><select name='attn_type[]' class='attn_type'><option value='0'>Absent</option><option value='1'>Present</option> <option value='2'>On leave</option></select>  </td>"
                       data = data + "</tr>"
                     })
                       $('tbody').html(data);
@@ -132,6 +132,43 @@
                  }
               })
           
+        }
+
+        function attendance_save(){
+          var date = $('#date').val();
+          var emp_id   = [];       
+          var inTime  =[];
+          var outTime = [];
+          var otTime  = [];
+          var attn_type = [];
+
+          $('.emp_id').each(function(){
+            emp_id.push($(this).val());
+          });
+          $('.inTime').each(function(){
+            inTime.push($(this).val());
+          });
+          $('.outTime').each(function(){
+            outTime.push($(this).val());
+          });
+          $('.otTime').each(function(){
+            otTime.push($(this).val());
+          });
+          $('.attn_type').each(function(){
+            attn_type.push('ab');
+          });
+
+          $.ajax({
+            type:"POST",
+            dataType:'json',
+            url: "attendance/store",
+            data:{"_token": $('#token').val(),date:date,emp_id:emp_id,inTime:inTime,outTime:outTime,otTime:otTime,attn_type:attn_type},
+            success:function(data){
+              console.log(data);
+            }
+          })
+
+
         }
         
           allData();

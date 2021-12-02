@@ -35,6 +35,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::resource('daily-attendance','DailyAttendanceController');
     Route::get('attendance/show','DailyAttendanceController@showAttendance');
     Route::get('attendance/show/{dept}','DailyAttendanceController@showAttendanceDept');
+    Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');
 
 
     // Route::get('emp/list/','empController@allData')->name('emp.all');
