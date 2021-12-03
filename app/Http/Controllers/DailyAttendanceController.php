@@ -51,7 +51,27 @@ class DailyAttendanceController extends Controller
     }
     public function storeAttendanceDept(Request $request)
     {
-        return response()->json($request);
+       $len = count($request->emp_id);
+       for ($i=0; $i <$len; $i++) { 
+           $date = $request->date;
+           $emp_id = $request->emp_id[$i];
+           $attn_type = $request->attn_type[$i];
+           $inTime = $request->inTime[$i];
+           $outTime = $request->outTime[$i];
+           $otTime = $request->otTime[$i];
+           $status = 'manual';
+
+         $data= DB::table('daily_attendances')->insert([
+            'emp_id' =>$emp_id,
+            'attn_type' =>$status,
+            'in_time' => $inTime,
+            'out_time' => $outTime,
+            'overtime' => $otTime,
+            'date' => $date,
+            'status' => $attn_type,
+        ]);
+       }
+        return response()->json($data);
     }
 
     /**
