@@ -41,7 +41,6 @@
         <thead>
           <th style="width: 5%">SI</th>
           <th style="width:20%">Employee Name</th>
-          <th style="width: 10%">Attendance Type</th>
           <th style="width: 10%">In Time</th>
           <th style="width: 10%">Out Time</th>
           <th style="width: 10%">Overtime</th>
@@ -90,22 +89,43 @@
                 url: "attendance/show/",
                 data:{"_token": $('#token').val(),date:date},
                 success:function(data){
+                  
+                  if (data.data_exit==true) {
                   var $i=1;
-                    $.each(data,function(key,value){
-                      data = data+ " <tr>"
-                      data = data + "<td>"+ ($i++) +"</td>"
-                      data = data + "<td>"+ value.name +"</td>"
-                      data = data + "<td><input type='number'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" hidden></td>"
-                      data = data + "<td>Manual</td>"
-                      data = data + "<td><input type='time'  class='inTime' name='inTime[]' value="+value.in_time+"></td>"
-                      data = data + "<td><input type='time'  class='outTime' name='outTime[]' value="+value.out_time+"></td>"
-                      data = data + "<td><input type='number' name='otTime[]'  class='otTime' value="+value.overtime+"></td>"
-                      data = data + "<td><select name='attn_type[]'  class='attn_type'  value="+value.status+"><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
-                      data = data + "</tr> "
+                   d = '';
+                    $.each(data.attendance,function(key,value){
+                      d = d+ " <tr>"
+                      d = d + "<td>"+ ($i++) +"</td>"
+                      d = d + "<td>"+ value.name +"</td>"
+                      d = d + "<input type='hidden'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" >"
+                      d = d + "<td><input type='time'  class='inTime' name='inTime[]' value="+value.in_time+"></td>"
+                      d = d + "<td><input type='time'  class='outTime' name='outTime[]' value="+value.out_time+"></td>"
+                      d = d + "<td><input type='number' name='otTime[]'  class='otTime' value="+value.overtime+"></td>"
+                      d = d + "<td><select name='attn_type[]'  class='attn_type'  value="+value.status+"><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
+                      d = d + "</tr> "
                     })
-                      $('tbody').html(data);
+                      $('tbody').html(d);
+                  }
+                  else{
+                    var $i=1;
+                    d = '';
+                    $.each(data.employees,function(key,value){
+                      d = d+ " <tr>"
+                      d = d + "<td>"+ ($i++) +"</td>"
+                      d = d + "<td>"+ value.name +"</td>"
+                      d = d + "<td> <input  type='hidden' class='emp_id' name='emp_id[]'  value="+value.employee_id+" ></td>"
+                      d = d + "<td><input type='time'  class='inTime' name='inTime[]' ></td>"
+                      d = d + "<td><input type='time'  class='outTime' name='outTime[]' ></td>"
+                      d = d + "<td><input type='number' name='otTime[]'  class='otTime' ></td>"
+                      d = d + "<td><select name='attn_type[]'  class='attn_type' ><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
+                     
+                      d = d + "</tr> "
+                    })
+                      $('tbody').html(d);
+                  }
+                   
 
-                  // console.log(data);
+                  console.log(data.data_exit);
                  }
               })
         }
@@ -118,6 +138,7 @@
                 type:"GET",
                 dataType:'json',
                 url: "attendance/show/"+emp_dept,
+                data:{date:date},
                 success:function(data){
                   var $i=1;
                     $.each(data,function(key,value){

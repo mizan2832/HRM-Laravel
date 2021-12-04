@@ -27,20 +27,28 @@ class DailyAttendanceController extends Controller
                 ->where('date', '=', $request->date)
                 ->exists();
         if ($date) {
-            $data = DB::table('daily_attendances')
+            $attendance = DB::table('daily_attendances')
             ->join('employees', 'employees.employee_id', '=', 'daily_attendances.emp_id')
             ->select('daily_attendances.*', 'employees.name')
             ->get();
             
-            return response()->json($data);
+            return response()->json(array(
+                'data_exit' => $date,
+                'attendance' => $attendance
+               
+            ));
 
         }else{
             $employees = Employee::all();
-            return response()->json($employees);
+            return response()->json(array(
+                'data_exit' => $date,
+                'employees' => $employees
+               
+            ));
         }
 
     }
-    public function showAttendanceDept($dpt_id)
+    public function showAttendanceDept(Request $request,$dpt_id)
     {
         $employees = Employee::where('department','=',$dpt_id)->get();
         return response()->json($employees);
