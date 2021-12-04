@@ -90,22 +90,22 @@
                 url: "attendance/show/",
                 data:{"_token": $('#token').val(),date:date},
                 success:function(data){
-                  // var $i=1;
-                  //   $.each(data,function(key,value){
-                  //     data = data+ " <tr>"
-                  //     data = data + "<td>"+ ($i++) +"</td>"
-                  //     data = data + "<td>"+ value.name +"</td>"
-                  //     data = data + "<td><input type='number'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" hidden></td>"
-                  //     data = data + "<td>Manual</td>"
-                  //     data = data + "<td><input type='time'  class='inTime' name='inTime[]'></td>"
-                  //     data = data + "<td><input type='time'  class='outTime' name='outTime[]'></td>"
-                  //     data = data + "<td><input type='number' name='otTime[]'  class='otTime'></td>"
-                  //     data = data + "<td><select name='attn_type[]'  class='attn_type'><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
-                  //     data = data + "</tr> "
-                  //   })
-                  //     $('tbody').html(data);
+                  var $i=1;
+                    $.each(data,function(key,value){
+                      data = data+ " <tr>"
+                      data = data + "<td>"+ ($i++) +"</td>"
+                      data = data + "<td>"+ value.name +"</td>"
+                      data = data + "<td><input type='number'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" hidden></td>"
+                      data = data + "<td>Manual</td>"
+                      data = data + "<td><input type='time'  class='inTime' name='inTime[]' value="+value.in_time+"></td>"
+                      data = data + "<td><input type='time'  class='outTime' name='outTime[]' value="+value.out_time+"></td>"
+                      data = data + "<td><input type='number' name='otTime[]'  class='otTime' value="+value.overtime+"></td>"
+                      data = data + "<td><select name='attn_type[]'  class='attn_type'  value="+value.status+"><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
+                      data = data + "</tr> "
+                    })
+                      $('tbody').html(data);
 
-                  console.log(data);
+                  // console.log(data);
                  }
               })
         }

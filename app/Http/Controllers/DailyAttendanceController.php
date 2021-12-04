@@ -22,9 +22,22 @@ class DailyAttendanceController extends Controller
 
     public function showAttendance(Request $request)
     {
-        
-        $employees = Employee::all();
-        return response()->json($employees);
+
+        $date = DB::table('daily_attendances')
+                ->where('date', '=', $request->date)
+                ->exists();
+        if ($date) {
+            $data = DB::table('daily_attendances')
+            ->join('employees', 'employees.employee_id', '=', 'daily_attendances.emp_id')
+            ->select('daily_attendances.*', 'employees.name')
+            ->get();
+            
+            return response()->json($data);
+
+        }else{
+            $employees = Employee::all();
+            return response()->json($employees);
+        }
 
     }
     public function showAttendanceDept($dpt_id)
