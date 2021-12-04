@@ -20,8 +20,9 @@ class DailyAttendanceController extends Controller
         return view('front.pages.attendance.daily_attendance')->withDepartments($department);
     }
 
-    public function showAttendance()
+    public function showAttendance(Request $request)
     {
+        
         $employees = Employee::all();
         return response()->json($employees);
 
