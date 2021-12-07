@@ -33,8 +33,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('employee/details/{id}','EmpController@details')->name('emp.details');
     Route::get('file/resume/{id}','FileController@resume');
     Route::resource('daily-attendance','DailyAttendanceController');
-    Route::get('attendance/show','DailyAttendanceController@showAttendance');
-    Route::get('attendance/show/{dept}','DailyAttendanceController@showAttendanceDept');
+    Route::post('attendance/show','DailyAttendanceController@showAttendanceDept');
     Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');
 
 

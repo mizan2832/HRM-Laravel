@@ -47,7 +47,22 @@
           <th style="width: 10%">Status</th>
         </thead>
         <tbody>
-   
+         @php
+             $i=1;
+         @endphp
+          @foreach ($datas as $data)
+            <tr>
+                <td>{{$i++}}</td>
+                <td>{{$data->name}}</td>
+                <td><input type="time" class="inTime" name='inTime[]' value="{{$data->in_time}}"></td>
+                <td><input type='time'  class='outTime' name='outTime[]' value="{{$data->out_time}}"></td>
+                <td><input type='number' name='otTime[]'  class='otTime' value="{{$data->overtime}}"></td>
+                <td><select name='attn_type[]'  class='attn_type'  value="{{$data->status}}"><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>
+                
+        
+            </tr> 
+          @endforeach
+
          
         </tbody>
       </table>
@@ -55,10 +70,13 @@
     <div class="container mt-2">
             <p style="float: left;">Showing 1 to 3 of 10 entities</p>
             <div class="paginate" style="float: right;">
-              <div class="btn-group">
+
+              {{ $datas->links() }}
+
+              {{-- <div class="btn-group">
                 <button type="button" style="margin-right: 2px;" class="btn btn-primary">Previous</button>
                 <button type="button" class="btn btn-primary">Next</button>
-              </div>
+              </div> --}}
             </div>
       </div>
       <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -90,39 +108,39 @@
                 data:{"_token": $('#token').val(),date:date},
                 success:function(data){
                   
-                  if (data.data_exit==true) {
-                  var $i=1;
-                   d = '';
-                    $.each(data.attendance,function(key,value){
-                      d = d+ " <tr>"
-                      d = d + "<td>"+ ($i++) +"</td>"
-                      d = d + "<td>"+ value.name +"</td>"
-                      d = d + "<input type='hidden'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" >"
-                      d = d + "<td><input type='time'  class='inTime' name='inTime[]' value="+value.in_time+"></td>"
-                      d = d + "<td><input type='time'  class='outTime' name='outTime[]' value="+value.out_time+"></td>"
-                      d = d + "<td><input type='number' name='otTime[]'  class='otTime' value="+value.overtime+"></td>"
-                      d = d + "<td><select name='attn_type[]'  class='attn_type'  value="+value.status+"><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
-                      d = d + "</tr> "
-                    })
-                      $('tbody').html(d);
-                  }
-                  else{
-                    var $i=1;
-                    d = '';
-                    $.each(data.employees,function(key,value){
-                      d = d+ " <tr>"
-                      d = d + "<td>"+ ($i++) +"</td>"
-                      d = d + "<td>"+ value.name +"</td>"
-                      d = d + "<td> <input  type='hidden' class='emp_id' name='emp_id[]'  value="+value.employee_id+" ></td>"
-                      d = d + "<td><input type='time'  class='inTime' name='inTime[]' ></td>"
-                      d = d + "<td><input type='time'  class='outTime' name='outTime[]' ></td>"
-                      d = d + "<td><input type='number' name='otTime[]'  class='otTime' ></td>"
-                      d = d + "<td><select name='attn_type[]'  class='attn_type' ><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
+                  // if (data.data_exit==true) {
+                  // var $i=1;
+                  //  d = '';
+                  //   $.each(data.attendance,function(key,value){
+                  //     d = d+ " <tr>"
+                  //     d = d + "<td>"+ ($i++) +"</td>"
+                  //     d = d + "<td>"+ value.name +"</td>"
+                  //     d = d + "<input type='hidden'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" >"
+                  //     d = d + "<td><input type='time'  class='inTime' name='inTime[]' value="+value.in_time+"></td>"
+                  //     d = d + "<td><input type='time'  class='outTime' name='outTime[]' value="+value.out_time+"></td>"
+                  //     d = d + "<td><input type='number' name='otTime[]'  class='otTime' value="+value.overtime+"></td>"
+                  //     d = d + "<td><select name='attn_type[]'  class='attn_type'  value="+value.status+"><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
+                  //     d = d + "</tr> "
+                  //   })
+                  //     $('tbody').html(d);
+                  // }
+                  // else{
+                  //   var $i=1;
+                  //   d = '';
+                  //   $.each(data.employees,function(key,value){
+                  //     d = d+ " <tr>"
+                  //     d = d + "<td>"+ ($i++) +"</td>"
+                  //     d = d + "<td>"+ value.name +"</td>"
+                  //     d = d + "<td> <input  type='hidden' class='emp_id' name='emp_id[]'  value="+value.employee_id+" ></td>"
+                  //     d = d + "<td><input type='time'  class='inTime' name='inTime[]' ></td>"
+                  //     d = d + "<td><input type='time'  class='outTime' name='outTime[]' ></td>"
+                  //     d = d + "<td><input type='number' name='otTime[]'  class='otTime' ></td>"
+                  //     d = d + "<td><select name='attn_type[]'  class='attn_type' ><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
                      
-                      d = d + "</tr> "
-                    })
-                      $('tbody').html(d);
-                  }
+                  //     d = d + "</tr> "
+                  //   })
+                  //     $('tbody').html(d);
+                  // }
                    
 
                   console.log(data.data_exit);
@@ -132,13 +150,15 @@
 
         function departmentData()
         {
+          // var content= $('tbody').val();
+          // console.log(content);
           var emp_dept = $('#emp_dept').val();
           var date = $('#date').val();
           $.ajax({
-                type:"GET",
+                type:"post",
                 dataType:'json',
-                url: "attendance/show/"+emp_dept,
-                data:{date:date},
+                url: "attendance/show",
+                data:{"_token": $('#token').val(),date:date,emp_dept:emp_dept},
                 success:function(data){
                   var $i=1;
                     $.each(data,function(key,value){
@@ -146,16 +166,17 @@
                       data = data + "<td>"+ ($i++) +"</td>"
                       data = data + "<td>"+ value.name +"</td>"
                       data = data + "<td>Manual</td>"
-                      data = data + "<td><input type='time' class='inTime' name='inTime[]'></td>"
+                      data = data + "<td><input type='time' class='inTime' name='inTime[]'  value="+value.in_time+"></td>"
                       data = data + "<input type='number'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" hidden>"
-                      data = data + "<td><input type='time' class='outTime' name='outTime[]'></td>"
-                      data = data + "<td><input type='number' name='otTime[]' id='otTime'></td>"
+                      data = data + "<td><input type='time' class='outTime' value="+value.out_time+" name='outTime[]'></td>"
+                      data = data + "<td><input type='number' name='otTime[]' id='otTime' value="+value.overtime+"></td>"
                       data = data + "<td><select name='attn_type[]' class='attn_type'><option value='0'>Absent</option><option value='1'>Present</option> <option value='2'>On leave</option></select>  </td>"
                       data = data + "</tr>"
                     })
                       $('tbody').html(data);
+                      $('.paginate').empty();
 
-                  // console.log(data);
+
                  }
               })
           
@@ -198,6 +219,6 @@
 
         }
         
-          allData();
+          // allData();
     </script>
 @endpush

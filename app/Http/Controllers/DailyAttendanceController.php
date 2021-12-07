@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DailyAttendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use App\Department;
 use App\Employee;
 class DailyAttendanceController extends Controller
@@ -16,42 +17,77 @@ class DailyAttendanceController extends Controller
      */
     public function index()
     {
+
+
         $department = Department::all();
-        return view('front.pages.attendance.daily_attendance')->withDepartments($department);
+        $d = date('Y-m-d');
+        $datas =  DB::table('daily_attendances')
+            ->join('employees', function ($join) {
+                $join->on('employees.employee_id', '=', 'daily_attendances.emp_id');
+                    
+            })
+            ->select('daily_attendances.*', 'employees.name')
+            ->where('daily_attendances.date', '=' ,''.$d.'')
+            ->paginate(2);
+
+
+        return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department));
+
+        
+       
     }
 
     public function showAttendance(Request $request)
     {
 
-        $date = DB::table('daily_attendances')
-                ->where('date', '=', $request->date)
-                ->exists();
-        if ($date) {
-            $attendance = DB::table('daily_attendances')
-            ->join('employees', 'employees.employee_id', '=', 'daily_attendances.emp_id')
-            ->select('daily_attendances.*', 'employees.name')
-            ->get();
+        $datas = DailyAttendance::paginate(2);
+        
+        return response()->json($datas);
+        // return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas));
+        // if ($date) {
+            // $attendance = DB::table('daily_attendances')
+            // ->join('employees', 'employees.employee_id', '=', 'daily_attendances.emp_id')
+            // ->select('daily_attendances.*', 'employees.name')
+            // ->get();
             
-            return response()->json(array(
-                'data_exit' => $date,
-                'attendance' => $attendance
+        //     return response()->json(array(
+        //         'data_exit' => $date,
+        //         'attendance' => $attendance
                
-            ));
+        //     ));
 
-        }else{
-            $employees = Employee::all();
-            return response()->json(array(
-                'data_exit' => $date,
-                'employees' => $employees
+        // }else{
+        //     $employees = Employee::all();
+        //     return response()->json(array(
+        //         'data_exit' => $date,
+        //         'employees' => $employees
                
-            ));
-        }
+        //     ));
+        // }
 
     }
-    public function showAttendanceDept(Request $request,$dpt_id)
+    public function showAttendanceDept(Request $request)
     {
-        $employees = Employee::where('department','=',$dpt_id)->get();
-        return response()->json($employees);
+        // $employees = Employee::where('department','=',$dpt_id)->get();
+        // return response()->json($employees);
+
+        $department = Department::all();
+        $d = date('Y-m-d');
+        $datas =  DB::table('daily_attendances')
+            ->join('employees', function ($join) {
+                $join->on('employees.employee_id', '=', 'daily_attendances.emp_id');
+                    
+            })
+            ->select('daily_attendances.*', 'employees.name')
+            ->where('employees.department','=',''.$request->emp_dept.'')
+            ->where('daily_attendances.date', '=' ,''.$request->date.'')
+            ->get();
+
+            return response()->json($datas);
+        // return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department));
+
+        // return Response::json(View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department))->render());
+
 
     }
  
