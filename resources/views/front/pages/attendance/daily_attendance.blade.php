@@ -100,7 +100,6 @@
         function allData()
         {
           var date = $('#date').val();
-
             $.ajax({
                 type:"GET",
                 dataType:'json',

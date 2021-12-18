@@ -105,7 +105,7 @@
                     </a>
                 </li>
                 <li class="submenu">
-                    <a href="users.html">
+                    <a href="{{route('holiday')}}">
                         <i class="fas fa-adjust"></i>
                         <span> Holidays </span>
                     </a>
