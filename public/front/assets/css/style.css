@@ -1693,3 +1693,12 @@ td {
     width: 100px;
     text-align: center;
 }
+.holiday-header select{
+    height: 38px;
+    width: 159px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.holiday-body{
+    margin-top: 20px;
+}
