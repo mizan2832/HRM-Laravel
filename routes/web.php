@@ -37,6 +37,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');
     Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');
     Route::get('holiday','HolidayController@index')->name('holiday');
+    Route::post('holiday/store','HolidayController@store');
 
 
     // Route::get('emp/list/','empController@allData')->name('emp.all');
