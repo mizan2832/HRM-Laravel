@@ -99,7 +99,7 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="{{ route('unit') }}">
+                    <a href="{{ route('unit.index') }}">
                         <i class="fab fa-uniregistry"></i>
                         <span> Units </span>
                     </a>

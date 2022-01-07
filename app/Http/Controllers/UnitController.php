@@ -9,7 +9,7 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::all();
-        return view('front.pages.section.index')->withUnits($unit);;
+        return view('front.pages.unit.index')->withUnits($units);;
     }
 
     /**
@@ -32,12 +32,12 @@ class UnitController extends Controller
     {
         // dd($request);
         $validated = $request->validate([
-            'name' => 'required|unique:sections|max:255',
+            'name' => 'required|unique:units|max:255',
         ]);
-        $sec = new Section();
+        $sec = new Unit();
         $sec->name = $request->name;
         $sec->save();
-        return redirect()->route('section.index')->with('success','Section has been added successfully!');
+        return redirect()->route('unit.index')->with('success','Unit has been added successfully!');
     }
 
     /**
@@ -59,9 +59,9 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
-        $dept = Section::find($id);
-        $allDept = Section::all();
-        return view('front.pages.section.edit')->withAllSection($allDept)->withSingleDept($dept);
+        $unit = Unit::find($id);
+        $units = Unit::all();
+        return view('front.pages.unit.edit')->withUnits($units)->withUnit($unit);
     }
 
     /**
@@ -74,12 +74,12 @@ class UnitController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:sections|max:255',
+            'name' => 'required|unique:units|max:255',
         ]);
-        $dept = Section::find($id);
-        $dept->name = $request->name;
-        $dept->save();
-        return redirect()->route('section.index')->with('success','Section updated successfully!');
+        $unit = Unit::find($id);
+        $unit->name = $request->name;
+        $unit->save();
+        return redirect()->route('unit.index')->with('success','Unit updated successfully!');
     }
 
     /**
@@ -88,9 +88,9 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy(Unit $unit)
     {
-        $section->delete();
-        return redirect()->back()->with('success','Section deleted successfully!');
+        $unit->delete();
+        return redirect()->back()->with('success','Unit deleted successfully!');
     }
 }
