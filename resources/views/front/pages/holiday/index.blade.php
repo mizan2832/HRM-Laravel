@@ -61,7 +61,7 @@
                         <div class="form-group" >
                           <label class="control-label col-sm-3" for="holiday-name">Holiday name:</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="holiday_name" placeholder="Enter holiday name" name="holiday-name">
+                            <input type="text" class="form-control" id="name" placeholder="Enter holiday name" name="holiday-name">
                           </div>
                         </div>
                         <div class="form-group">
@@ -73,7 +73,9 @@
                        
                         <div class="form-group">        
                           <div class="col-sm-offset-2 col-sm-10">
-                            <input type="submit" onclick="holiday()" class="btn btn-primary  d-flex align-items-center justify-content-center" value="Add">                          </div>
+                            <input type="submit" id="add" onclick="holiday()" class="btn btn-primary  d-flex align-items-center justify-content-center" value="Add">                        
+                            <input type="submit" id="update" onclick="update()" class="btn btn-primary  d-flex align-items-center justify-content-center" value="UPDATE">                        
+                            </div>
                         </div>
                      
                 </div>
@@ -85,8 +87,6 @@
 
 @push('js')
 <script>
-
-
 
   $.ajaxSetup({
         headers: {
@@ -102,7 +102,7 @@
               type:"POST",
               dataType:'json',
               url: "holiday/store",
-              data:{date:date,holiday_name:holiday_name},
+              data:{"_token": $('#token').val(),date:date,holiday_name:holiday_name},
               success:function(){
                 all_holiday();
               }
@@ -110,7 +110,9 @@
 
       }
 
-  function all_holiday(){
+   function all_holiday(){
+          $('#add').show();
+          $('#update').hide();
             $.ajax({
                 type:"GET",
                 dataType:'json',
@@ -124,6 +126,7 @@
                       d = d + "<td>"+ ($i++) +"</td>"
                       d = d + "<td>"+ value.name +"</td>"
                       d = d + "<td>"+ value.date +"</td>"
+                      d = d + "<td><button type='button' id='button1' data-sample-id='gotcha!' onclick='holiday_edit("+value.id+")'> EDIT </button> </td>"
                       d = d + "</tr> "
                     })
                       $('tbody').html(d);
@@ -134,6 +137,28 @@
   }
 
   all_holiday();
+
+
+  function holiday_edit(e){
+    $('#add').hide();
+    $('#update').show();
+
+        $.ajax({
+                type:"GET",
+                dataType:'json',
+                url: "holiday/edit/"+e,
+                data:{id:e},
+                success:function(data){
+                  console.log(data);
+                    let name = data.name;
+                    let holiday = data.holiday;
+                    $("#name").val(name);
+                    $("#date").val(holiday);
+                  }
+              })
+
+  }
+
 
 
 </script>
