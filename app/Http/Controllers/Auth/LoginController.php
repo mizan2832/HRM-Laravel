@@ -72,6 +72,7 @@ class LoginController extends Controller
                     ->with('error','Email & Password are incorrect.');
         }     
     }
+    
     public function logout(Request $request) {
         Auth::logout();
         return redirect()->route('home');

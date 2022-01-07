@@ -99,7 +99,7 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="users.html">
+                    <a href="{{ route('unit') }}">
                         <i class="fab fa-uniregistry"></i>
                         <span> Units </span>
                     </a>

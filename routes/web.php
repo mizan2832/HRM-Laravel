@@ -38,15 +38,8 @@ Route::group(['middleware' => 'admin'], function()
     Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');
     Route::get('holiday','HolidayController@index')->name('holiday');
     Route::post('holiday/store','HolidayController@store');
-
-
-    // Route::get('emp/list/','empController@allData')->name('emp.all');
-    // Route::post('emp/store/','empController@storeData')->name('emp.store');
-    // Route::get('emp/edit/{id}','empController@editData');
-    // Route::post('emp/update/{id}','empController@updateData');
-    // Route::post('emp/delete/{id}','empController@empDelete');
-
-
+    Route::resource('unit','UnitController');
+    
 
 
 });
