@@ -6,9 +6,19 @@ use Illuminate\Http\Request;
 use App\Holiday;
 class HolidayController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('front.pages.holiday.index');
+       if ($request->date) {
+           $holidays = Holiday::all();
+           return response()->json(array(
+                    'holiday' => $holidays
+                   
+                ));
+       }else{
+           $holidays = Holiday::all();
+           return view('front.pages.holiday.index')->withHolidays($holidays);
+       }
+       
     }
     
     public function store(Request $request){

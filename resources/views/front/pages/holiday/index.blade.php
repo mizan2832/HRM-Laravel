@@ -42,7 +42,16 @@
                           </tr>
                         </thead>
                         <tbody>
-                       
+                       @php
+                              $i = 1;
+                       @endphp
+                       @foreach ($holidays as $day)
+                        <tr>  
+                           <td>{{$i++}}</td>
+                           <td>{{$day->name}}</td>
+                           <td>{{$day->date}}</td>
+                        </tr>
+                       @endforeach
                         </tbody>
                       </table>
     
@@ -85,7 +94,6 @@
         }
   });
 
-
   function holiday(){
     let date = $('#date').val();
     let holiday_name = $('#holiday_name').val();
@@ -95,63 +103,34 @@
               dataType:'json',
               url: "holiday/store",
               data:{date:date,holiday_name:holiday_name},
-              success:function(data){
-                console.log(data);
+              success:function(){
+                all_holiday();
               }
             })
 
       }
 
   function all_holiday(){
-
-    function allData()
-        {
-         
             $.ajax({
                 type:"GET",
                 dataType:'json',
-                url: "holiday/show/",
+                url: "holiday",
+                data:{date:'save'},
                 success:function(data){
-                  
-                  if (data.data_exit==true) {
-                  var $i=1;
+                   var $i=1;
                    d = '';
-                    $.each(data.attendance,function(key,value){
+                   $.each(data.holiday,function(key,value){
                       d = d+ " <tr>"
                       d = d + "<td>"+ ($i++) +"</td>"
                       d = d + "<td>"+ value.name +"</td>"
-                      d = d + "<input type='hidden'  class='emp_id' name='emp_id[]'  value="+value.employee_id+" >"
-                      d = d + "<td><input type='time'  class='inTime' name='inTime[]' value="+value.in_time+"></td>"
-                      d = d + "<td><input type='time'  class='outTime' name='outTime[]' value="+value.out_time+"></td>"
-                      d = d + "<td><input type='number' name='otTime[]'  class='otTime' value="+value.overtime+"></td>"
-                      d = d + "<td><select name='attn_type[]'  class='attn_type'  value="+value.status+"><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
+                      d = d + "<td>"+ value.date +"</td>"
                       d = d + "</tr> "
                     })
                       $('tbody').html(d);
                   }
-                  else{
-                    var $i=1;
-                    d = '';
-                    $.each(data.holidays,function(key,value){
-                      d = d+ " <tr>"
-                      d = d + "<td>"+ ($i++) +"</td>"
-                      d = d + "<td>"+ value.name +"</td>"
-                      d = d + "<td> <input  type='hidden' class='emp_id' name='emp_id[]'  value="+value.employee_id+" ></td>"
-                      d = d + "<td><input type='time'  class='inTime' name='inTime[]' ></td>"
-                      d = d + "<td><input type='time'  class='outTime' name='outTime[]' ></td>"
-                      d = d + "<td><input type='number' name='otTime[]'  class='otTime' ></td>"
-                      d = d + "<td><select name='attn_type[]'  class='attn_type' ><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>"
-                     
-                      d = d + "</tr> "
-                    })
-                      $('tbody').html(d);
-                  }
-                   
 
-                  console.log(data.data_exit);
-                 }
               })
-        }
+        
   }
 
   all_holiday();
