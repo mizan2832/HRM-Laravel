@@ -137,8 +137,6 @@
   }
 
   all_holiday();
-
-
   function holiday_edit(e){
     $('#add').hide();
     $('#update').show();
@@ -151,7 +149,8 @@
                 success:function(data){
                   console.log(data);
                     let name = data.name;
-                    let holiday = data.holiday;
+                    let holiday = data.date;
+                    console.log(data);
                     $("#name").val(name);
                     $("#date").val(holiday);
                   }

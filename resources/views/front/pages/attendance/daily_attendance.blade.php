@@ -8,13 +8,17 @@
 </div>
 <div class="container  bg-attn">
 <div class="form-inline  bg-attn" >
-      <label for="emp_dept" class="mb-2 mr-sm-2">Employee by department:</label>
-      <select name="emp_dept" id="emp_dept" class="form-control col-md-3">
+      <label for="emp_dept" class="mb-2 mr-sm-2"> department:</label>
+      <select name="emp_dept" id="emp_dept" class="form-control col-md-2">
           <option value="all">All Department</option>
           @foreach ($departments as $dept)
               <option value="{{$dept->id}}">{{$dept->dpt_name}}</option>
           @endforeach
       </select>
+
+      <label for="date" class="mb-2 mr-sm-2">File(csv):</label>
+      <input type="file" class="form-control mb-2 mr-sm-2" id="file"  name="file">
+
       <label for="date" class="mb-2 mr-sm-2">Date:</label>
       <input type="date" class="form-control mb-2 mr-sm-2" id="date"  name="pswd">
           
@@ -24,7 +28,7 @@
 
   </div>
   <div class="container bg-attn  mt-2">
-    z
+    
     <div class="row">
       <div class="entities">
           <p>Show</p>
