@@ -115,16 +115,12 @@ class EmployeeController extends Controller
        $user->save();
      
        return redirect()->route('employee.index');
-      
-
-
-
 
     }
 
     public function show(Employee $employee)
     {
-        //
+        
     }
 
     /**

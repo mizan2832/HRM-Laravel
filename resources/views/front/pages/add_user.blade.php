@@ -1,5 +1,14 @@
 @extends('front.master')
 @section('title','Users')
+@push('head')
+    <style>
+        .adduser_btn{
+            margin: 0 auto;
+            margin-left:50%;
+            margin-right:50%;
+        }
+    </style>
+@endpush
 @section('content')
 
     <div class="container">
@@ -85,8 +94,6 @@
                                     <input type="file" name="photo">
                                 </div>
                             </div>
-                       
-
                     </div>
                     
                   </div>
@@ -125,72 +132,19 @@
               </div>
               <div class="card per-del">
                 <div class="card-header">
-                    Module Access
+                     Access
                 </div>
                 <div class="card-body">
                      <div class="form-group row">
-                        <label style="margin-top: -8px;" for="employee" class="col-sm-3 col-form-label">Employee</label>
-                        <div class="col-sm-9">
-                            <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="attd_view" id="attd_view" value="attd_view">
-                                    <label class="form-check-label" for="attd_view">view</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="attd_add" id="attd_add" value="attd_add">
-                                    <label class="form-check-label" for="attd_add">Add</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="attd_edit" id="attd_edit" value="attd_edit" >
-                                    <label class="form-check-label" for="attd_edit">Edit</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="attd_delete" id="attd_delete" value="attd_delete" >
-                                    <label class="form-check-label" for="attd_delete">Delete</label>
-                              </div>
-                        </div>
+                        <label style="margin-top: -8px;" for="permission" class="col-sm-3 col-form-label">Permission</label>
+                        <select  name="permission" id="permission" multiple="multiple">
+                            <option value="add">Add</option>
+                            <option value="view">View</option>
+                            <option value="edit">Edit</option>
+                            <option value="delete">Delete</option>
+                        </select>
                     </div>
-                    <div class="form-group row">
-                        <label style="margin-top: -8px;" for="department" class="col-sm-3 col-form-label">Department</label>
-                        <div class="col-sm-9">
-                            <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="emp_view" id="dept_view" value="dept_view">
-                                    <label class="form-check-label" for="dept_view">view</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="dept_add" id="dept_add" value="dept_add">
-                                    <label class="form-check-label" for="dept_add">Add</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="dept_edit" id="dept_edit" value="dept_edit" >
-                                    <label class="form-check-label" for="dept_edit">Edit</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="dept_delete" id="dept_delete" value="dept_delete" >
-                                    <label class="form-check-label" for="dept_delete">Delete</label>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label style="margin-top: -8px;" for="attendance" class="col-sm-3 col-form-label">Attendance</label>
-                        <div class="col-sm-9">
-                            <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="attd_view" id="dept_view" value="dept_view">
-                                    <label class="form-check-label" for="dept_view">view</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="dept_add" id="dept_add" value="dept_add">
-                                    <label class="form-check-label" for="dept_add">Add</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="dept_edit" id="dept_edit" value="dept_edit" >
-                                    <label class="form-check-label" for="dept_edit">Edit</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="dept_delete" id="dept_delete" value="dept_delete" >
-                                    <label class="form-check-label" for="dept_delete">Delete</label>
-                              </div>
-                        </div>
-                    </div>
+                    
                 </div>
               </div>
             </div>

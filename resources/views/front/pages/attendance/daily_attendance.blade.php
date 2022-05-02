@@ -17,7 +17,7 @@
       </select>
 
       <label for="date" class="mb-2 mr-sm-2">File(csv):</label>
-      <input type="file" class="form-control mb-2 mr-sm-2" id="file"  name="file">
+      <input type="file" class="form-control mb-2 mr-sm-2" id="file"  name="upload_file">
 
       <label for="date" class="mb-2 mr-sm-2">Date:</label>
       <input type="date" class="form-control mb-2 mr-sm-2" id="date"  name="pswd">
@@ -157,6 +157,21 @@
           // console.log(content);
           var emp_dept = $('#emp_dept').val();
           var date = $('#date').val();
+          var file = $('#file').val();
+          if (file) {
+            $.ajax({
+                type:'post',
+                dataType:'json',
+                url: "attendance/store/csv",
+                data:{"_token": $('#token').val(),date:date,file:file},
+                success:function(data){
+                  console.log(data)
+                }
+
+                
+            })
+          }else{
+
           $.ajax({
                 type:"post",
                 dataType:'json',
@@ -178,10 +193,10 @@
                     })
                       $('tbody').html(data);
                       $('.paginate').empty();
-
-
                  }
               })
+          }
+
           
         }
 
