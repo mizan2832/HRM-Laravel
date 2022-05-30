@@ -1687,12 +1687,7 @@ thead th,
 td {
     text-align: left;
 }
-.attn-save{
-    margin:0 auto;
-    margin-top: 20px;
-    width: 100px;
-    text-align: center;
-}
+
 .holiday-header select{
     height: 38px;
     width: 159px;

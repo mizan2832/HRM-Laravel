@@ -136,16 +136,16 @@ class DailyAttendanceController extends Controller
 
     public function storeCsv(Request $request){
 
-        $upload=$request->file('upload-file');
+        $path = $request->file('upload_file')->store('upload/files', 'public');
       
-            $filePath=$upload->getRealPath();
+        $filePath=$upload->getRealPath();
         //open and read
         $file=fopen($filePath, 'r');
-
+        
         $header= fgetcsv($file);
+        dd($header);
         return response()->json($data);
 
-        // dd($header);
 
         // // dd($header);
         // $escapedHeader=[];

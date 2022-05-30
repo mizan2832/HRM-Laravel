@@ -1,32 +1,97 @@
 @extends('front.master')
 @section('title','Daily Attendance')
+@push('head')
+    
+@endpush
 @section('content')
 <div class="row">
     <div class="container bg-attn">
         <h3 style="padding-bottom:1.2rem; border-bottom:2px solid black;">Daily Attendance</h3>
     </div>
 </div>
-<div class="container  bg-attn">
-<div class="form-inline  bg-attn" >
-      <label for="emp_dept" class="mb-2 mr-sm-2"> department:</label>
-      <select name="emp_dept" id="emp_dept" class="form-control col-md-2">
-          <option value="all">All Department</option>
-          @foreach ($departments as $dept)
-              <option value="{{$dept->id}}">{{$dept->dpt_name}}</option>
-          @endforeach
-      </select>
 
-      <label for="date" class="mb-2 mr-sm-2">File(csv):</label>
-      <input type="file" class="form-control mb-2 mr-sm-2" id="file"  name="upload_file">
 
-      <label for="date" class="mb-2 mr-sm-2">Date:</label>
-      <input type="date" class="form-control mb-2 mr-sm-2" id="date"  name="pswd">
+<form  enctype="multipart/form-data" method="POST" action="{{ route('attendance.csv') }}">
+ 
+    <div class="container">
+    <div class="row mb-2 col-md-12">
+      <div class="col-md-2">
+        <div class="col">
+        <div class="form-outline">
+          <label class="form-label" for="form3Example1">Employee Id</label>
+          <input type="text" id="emp_id" name="emp_id" class="form-control" />
+        </div>
+      </div>
+    </div>
+      <div class="col-md-4">
+        <div class="col">
+        <div class="form-outline">
+          <label class="form-label" for="form3Example1">Employee Name</label>
+          <input type="text" id="emp_name" name="emp_name" class="form-control" />
+        </div>
+      </div>
+     </div>
+      <div class="col-md-3">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">In Time</label>
+            <input type="time" id="in_time" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">Out Time</label>
+            <input type="time" id="out_time" class="form-control" />
+          </div>
+        </div>
+      </div>    
+    </div>
+
+    <div class="row mb-2 col-md-12">
+      <div class="col-md-4">
+        <div class="col">
+        <div class="form-outline">
+          <label class="form-label" for="form3Example1">Department</label>
+          <select name="dept_name" id="dept_name" class="form-control">
+            <option value="">Select Department</option>
+            @foreach ($departments as $dept)
+                <option value="{{$dept->id}}">{{$dept->dpt_name}}</option>
+            @endforeach
           
-      <button type="submit" id="submit"  class="btn btn-primary mb-2" onclick="departmentData()">Submit</button>
+          </select>
+        </div>
+      </div></div>
+      <div class="col-md-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">Date</label>
+            <input type="date" id="date" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">Attendance Type</label>
+            <select name="dept_name" id="dept_name" class="form-control">
+              <option value="">Select Type</option>
+            </select>
+          </div>
+        </div>
+      </div>   
     </div>
 
 
+    <!-- Submit button -->
+    <div class="row justify-content-center">
+      <button type="submit" id="save" class="btn btn-primary">Submit</button>
+    </div> 
+
   </div>
+  </form>
+  
   <div class="container bg-attn  mt-2">
     
     <div class="row">
@@ -92,7 +157,7 @@
 
   
 @endsection
-@push('js')
+{{-- @push('js')
     <script>
       $.ajaxSetup({
         headers: {
@@ -239,4 +304,4 @@
         
           // allData();
     </script>
-@endpush
+@endpush --}}

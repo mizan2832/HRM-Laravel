@@ -18,7 +18,7 @@
                     <div class="card-header">Person Details</div>
                     <div class="card-body">
 
-                        <form autocomplete="off" action="#">
+                        <form autocomplete="off" action="addUser">
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
@@ -39,17 +39,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="phone1" class="col-sm-2 col-form-label">Phone 1</label>
+                                <label for="phone1" class="col-sm-2 col-form-label">Phone </label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="phone1" name="phone1" autocomplete="off">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="phone2" class="col-sm-2 col-form-label">Phone 2</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="phone2" name="phone2" autocomplete="off">
-                                </div>
-                            </div>
+       
                             <div class="form-group row">
                                 <label for="street" class="col-sm-2 col-form-label">Street</label>
                                 <div class="col-sm-10">
@@ -73,8 +68,8 @@
                                 <div class="col-sm-10">
                                     <select class="form-control" name="country" id="country">
                                         <option value="">Select Country</option>
-                                        <option value="">Bangladesh</option>
-                                        <option value="">India</option>
+                                        <option value="bn">Bangladesh</option>
+                                        <option value="in">India</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,8 +78,8 @@
                                 <div class="col-sm-10">
                                     <select class="form-control" name="meritial_status" id="meritial_status">
                                         <option value="">Select</option>
-                                        <option value="">Bachelor</option>
-                                        <option value="">Merried</option>
+                                        <option value="bc">Bachelor</option>
+                                        <option value="m">Merried</option>
                                     </select>
                                 </div>
                             </div>
@@ -143,11 +138,13 @@
                             <option value="edit">Edit</option>
                             <option value="delete">Delete</option>
                         </select>
-                    </div>
+                    </div>                                                                                                                                                                                                                                                                      
                     
                 </div>
               </div>
+              <button class="btn btn-primary adduser_btn">Submit</button>
             </div>
+        </form>
         </div>
     </div>
 @endsection

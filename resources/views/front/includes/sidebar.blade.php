@@ -11,7 +11,7 @@
                         <span> Dashboard </span>
                     </a>
                 </li>
-
+{{-- 
                 <li class="submenu">
                     <a id="tables" href="#">
                         <i class="fas fa-table"></i>
@@ -27,7 +27,7 @@
                             <a href="#"> <i class="far fa-calendar-alt"></i>Manage User</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li class="submenu">
                     <a href="mail-all.html">
@@ -81,6 +81,21 @@
                         <i class="fas fa-cut"></i>
                         <span> Sections </span>
                     </a>
+                </li>
+                <li class="submenu">
+                    <a id="tables" href="#">
+                        <i class="fas fa-strikethrough"></i>
+                        <span> Leave </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href=""> <i class="fas fa-user-clock"></i>Leave Employee</a>
+                        </li>
+                        <li>
+                            <a href="{{route('leave.index')}}"> <i class="fas fa-th-list"></i>Leave Type</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="submenu">
                     <a id="tables" href="#">
