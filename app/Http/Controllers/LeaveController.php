@@ -37,13 +37,16 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validated = $request->validate([
-            'name' => 'required|unique:units|max:255',
+            'type' => 'required|unique:leaves|max:255',
+            'code' => 'required|unique:leaves|max:5'
         ]);
-        $sec = new Unit();
-        $sec->name = $request->name;
-        $sec->save();
-        return redirect()->route('unit.index')->with('success','Unit has been added successfully!');
+        $le = new Leave();
+        $le->type = $request->type;
+        $le->code = $request->code;
+        $le->save();
+        return redirect()->route('leave.index')->with('success','Leave has been added successfully!');
     }
 
     /**

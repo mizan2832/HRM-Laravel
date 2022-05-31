@@ -11,7 +11,8 @@
 </div>
 
 
-<form  enctype="multipart/form-data" method="POST" action="{{ route('attendance.csv') }}">
+<form  enctype="multipart/form-data" method="POST" action="{{ route('daily-attendance.store') }}">
+  @csrf
  
     <div class="container">
     <div class="row mb-2 col-md-12">
@@ -77,6 +78,9 @@
             <label class="form-label" for="form3Example2">Attendance Type</label>
             <select name="dept_name" id="dept_name" class="form-control">
               <option value="">Select Type</option>
+              @foreach ($leaves as $le)
+                 <option value="{{$le->code}}">{{$le->type}}</option>
+              @endforeach
             </select>
           </div>
         </div>

@@ -16,7 +16,7 @@
                         <div style="color: red;">{{$error}}</div>
                     @endforeach
                  @endif
-                <form class="form-inline" action="{{ route('leave.create') }}" method="POST" >
+                <form class="form-inline" action="{{ route('leave.store') }}" method="POST" >
                     @csrf
                     <div class="container">
                     <div class="row col-md-12">

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\Department;
 use App\Employee;
+use App\Leave;
+
 class DailyAttendanceController extends Controller
 {
     /**
@@ -20,18 +22,19 @@ class DailyAttendanceController extends Controller
 
 
         $department = Department::all();
+        $leaves = Leave::all();
         $d = date('Y-m-d');
         $datas =  DB::table('daily_attendances')
             ->join('employees', function ($join) {
                 $join->on('employees.employee_id', '=', 'daily_attendances.emp_id');
                     
             })
-            ->select('daily_attendances.*', 'employees.name')
+            ->select('daily_attendan.ces.*', 'employees.name')
             ->where('daily_attendances.date', '=' ,''.$d.'')
             ->paginate(2);
 
 
-        return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department));
+        return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department,'leaves'=>$leaves));
 
         
        
@@ -105,9 +108,7 @@ class DailyAttendanceController extends Controller
      */
     public function store(Request $request)
     {
-       
-
-        return response()->json($request);
+        dd($request);
     }
     public function storeAttendanceDept(Request $request)
     {
