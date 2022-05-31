@@ -21,7 +21,7 @@ class CreateDailyAttendancesTable extends Migration
             $table->string('out_time')->nullable();
             $table->string('overtime')->nullable();
             $table->date('date');
-            $table->string('status');
+            $table->string('emp_id');
             $table->timestamps();
         });
     }

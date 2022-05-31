@@ -36,7 +36,7 @@
         <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example2">In Time</label>
-            <input type="time" id="in_time" class="form-control" />
+            <input type="time" name="in_time" id="in_time" class="form-control" />
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
         <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example2">Out Time</label>
-            <input type="time" id="out_time" class="form-control" />
+            <input type="time" name="out_time" id="out_time" class="form-control" />
           </div>
         </div>
       </div>    
@@ -68,7 +68,7 @@
         <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example2">Date</label>
-            <input type="date" id="date" class="form-control" />
+            <input type="date" id="date" name="date" class="form-control" />
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
         <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example2">Attendance Type</label>
-            <select name="dept_name" id="dept_name" class="form-control">
+            <select name="code" id="code" class="form-control">
               <option value="">Select Type</option>
               @foreach ($leaves as $le)
                  <option value="{{$le->code}}">{{$le->type}}</option>
@@ -126,11 +126,11 @@
           @foreach ($datas as $data)
             <tr>
                 <td>{{$i++}}</td>
-                <td>{{$data->name}}</td>
-                <td><input type="time" class="inTime" name='inTime[]' value="{{$data->in_time}}"></td>
-                <td><input type='time'  class='outTime' name='outTime[]' value="{{$data->out_time}}"></td>
-                <td><input type='number' name='otTime[]'  class='otTime' value="{{$data->overtime}}"></td>
-                <td><select name='attn_type[]'  class='attn_type'  value="{{$data->status}}"><option value='ab'>Absent</option><option value='p'>Present</option> <option value='r'>On leave</option></select>  </td>
+                <td>{{$data->name}} </td>
+                <td>{{$data->in_time}}</td>
+                <td>{{$data->out_time}}</td>
+                <td>{{$data->overtime}}</td>
+                <td>{{$data->attn_type}} </td>
                 
         
             </tr> 

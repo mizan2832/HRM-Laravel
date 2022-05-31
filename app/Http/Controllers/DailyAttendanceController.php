@@ -20,7 +20,7 @@ class DailyAttendanceController extends Controller
     public function index()
     {
 
-
+        
         $department = Department::all();
         $leaves = Leave::all();
         $d = date('Y-m-d');
@@ -29,9 +29,10 @@ class DailyAttendanceController extends Controller
                 $join->on('employees.employee_id', '=', 'daily_attendances.emp_id');
                     
             })
-            ->select('daily_attendan.ces.*', 'employees.name')
+            ->select('daily_attendances.*', 'employees.name')
             ->where('daily_attendances.date', '=' ,''.$d.'')
             ->paginate(2);
+     
 
 
         return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department,'leaves'=>$leaves));
@@ -107,8 +108,42 @@ class DailyAttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        dd($request);
+    {   
+       
+        $attn = new DailyAttendance();
+        $emp_id = $request->emp_id;
+        $attn->emp_name = $request->emp_name;
+        $attn->attn_type = $request->code;
+        $in_time = date("g:i a", strtotime(".$request->in_time . UTC"));
+        $out_time = date("g:i a", strtotime(".$request->out_time . UTC"));
+        $attn->in_time = $in_time;
+        $attn->out_time = $out_time;
+        $start = strtotime($request->in_time);
+        $end = strtotime($request->out_time);
+        $hours = ($end - $start)/3600;
+        if($hours>8){
+            $ot = $hours-8;
+            $hour = floor($ot);
+            $min = fmod($ot,1);
+            if($min>0 && $min<= 0.25){
+                $ot = $hour+0.25;
+            }
+            elseif($min>0.25 && $min<= 0.50){
+                $ot = $hour+0.50;
+            }
+            elseif($min>0.50 && $min<= 0.75){
+                $ot = $hour+0.75;
+            }
+            elseif($min>0.75 && $min< 1.0){
+                $ot = $hour+1;
+            }
+
+        }
+        $attn->overtime = $ot;
+        $attn->date = $request->date;
+        $attn->emp_id = $request->emp_id;
+        $attn->save();
+        return redirect()->route('daily-attendance.index');
     }
     public function storeAttendanceDept(Request $request)
     {
