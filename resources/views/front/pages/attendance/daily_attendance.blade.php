@@ -16,7 +16,7 @@
  
     <div class="container">
     <div class="row mb-2 col-md-12">
-      <div class="col-md-2">
+      <div class="col-md-4">
         <div class="col">
         <div class="form-outline">
           <label class="form-label" for="form3Example1">Employee Id</label>
@@ -26,21 +26,13 @@
     </div>
       <div class="col-md-4">
         <div class="col">
-        <div class="form-outline">
-          <label class="form-label" for="form3Example1">Employee Name</label>
-          <input type="text" id="emp_name" name="emp_name" class="form-control" />
-        </div>
-      </div>
-     </div>
-      <div class="col-md-3">
-        <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example2">In Time</label>
             <input type="time" name="in_time" id="in_time" class="form-control" />
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example2">Out Time</label>
@@ -68,7 +60,7 @@
         <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example2">Date</label>
-            <input type="date" id="date" name="date" class="form-control" />
+            <input type="date" id="date" value="@php echo date("Y-m-d");  @endphp" name="date" class="form-control" />
           </div>
         </div>
       </div>
@@ -118,6 +110,7 @@
           <th style="width: 10%">Out Time</th>
           <th style="width: 10%">Overtime</th>
           <th style="width: 10%">Status</th>
+          <th style="width: 10%">Action</th>
         </thead>
         <tbody>
          @php
@@ -131,12 +124,9 @@
                 <td>{{$data->out_time}}</td>
                 <td>{{$data->overtime}}</td>
                 <td>{{$data->attn_type}} </td>
-                
-        
+                <td><a href=""><i class="far fa-edit"></i></a> <a href=""><i class="fas fa-trash-alt"></i></a></td>
             </tr> 
           @endforeach
-
-         
         </tbody>
       </table>
     </div>
@@ -152,10 +142,7 @@
               </div> --}}
             </div>
       </div>
-      <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-
-      <input type="submit" value="save" id="save" onclick="attendance_save()" class="btn btn-success attn-save">
- 
+      <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
     </div>
   </div>
 
