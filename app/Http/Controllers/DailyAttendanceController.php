@@ -112,7 +112,6 @@ class DailyAttendanceController extends Controller
        
         $attn = new DailyAttendance();
         $emp_id = $request->emp_id;
-        $attn->emp_name = $request->emp_name;
         $attn->attn_type = $request->code;
         $in_time = date("g:i a", strtotime(".$request->in_time . UTC"));
         $out_time = date("g:i a", strtotime(".$request->out_time . UTC"));
@@ -246,7 +245,7 @@ class DailyAttendanceController extends Controller
      */
     public function edit(DailyAttendance $dailyAttendance)
     {
-        //
+        
     }
 
     /**

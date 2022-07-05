@@ -51,6 +51,10 @@
                         <li>
                             <a href="#"> <i class="far fa-calendar-alt"></i>Monthly Attendance</a>
                         </li>
+                        </li>
+                        <li>
+                            <a href="{{ route('attendance.type') }}"> <i class="far fa-calendar-alt"></i>Attendance Type</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="submenu">
