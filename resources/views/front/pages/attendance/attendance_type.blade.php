@@ -70,6 +70,7 @@
 
               </div>
               <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
+              <input type="hidden" name="id" id='update_id'>
 
             </div>
           </div>
@@ -80,7 +81,30 @@
       $('#add').click(function(){
         $('#update').hide();
         $('#typeSave').show();
-      })
+      });
+
+      $("#update").click(function(e){
+        var id = $("#update_id").val();
+        var name = $('#name').val();
+        console.log(e.target.closest("tr"));
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            url:'/update/'+id,
+            data:{"_token": $('#token').val(),id:id,name:name},
+            success: function(data){
+                // var name = data.name;
+                // var data = "<tr>";
+                //     data += "<td id='"+data.id+"'>"+name+"</td>";
+                //     data += "<td><a href='#' class='edit_type' data-id='"+data.id+"'><i class='far fa-edit'></i></a> <a href=''><i class='fas fa-trash-alt'></i></a> </td>";
+                //     data += "</tr>";
+                // let tableBody = $('#tTable tbody').append(data);
+
+               
+            }
+
+        })
+      });
 
       $('#typeSave').click(function(){
         var name = $('#name').val();
@@ -104,7 +128,8 @@
 
       $('.edit_type').click(function(){
         var type_id = $(this).data('id');
-        console.log(type_id);
+        $("#update_id").val(type_id);
+        var td = this;
             $.ajax({
                 method:'GET',
                 dataType:'JSON',

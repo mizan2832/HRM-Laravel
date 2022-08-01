@@ -23,4 +23,13 @@ class AttendanceTypeController extends Controller
         $type = AttendanceType::find($request->id);
         return response()->json($type);
     }
+
+    public function update(Request $request){
+        $type = AttendanceType::find($request->id);
+        $type->name = $request->name;
+        $type->save();
+
+        return response()->json($type);
+        
+    }
 }
