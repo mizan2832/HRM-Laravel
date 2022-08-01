@@ -30,7 +30,7 @@
               </button>
               
                     <div class="attnTable">
-                        <table class="table table-bordered table-striped text-center">
+                        <table class="table table-bordered table-striped text-center" id="tTable">
                             <thead>
                                 <tr>
                                    <th>Type</th>
@@ -38,11 +38,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                             
+                                
+                                    @foreach ($types as $type)
+                                     <tr>
+                                        <td>{{$type->name}}</td>
+                                        <td><a href="javascript:void(0)"  id="edit_type" data-id="{{ $type->id }}"><i class="far fa-edit"></i></a> <a href=""><i class="fas fa-trash-alt"></i></a>  </td>
+                                    </tr>
+                                    @endforeach
                             </tbody>
                          </table>
                     </div>
@@ -60,23 +62,68 @@
                
                 <div class="modal-body">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="type name" >
-                    
+                        <input type="text" id="name" class="form-control" placeholder="type name" >
+                 
                       </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" id="typeSave" class="btn btn-primary">Save</button>
                   </div>
 
               </div>
+              <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
+
             </div>
           </div>
     </div>
 @endsection
 @push('js')
     <script>
-        
+
+      $('#typeSave').click(function(){
+        var name = $('#name').val();
+        console.log(name);
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            url:'/save',
+            data:{"_token": $('#token').val(),name:name},
+            success: function(data){
+                console.log(data.id);
+                var name = data.name;
+                var data = "<tr>";
+                    data += "<td id='"+data.id+"'>"+name+"</td>";
+                    data += "<td><a href='#' id='edit_type' data-id='"+data.id+"'><i class='far fa-edit'></i></a> <a href=''><i class='fas fa-trash-alt'></i></a> </td>";
+                    data += "</tr>";
+                let tableBody = $('#tTable tbody').append(data);
+               
+            }
+
+        })
+      });
+
+      $('#edit_type').click(function(){
+        var type_id = $(this).data("id");
+        alert('agag');
+        $.ajax({
+            method:'GET',
+            dataType:'JSON',
+            data : {data:type_id},
+            url : '/attendance-type/edit/'+type_id,
+            success:function(data){
+
+                console.log(data);
+            }
+
+
+        })
+
+
+      });
+      
+    
+
     </script>
 @endpush
