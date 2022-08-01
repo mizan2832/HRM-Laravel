@@ -32,4 +32,7 @@ class AttendanceTypeController extends Controller
         return response()->json($type);
         
     }
+    public function delete(Request $request){
+        return response()->json($request->id); 
+    }
 }

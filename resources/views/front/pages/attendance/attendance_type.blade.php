@@ -37,8 +37,8 @@
                                 
                                     @foreach ($types as $type)
                                      <tr>
-                                        <td>{{$type->name}}</td>
-                                        <td><a href="javascript:void(0)"  class="edit_type" data-id="{{ $type->id }}"><i class="far fa-edit"></i></a> <a href=""><i class="fas fa-trash-alt"></i></a>  </td>
+                                        <td class="name-{{$type->id}}">{{$type->name}}</td>
+                                        <td><a href="javascript:void(0)"  class="edit_type" data-id="{{ $type->id }}"><i class="far fa-edit"></i></a> <a href="javascript:void(0)" class='delete' data-id="{{ $type->id }}">  <i class="fas fa-trash-alt"></i></a>  </td>
                                     </tr>
                                     @endforeach
                             </tbody>
@@ -86,21 +86,14 @@
       $("#update").click(function(e){
         var id = $("#update_id").val();
         var name = $('#name').val();
-        console.log(e.target.closest("tr"));
         $.ajax({
             type:'POST',
             dataType:'json',
             url:'/update/'+id,
             data:{"_token": $('#token').val(),id:id,name:name},
             success: function(data){
-                // var name = data.name;
-                // var data = "<tr>";
-                //     data += "<td id='"+data.id+"'>"+name+"</td>";
-                //     data += "<td><a href='#' class='edit_type' data-id='"+data.id+"'><i class='far fa-edit'></i></a> <a href=''><i class='fas fa-trash-alt'></i></a> </td>";
-                //     data += "</tr>";
-                // let tableBody = $('#tTable tbody').append(data);
-
-               
+              const td = document.querySelector(`.name-${data.id}`);
+              td.textContent = data.name;
             }
 
         })
@@ -117,19 +110,17 @@
                 var name = data.name;
                 var data = "<tr>";
                     data += "<td id='"+data.id+"'>"+name+"</td>";
-                    data += "<td><a href='#' class='edit_type' data-id='"+data.id+"'><i class='far fa-edit'></i></a> <a href=''><i class='fas fa-trash-alt'></i></a> </td>";
+                    data += "<td><a href='#' class='edit_type' data-id='"+data.id+"'><i class='far fa-edit'></i></a> <a href='#' class='delete' data-id='"+data.id+"'><i class='fas fa-trash-alt'></i></a> </td>";
                     data += "</tr>";
                 let tableBody = $('#tTable tbody').append(data);
                
             }
-
         })
       });
 
       $('.edit_type').click(function(){
         var type_id = $(this).data('id');
         $("#update_id").val(type_id);
-        var td = this;
             $.ajax({
                 method:'GET',
                 dataType:'JSON',
@@ -144,6 +135,19 @@
         })
 
 
+      });
+
+      $(".delete").click(function(){
+        var type_id = $(this).data('id');
+        $.ajax({
+                method:'DELETE',
+                dataType:'JSON',
+                data : {"_token": $('#token').val(),data:type_id},
+                url : '/attendance-type/delete/'+type_id,
+                success:function(data){
+                   console.log(data);
+            }
+        })
       });
       
     
