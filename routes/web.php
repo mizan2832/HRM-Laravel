@@ -39,7 +39,9 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('attendance/type','AttendanceTypeController@index')->name('attendance.type');
     Route::post('/save','AttendanceTypeController@store');
     Route::post('/update/{id}','AttendanceTypeController@update');
+    
     Route::delete('/attendance-type/delete/{id}','AttendanceTypeController@delete');
+
     Route::post('attendance/store/csv','DailyAttendanceController@storeCsv')->name('attendance.csv');
     Route::get('holiday','HolidayController@index')->name('holiday');
     Route::post('holiday/store','HolidayController@store');

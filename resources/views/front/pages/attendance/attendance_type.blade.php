@@ -113,6 +113,8 @@
                     data += "<td><a href='#' class='edit_type' data-id='"+data.id+"'><i class='far fa-edit'></i></a> <a href='#' class='delete' data-id='"+data.id+"'><i class='fas fa-trash-alt'></i></a> </td>";
                     data += "</tr>";
                 let tableBody = $('#tTable tbody').append(data);
+             $("#addType").modal('hide');
+
                
             }
         })

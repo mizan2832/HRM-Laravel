@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AttendanceType;
+use DB;
 class AttendanceTypeController extends Controller
 {
     public function index(){
@@ -33,6 +34,9 @@ class AttendanceTypeController extends Controller
         
     }
     public function delete(Request $request){
+        
+         $delete_type = DB::table('attendance_types')->where('id', '=', $request->id)->delete();
+
         return response()->json($request->id); 
     }
 }
