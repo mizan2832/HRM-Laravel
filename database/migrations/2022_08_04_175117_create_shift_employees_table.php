@@ -15,7 +15,6 @@ class CreateShiftEmployeesTable extends Migration
     {
         Schema::create('shift_employees', function (Blueprint $table) {
             $table->id();
-            $table->
             $table->timestamps();
         });
     }

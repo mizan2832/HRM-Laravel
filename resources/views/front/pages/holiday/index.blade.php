@@ -32,7 +32,7 @@
         <div class="holiday-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-hover">
+                    <table class="table table-hover holiday_t">
                         <thead>
                           <tr>
                             <th>#SI</th>
@@ -61,7 +61,7 @@
                         <div class="form-group" >
                           <label class="control-label col-sm-3" for="holiday-name">Holiday name:</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="name" placeholder="Enter holiday name" name="holiday-name">
+                            <input type="text" class="form-control" id="holiday_name" placeholder="Enter holiday name" name="holiday-name">
                           </div>
                         </div>
                         <div class="form-group">
@@ -73,10 +73,12 @@
                        
                         <div class="form-group">        
                           <div class="col-sm-offset-2 col-sm-10">
-                            <input type="submit" id="add" onclick="holiday()" class="btn btn-primary  d-flex align-items-center justify-content-center" value="Add">                        
-                            <input type="submit" id="update" onclick="update()" class="btn btn-primary  d-flex align-items-center justify-content-center" value="UPDATE">                        
+                            <button type="submit" id="add"  class="btn btn-primary  d-flex align-items-center justify-content-center">Add </button>                     
                             </div>
                         </div>
+
+                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
+
                      
                 </div>
             </div>
@@ -88,75 +90,26 @@
 @push('js')
 <script>
 
-  $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-  });
-
-  function holiday(){
+  $("#add").click(function(){
     let date = $('#date').val();
     let holiday_name = $('#holiday_name').val();
+    $.ajax({
+          type:"POST",
+          dataType:'json',
+          url: "/holiday/store",
+          data:{"_token": $('#token').val(),date:date,holiday_name:holiday_name},
+          success:function(data){
+                var name = data.name;
+                var date = data.date;
+                var data = "<tr>";
+                   data += "<td>"+name+"</td>";
+                   data += "<td>"+date+"</td></tr>";
 
-      $.ajax({
-              type:"POST",
-              dataType:'json',
-              url: "holiday/store",
-              data:{"_token": $('#token').val(),date:date,holiday_name:holiday_name},
-              success:function(){
-                all_holiday();
+                $(".holiday_t tbody").append(data);
+
               }
-            })
-
-      }
-
-   function all_holiday(){
-          $('#add').show();
-          $('#update').hide();
-            $.ajax({
-                type:"GET",
-                dataType:'json',
-                url: "holiday",
-                data:{date:'save'},
-                success:function(data){
-                   var $i=1;
-                   d = '';
-                   $.each(data.holiday,function(key,value){
-                      d = d+ " <tr>"
-                      d = d + "<td>"+ ($i++) +"</td>"
-                      d = d + "<td>"+ value.name +"</td>"
-                      d = d + "<td>"+ value.date +"</td>"
-                      d = d + "<td><button type='button' id='button1' data-sample-id='gotcha!' onclick='holiday_edit("+value.id+")'> EDIT </button> </td>"
-                      d = d + "</tr> "
-                    })
-                      $('tbody').html(d);
-                  }
-
-              })
-        
-  }
-
-  all_holiday();
-  function holiday_edit(e){
-    $('#add').hide();
-    $('#update').show();
-
-        $.ajax({
-                type:"GET",
-                dataType:'json',
-                url: "holiday/edit/"+e,
-                data:{id:e},
-                success:function(data){
-                  console.log(data);
-                    let name = data.name;
-                    let holiday = data.date;
-                    console.log(data);
-                    $("#name").val(name);
-                    $("#date").val(holiday);
-                  }
-              })
-
-  }
+          })
+  })
 
 
 
