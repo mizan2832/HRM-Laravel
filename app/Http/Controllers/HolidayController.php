@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Holiday;
+use DB;
 class HolidayController extends Controller
 {
     public function index(Request $request)
@@ -45,6 +46,10 @@ class HolidayController extends Controller
                 'update' => $request->update,
       ));
 
+    }
+    public function delete(Request $request){
+        $holiday = DB::table('holidays')->where('id', '=', $request->id)->delete();
+        return response()->json($holiday);
     }
 }
 

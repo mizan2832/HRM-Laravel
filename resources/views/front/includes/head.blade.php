@@ -24,5 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/plugins/chart.js/Chart.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/plugins/datatables/datatables.min.css') }}" />
     <!-- END CSS for this page -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
     @stack('head')
 </head>
