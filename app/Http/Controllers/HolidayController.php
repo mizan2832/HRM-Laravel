@@ -34,5 +34,17 @@ class HolidayController extends Controller
         return response()->json($holiday);
 
     }
+
+    public function update(Request $request){
+        $holiday = Holiday::find($request->id);
+        $holiday->name= $request->holiday_name;
+        $holiday->date= $request->date;
+        $holiday->save();
+        return response()->json(array(
+                'holiday' => $holiday,
+                'update' => $request->update,
+      ));
+
+    }
 }
 

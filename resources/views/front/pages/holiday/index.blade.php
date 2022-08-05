@@ -35,21 +35,17 @@
                     <table class="table table-hover holiday_t">
                         <thead>
                           <tr>
-                            <th>#SI</th>
                             <th>Holiday Name</th>
                             <th>Date</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                       @php
-                              $i = 1;
-                       @endphp
                        @foreach ($holidays as $day)
                         <tr>  
-                           <td>{{$i++}}</td>
-                           <td>{{$day->name}}</td>
-                           <td>{{$day->date}}</td>
+                           <td class="holi_name-{{$day->id}}">{{$day->name}}</td>
+                           <td class="holi_date-{{$day->id}}">{{$day->date}}</td>
+                           <td><a href="javascript:void(0)"  class="edit_holiday" data-id="{{ $day->id }}"><i class="far fa-edit"></i></a> <a href="javascript:void(0)" class='delete_holiday' data-id="{{ $day->id }}">  <i class="fas fa-trash-alt"></i></a> </td>
                         </tr>
                        @endforeach
                         </tbody>
@@ -78,6 +74,7 @@
                         </div>
 
                      <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
+                     <input type="hidden" name="update" id="update_id">
 
                      
                 </div>
@@ -91,25 +88,82 @@
 <script>
 
   $("#add").click(function(){
-    let date = $('#date').val();
-    let holiday_name = $('#holiday_name').val();
+    var date = $('#date').val();
+    var holiday_name = $('#holiday_name').val();
+    var update_id = $("#update_id").val();
+    if (update_id>0) {
+      url = "/holiday/update/"+update_id;
+      data={"_token": $('#token').val(),id:update_id,holiday_name:holiday_name,date:date,update:'update'};
+    }
+    else{
+      url = "/holiday/store";
+      data={"_token": $('#token').val(),holiday_name:holiday_name,date:date};
+    }
     $.ajax({
           type:"POST",
           dataType:'json',
-          url: "/holiday/store",
-          data:{"_token": $('#token').val(),date:date,holiday_name:holiday_name},
+          url: url,
+          data:data,
           success:function(data){
-                var name = data.name;
-                var date = data.date;
-                var data = "<tr>";
-                   data += "<td>"+name+"</td>";
-                   data += "<td>"+date+"</td></tr>";
+                if(data.update=='update'){
+                  const holi_name = document.querySelector(`.holi_name-${data.holiday.id}`);
+                  holi_name.textContent = data.holiday.name;
+                  const holi_date = document.querySelector(`".holi_date-${data.holiday.id}"`);
+                  holi_date.textContent = data.holiday.date;
+;
+                }
+                else{
+                    var name = data.name;
+                    var date = data.date;
+                    var data = "<tr>";
+                       data += "<td class='holi_name-"+data.id+"'>"+name+"</td>";
+                       data += "<td class='holi_date"+data.id+"'>"+date+"</td>";
+                       data += "<td><a href='javascript:void(0)'  class='edit_holiday' data-id='"+data.id+"'><i class='far fa-edit'></i></a> <a href='javascript:void(0)' class='delete_holiday' data-id='"+data.id+ "'>  <i class='fas fa-trash-alt'></i></a></td></tr>";
 
-                $(".holiday_t tbody").append(data);
-
+                    $(".holiday_t tbody").append(data);
+                }
+              
               }
           })
-  })
+  });
+
+  $(".edit_holiday").click(function(){
+    $("#add").text('Update');
+    $("#add").attr("id","update");
+    var id = $(this).data('id');
+    $("#update_id").val(id);
+    
+    $.ajax({
+                method:'GET',
+                dataType:'JSON',
+                data : {data:id},
+                url : '/holiday/edit/'+id,
+                success:function(data){
+                    $('#holiday_name').val(data.name);  
+                    $('#date').val(data.date);  
+                    // console.log(data);
+            }
+        })
+
+  });
+
+  $("#update").click(function(e){
+        var id = $("#update_id").val();
+        var name = $('#holiday_name').val();
+        var date = $('#date').val();
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            url:'/holiday/update/'+id,
+            data:{"_token": $('#token').val(),id:id,name:name,date:date},
+            success: function(data){
+              console.log(data);
+              // const td = document.querySelector(`.name-${data.id}`);
+              // td.textContent = data.name;
+            }
+
+        })
+      });
 
 
 
