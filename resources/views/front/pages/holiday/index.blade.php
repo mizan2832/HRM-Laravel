@@ -18,7 +18,8 @@
 @section('content')
 <div class="container">   
         <div class="searchHoliday d-flex">
-          <input name="startDate" id="startDate" class="date-picker" />
+          <select class="form-control" name="month" id="month"></select>
+          <select class="form-control" name="year" id="year"></select>
           <button class="btn btn-primary" id="search">Search</button>
         </div>
 
@@ -76,6 +77,18 @@
 @push('js')
 <script>
 
+      
+        let startYear = 1800;
+        let endYear = new Date().getFullYear();
+        let months = ["January","February","March","April","Jun","July","Augest","September","October","Novermber","December"];
+
+        for (i = endYear; i > startYear; i--)
+        {
+          $('#year').append($('<option />').val(i).html(i));
+        }
+        for (let index = 0; index < months.length; index++) {
+          $('#month').append($('<option />').val(index).html(months[index]));
+        }
 
         $(function() {
             $('.date-picker').datepicker( {
@@ -148,24 +161,6 @@
         })
 
   });
-
-  $("#update").click(function(e){
-        var id = $("#update_id").val();
-        var name = $('#holiday_name').val();
-        var date = $('#date').val();
-        $.ajax({
-            type:'POST',
-            dataType:'json',
-            url:'/holiday/update/'+id,
-            data:{"_token": $('#token').val(),id:id,name:name,date:date},
-            success: function(data){
-              // console.log(data);
-              // const td = document.querySelector(`.name-${data.id}`);
-              // td.textContent = data.name;
-            }
-
-        })
-      });
 
       $(".delete-holiday").click(function(){
         var id = $(this).data('id');
