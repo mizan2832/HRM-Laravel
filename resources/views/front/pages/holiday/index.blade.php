@@ -77,7 +77,7 @@
 @push('js')
 <script>
 
-      
+        
         let startYear = 1800;
         let endYear = new Date().getFullYear();
         let months = ["January","February","March","April","Jun","July","Augest","September","October","Novermber","December"];
@@ -89,6 +89,14 @@
         for (let index = 0; index < months.length; index++) {
           $('#month').append($('<option />').val(index).html(months[index]));
         }
+
+
+        $("#search").click(function(){
+          let year = $("#year").val();
+          let month = $("#month").val();
+          console.log(year,month);
+        });
+
 
         $(function() {
             $('.date-picker').datepicker( {

@@ -9,16 +9,11 @@ class HolidayController extends Controller
 {
     public function index(Request $request)
     {
-       if ($request->date) {
-           $holidays = Holiday::all();
-           return response()->json(array(
-                    'holiday' => $holidays
-                   
-                ));
-       }else{
-           $holidays = Holiday::all();
+           $year = date("y");
+           $month = date("m");
+           $holidays = DB::table("holidays")->whereR('month(date)','=',$month)->where('year(date)','=',$year)->get();
            return view('front.pages.holiday.index')->withHolidays($holidays);
-       }
+       
        
     }
     
