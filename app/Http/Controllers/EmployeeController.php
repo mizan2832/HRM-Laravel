@@ -14,7 +14,7 @@ class EmployeeController extends Controller
   
     public function index()
     {
-       $list = Employee::all();
+       $list = Employee::paginate(7);
        return view('front.pages.employee.employee_list')->withList($list);
     }
 
@@ -28,7 +28,6 @@ class EmployeeController extends Controller
         // dd($request);
        $employee = new Employee();
        $user = new User();
-
        $employee->name = $request->name;
        $employee->father_name = $request->father_name;
        $employee->email = $request->email;
@@ -116,6 +115,16 @@ class EmployeeController extends Controller
      
        return redirect()->route('employee.index');
 
+    }
+
+    public function getMoreEmployees(Request $request){
+        $name = $request->name;
+        $email = $request->email;
+        $mobile = $request->mobile;
+        if($request->ajax()) {
+            $list = Employee::getEmployees($name, $email, $mobile);
+                return view('front.pages.employee.employee_table', compact('users'))->render();
+        }
     }
 
     public function show(Employee $employee)
