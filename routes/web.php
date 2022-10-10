@@ -34,24 +34,18 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('file/resume/{id}','FileController@resume');
     Route::resource('daily-attendance','DailyAttendanceController');
     Route::post('attendance/show','DailyAttendanceController@showAttendanceDept');
-    Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');
-
+    Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
     Route::get('/attendance-type/edit/{id}','AttendanceTypeController@edit');
     Route::get('attendance/type','AttendanceTypeController@index')->name('attendance.type');
     Route::delete('/attendance-type/delete/{id}','AttendanceTypeController@delete');
     Route::post('/update/{id}','AttendanceTypeController@update');
     Route::post('/save','AttendanceTypeController@store');
-    
-
     Route::post('attendance/store/csv','DailyAttendanceController@storeCsv')->name('attendance.csv');
-
     Route::get('holiday','HolidayController@index')->name('holiday');
     Route::post('/holiday/store','HolidayController@store');
     Route::get('holiday/edit/{id}','HolidayController@edit');
     Route::post('holiday/update/{id}','HolidayController@update');
     Route::delete('holiday/delete/{id}','HolidayController@delete');
-
-    
     Route::resource('unit','UnitController');
     Route::resource('leave','LeaveController');
 

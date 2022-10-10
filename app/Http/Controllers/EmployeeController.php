@@ -14,7 +14,7 @@ class EmployeeController extends Controller
   
     public function index()
     {
-       $list = Employee::paginate(5);
+       $list = Employee::all();
        return view('front.pages.employee.employee_list')->withList($list);
     }
 
