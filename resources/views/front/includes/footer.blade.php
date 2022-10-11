@@ -6,9 +6,9 @@
         Powered by <a target="_blank" href="https://bootstrap24.com" title="Download free Bootstrap templates"><b>Bootstrap24.com</b></a>
     </span>
 </footer>
+<script src="{{ asset('front/assets/js/jquery.min.js') }} "></script>
 
 <script src="{{ asset('front/assets/js/modernizr.min.js') }} "></script>
-<script src="{{ asset('front/assets/js/jquery.min.js') }} "></script>
 <script src="{{ asset('front/assets/js/moment.min.js') }} "></script>
 <script src="{{ asset('front/assets/js/popper.min.js') }} "></script>
 <script src="{{ asset('front/assets/js/bootstrap.min.js') }} "></script>
