@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\User;
+use App\Role;
 use Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,12 +16,14 @@ class EmployeeController extends Controller
     public function index()
     {
        $list = Employee::paginate(7);
+       
        return view('front.pages.employee.employee_list')->withList($list);
     }
 
     public function create()
     {
-        return view('front.pages.employee.add_empoyee');
+        $roles= Role::all();
+        return view('front.pages.employee.add_empoyee')->withRoles($roles);
     }
 
     public function store(Request $request)
@@ -102,14 +105,11 @@ class EmployeeController extends Controller
 
        $user->name = $request->name;
 
-       $username = array("1"=>"Admin", "2"=>"Super Admin", "3"=>"Manager","4"=>"Staff");
-       foreach($username as $x => $value) {
-        if ($x == $request->username) {
-            $user->username = $value;
-        }
-      }
+      
+            $user->username = 'Staff';
+        
        $user->email = $request->email;
-       $user->role_id = $request->username;
+       $user->role_id = $request->role;
        $user->password = Hash::make($request->password);
        $user->save();
      

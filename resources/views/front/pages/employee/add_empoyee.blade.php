@@ -207,14 +207,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-3 col-form-label">Username</label>
+                                <label for="role" class="col-sm-3 col-form-label">Role</label>
                                 <div class="col-sm-9">
-                                    <select value="{{ old('username') }}" name="username"
-                              id="username" class="form-control">
-                                        <option value="1">Admin</option>
-                                        <option value="2">Super Admin</option>
-                                        <option value="3">Manager</option>
-                                        <option value="4">Staff</option>
+                                    <select value="{{ old('role') }}" name="role"
+                              id="role" class="form-control">
+                              @foreach ($roles as $role)
+                                  <option value="{{$role->id}}">{{$role->name}}</option>
+                              @endforeach
+                                        
                                     </select>
                                 </div>
                             </div>
