@@ -47,6 +47,11 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('holiday/edit/{id}','HolidayController@edit');
     Route::post('holiday/update/{id}','HolidayController@update');
     Route::delete('holiday/delete/{id}','HolidayController@delete');
+    Route::get('role','RoleController@index')->name('role.index');
+    Route::post('role','RoleController@store')->name('role.store');
+    Route::get('role/{id}','RoleController@edit')->name('role.edit');
+    Route::put('role/update/{id}','RoleController@update')->name('role.update');
+    Route::delete('role/delete/{id}','RoleController@destroy')->name('role.destroy');
     Route::resource('unit','UnitController');
     Route::resource('leave','LeaveController');
 

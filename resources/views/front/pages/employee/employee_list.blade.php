@@ -15,15 +15,7 @@
 
   <label for="number" class="mr-sm-2">Mobile</label>
   <input type="number" class="form-control mb-2 mr-sm-2" placeholder="Enter mobile" id="mobile">
-{{--       
-  <label for="select" class="mr-sm-2">Select</label>
-  <select name="select" id="select" class="form-control mb-2 mr-sm-2">
-    <option value="">Select option</option>
-    <option value="department">Department</option>
-    <option value="joining_date">Joining Date</option>
-    <option value="section">Section</option>
-    <option value="unit">Unit</option>
-  </select> --}}
+
 
 </form>
 <div id="employee_data">

@@ -86,6 +86,7 @@
                         <span> Sections </span>
                     </a>
                 </li>
+                
                 <li class="submenu">
                     <a id="tables" href="#">
                         <i class="fas fa-strikethrough"></i>
@@ -127,6 +128,12 @@
                     <a href="{{route('holiday')}}">
                         <i class="fas fa-adjust"></i>
                         <span> Holidays </span>
+                    </a>
+                </li>
+                <li class="submenu">
+                    <a href="{{route('role.index')}}">
+                        <i class="fas fa-cut"></i>
+                        <span> Role </span>
                     </a>
                 </li>
                 <li class="submenu">
