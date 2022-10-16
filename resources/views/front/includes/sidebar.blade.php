@@ -36,8 +36,9 @@
                         <span> Messages </span>
                     </a>
                 </li>
-
-                <li class="submenu">
+                
+                @if (Auth::user()->role->name == 'Admin')
+                  <li class="submenu">
                     <a id="tables" href="#">
                         <i class="fas fa-table"></i>
                         <span> Attendance </span>
@@ -57,6 +58,14 @@
                         </li>
                     </ul>
                 </li>
+                @elseif(Auth::user()->role->name == 'Staff')
+                <li class="submenu">
+                    <a href="">
+                        <i class="fas fa-cut"></i>
+                        <span> Your Attendance </span>
+                    </a>
+                </li>
+                @endif
                 <li class="submenu">
                     <a id="tables" href="#">
                         <i class="fas fa-user-tie"></i>

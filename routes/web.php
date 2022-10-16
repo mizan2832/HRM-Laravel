@@ -55,7 +55,12 @@ Route::group(['middleware' => 'admin'], function()
     Route::resource('unit','UnitController');
     Route::resource('leave','LeaveController');
 
+});
 
+Route::get('/staff', 'StaffController@index')->name('staff');
+
+Route::group(['middleware'=>'staff'],function(){
+    Route::get('attendance','StaffController@attendance')->name('staff.attendance');
 });
 
 
