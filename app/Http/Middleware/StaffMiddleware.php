@@ -19,8 +19,8 @@ class StaffMiddleware
         {
             return $next($request);
         }
-        //  else {
-        //     return redirect()->route('staff');
-        // }
+         else {
+            return redirect()->route('staff');
+        }
     }
 }

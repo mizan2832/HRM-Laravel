@@ -60,7 +60,7 @@
                 </li>
                 @elseif(Auth::user()->role->name == 'Staff')
                 <li class="submenu">
-                    <a href="">
+                    <a href="{{ route('staff.attendance') }}">
                         <i class="fas fa-cut"></i>
                         <span> Your Attendance </span>
                     </a>

@@ -54,7 +54,7 @@ class LoginController extends Controller
         ]);
         // dd($inputVal);
    
-        if(auth()->attempt(array('email' => $inputVal['email'], 'password' => $inputVal['password']))){
+        if(auth()->attempt(array('email' => $inputVal['email'], 'password' =>      $inputVal['password']))){
 
             if (Auth::user()->role->id == 1) {
                 return redirect()->route('home');

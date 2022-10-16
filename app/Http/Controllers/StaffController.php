@@ -16,5 +16,12 @@ class StaffController extends Controller
         return view('front.pages.index');
     }
 
+
+    public function attendance()
+    {
+        return 'attendance';
+        return view('front.pages.other.attendance');
+    }
+
     
 }
