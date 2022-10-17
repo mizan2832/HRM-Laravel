@@ -9,10 +9,17 @@
       <div class="attn-header"  style="padding-bottom:1.2rem; border-bottom:2px solid black;">
        
           <h3>Daily Attendance</h3>
-          <button class="btn btn-primary" id="add" data-toggle="modal" data-target="#attn">Add Attendance</button>
-       
+
+          <div class="csvfile" style="float: right; margin-top:-40px; background-color:gray;padding:10px;">
+              <form>
+                <label for="email">CSV/text  :</label>
+                <input type="file" name="file" id="file" style="background-color: green;">
+                <button type="submit"class="btn btn-primary">Save</button>
+              </form>
+          </div>
       </div>
       </div>
+      <button class="btn btn-primary" id="add" data-toggle="modal" data-target="#attn">Add Attendance</button>
 
       <div class="modal fade attn-model" id="attn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
