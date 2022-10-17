@@ -72,9 +72,9 @@ class DailyAttendanceController extends Controller
      */
     public function store(Request $request)
     {   
+        // dd($request);
        
         $attn = new DailyAttendance();
-        $emp_id = $request->emp_id;
         $attn->attn_type = $request->code;
         $in_time = date("g:i a", strtotime(".$request->in_time . UTC"));
         $out_time = date("g:i a", strtotime(".$request->out_time . UTC"));

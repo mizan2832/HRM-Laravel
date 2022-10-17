@@ -20,14 +20,16 @@
             <div class="model-header">
                 <h1 class="text-center">Employee attandance</h1>
             </div>
+        <form enctype="multipart/form-data" method="POST" action="{{ route('daily-attendance.store') }}">
+          @csrf
             <div class="modal-body">
                 <div class="container">
                     <div class="row col-md-12">
-                       <div class="col-md-3">
+                      <div class="col-md-4">
                         <label class="form-label" for="form3Example1">Id Number</label>
-                        <input type="text" id="employee_id" class="form-control" placeholder="Id Number">
+                        <input type="text" name="emp_id" id="emp_id" class="form-control" placeholder="Id ">
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-4">
                         <label class="form-label" for="form3Example1">Entry Time</label>
                         <input  type="time" name="in_time" id="in_time" class="form-control">
 
@@ -36,6 +38,9 @@
                         <label class="form-label" for="form3Example1">Out Time</label>
                         <input  type="time" name="out_time" id="out_time" class="form-control">
                       </div>
+                    </div>
+                    <div class="row col-md-12">
+                                   
                       <div class="col-md-3">
                         <label class="form-label" for="form3Example2">Type</label>
                         <select name="code" id="code" class="form-control">
@@ -45,16 +50,21 @@
                           @endforeach
                         </select>
                       </div>
+                      <div class="col-md-4">
+                        <label class="form-label" for="form3Example1">Date</label>
+                        <input type="date" name="date" id="date" class="form-control">
+                      </div>
+                    
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="typeSave" class="btn btn-primary">Save</button>
-                <button type="button" id="update" class="btn btn-primary">Update</button>
+                <button type="submit" id="typeSave" class="btn btn-primary">Save</button>
+              
               </div>
-
+           </form>
           </div>
           <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
           <input type="hidden" name="id" id='update_id'>
