@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\Department;
 use App\Employee;
-use App\Leave;
+use App\AttendanceType;
 
 class DailyAttendanceController extends Controller
 {
@@ -22,59 +22,27 @@ class DailyAttendanceController extends Controller
 
         
         $department = Department::all();
-        $leaves = Leave::all();
+        $types = AttendanceType::all();
         $d = date('Y-m-d');
         $datas =  DB::table('daily_attendances')
             ->join('employees', function ($join) {
-                $join->on('employees.employee_id', '=', 'daily_attendances.emp_id');
-                    
+                $join->on('employees.employee_id', '=', 'daily_attendances.emp_id');            
             })
             ->select('daily_attendances.*', 'employees.name')
             ->where('daily_attendances.date', '=' ,''.$d.'')
-            ->paginate(2);
-     
+            ->get();
 
-
-        return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department,'leaves'=>$leaves));
-
-        
-       
+        return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department,'types'=>$types));
     }
 
     public function showAttendance(Request $request)
     {
 
         $datas = DailyAttendance::paginate(2);
-        
         return response()->json($datas);
-        // return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas));
-        // if ($date) {
-            // $attendance = DB::table('daily_attendances')
-            // ->join('employees', 'employees.employee_id', '=', 'daily_attendances.emp_id')
-            // ->select('daily_attendances.*', 'employees.name')
-            // ->get();
-            
-        //     return response()->json(array(
-        //         'data_exit' => $date,
-        //         'attendance' => $attendance
-               
-        //     ));
-
-        // }else{
-        //     $employees = Employee::all();
-        //     return response()->json(array(
-        //         'data_exit' => $date,
-        //         'employees' => $employees
-               
-        //     ));
-        // }
-
     }
     public function showAttendanceDept(Request $request)
     {
-        // $employees = Employee::where('department','=',$dpt_id)->get();
-        // return response()->json($employees);
-
         $department = Department::all();
         $d = date('Y-m-d');
         $datas =  DB::table('daily_attendances')
@@ -88,11 +56,6 @@ class DailyAttendanceController extends Controller
             ->get();
 
             return response()->json($datas);
-        // return View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department));
-
-        // return Response::json(View::make('front.pages.attendance.daily_attendance', array('datas' => $datas,'departments' => $department))->render());
-
-
     }
  
 
@@ -181,49 +144,6 @@ class DailyAttendanceController extends Controller
         dd($header);
         return response()->json($data);
 
-
-        // // dd($header);
-        // $escapedHeader=[];
-        // //validate
-        // foreach ($header as $key => $value) {
-        //     $lheader=strtolower($value);
-        //     $escapedItem=preg_replace('/[^a-z]/', '', $lheader);
-        //     array_push($escapedHeader, $escapedItem);
-        // }
-
-        // //looping through othe columns
-        // while($columns=fgetcsv($file))
-        // {
-        //     if($columns[0]=="")
-        //     {
-        //         continue;
-        //     }
-        //     //trim data
-        //     foreach ($columns as $key => &$value) {
-        //         $value=preg_replace('/\D/','',$value);
-        //     }
-
-        // $data= array_combine($escapedHeader, $columns);
-
-        // // setting type
-        // foreach ($data as $key => &$value) {
-        //     $value=($key=="zip" || $key=="month")?(integer)$value: (float)$value;
-        // }
-
-        // // Table update
-        // $zip=$data['zip'];
-        // $month=$data['month'];
-        // $lodging=$data['lodging'];
-        // $meal=$data['meal'];
-        // $housing=$data['housing'];
-
-        // $budget= Budget::firstOrNew(['zip'=>$zip,'month'=>$month]);
-        // $budget->lodging=$lodging;
-        // $budget->meal=$meal;
-        // $budget->housing=$housing;
-        // $budget->save();
-        // }
-        
     }
 
     /**

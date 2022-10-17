@@ -15,7 +15,6 @@ class CreateDailyAttendancesTable extends Migration
     {
         Schema::create('daily_attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('emp_name');
             $table->string('attn_type');
             $table->string('in_time')->nullable();
             $table->string('out_time')->nullable();

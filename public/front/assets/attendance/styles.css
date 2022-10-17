@@ -1,0 +1,11 @@
+.attn-header{
+    display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+}
+.attn-button .button{
+    float: right;
+}
+.attn-model{
+    width: ;
+}

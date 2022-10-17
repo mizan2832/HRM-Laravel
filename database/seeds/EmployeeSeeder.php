@@ -38,7 +38,7 @@ class EmployeeSeeder extends Seeder
                 'offer'=>'Mizanur Rahman.docx',
                 'joining_letter'=>'Mizanur Rahman.docx',
                 'other'=>'Mizanur Rahman.docx',
-                'employee_id'=>$faker->randomElement(["15", "16"]),
+                'employee_id'=>$faker->numberBetween(5,20),
                 'department'=>2,
                 'joining_date'=>'2021-10-08',
                 'status'=>'1',

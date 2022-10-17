@@ -55,7 +55,6 @@
                 <div class="model-header">
                     <h1 class="text-center">Type</h1>
                 </div>
-               
                 <div class="modal-body">
                     <div class="input-group mb-3">
                         <input type="text" id="name" class="form-control" placeholder="type name" >         
