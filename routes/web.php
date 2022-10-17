@@ -61,6 +61,8 @@ Route::get('/staff', 'StaffController@index')->name('staff');
 
 Route::group(['middleware'=>'staff'],function(){
     Route::get('attendance','StaffController@attendance')->name('staff.attendance');
+    Route::get('profile','StaffController@profile')->name('staff.profile');
+    Route::get('myleave','StaffController@leave')->name('staff.leave');
 });
 
 

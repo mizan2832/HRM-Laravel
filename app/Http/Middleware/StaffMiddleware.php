@@ -20,7 +20,7 @@ class StaffMiddleware
             return $next($request);
         }
          else {
-            return redirect()->route('staff');
+            return redirect()->route('home');
         }
     }
 }

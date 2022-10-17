@@ -22,6 +22,16 @@ class StaffController extends Controller
         return 'attendance';
         return view('front.pages.other.attendance');
     }
+    public function leave()
+    {
+        return 'leave';
+        
+    }
+    public function profile()
+    {
+        return 'profile';
+        
+    }
 
     
 }
