@@ -15,7 +15,6 @@ class LeaveController extends Controller
     public function index()
     {
         $leaves = Leave::all();
-
         return view('front.pages.leave.index')->withLeaves($leaves);
     }
 
