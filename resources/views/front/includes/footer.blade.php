@@ -7,13 +7,12 @@
     </span>
 </footer>
 <script src="{{ asset('front/assets/js/jquery.min.js') }} "></script>
-
 <script src="{{ asset('front/assets/js/modernizr.min.js') }} "></script>
 <script src="{{ asset('front/assets/js/moment.min.js') }} "></script>
 <script src="{{ asset('front/assets/js/popper.min.js') }} "></script>
 <script src="{{ asset('front/assets/js/bootstrap.min.js') }} "></script>
 <script src="{{ asset('front/assets/js/admin.js') }} "></script>
 
+@stack('js')
 </div>
 <!-- END main -->
-@stack('js')
