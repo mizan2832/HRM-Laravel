@@ -80,7 +80,7 @@
                     </a>
                     <ul class="list-unstyled">
                         <li>
-                            <a href=""> <i class="fas fa-user-clock"></i>Leave Employee</a>
+                            <a href="{{route('departure.emp')}}"> <i class="fas fa-user-clock"></i>Leave Employee</a>
                         </li>
                         <li>
                             <a href="{{route('leave.index')}}"> <i class="fas fa-th-list"></i>Leave Type</a>

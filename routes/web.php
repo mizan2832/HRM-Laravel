@@ -35,7 +35,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('file/resume/{id}','FileController@resume');
     Route::resource('/daily-attendance','DailyAttendanceController');
     Route::post('attendance/show','DailyAttendanceController@showAttendanceDept');
-    Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    Route::post('attendance/store','DailyAttendanceController@storeAttendanceDept');                                   
     Route::get('/attendance-type/edit/{id}','AttendanceTypeController@edit');
     Route::get('attendance/type','AttendanceTypeController@index')->name('attendance.type');
     Route::delete('/attendance-type/delete/{id}','AttendanceTypeController@delete');
@@ -54,6 +54,8 @@ Route::group(['middleware' => 'admin'], function()
     Route::delete('role/delete/{id}','RoleController@destroy')->name('role.destroy');
     Route::resource('unit','UnitController');
     Route::resource('leave','LeaveController');
+    Route::get('emp/leave','EmployeeLeaveController@index')->name('departure.emp');
+    Route::post('emp/leave','EmployeeLeaveController@store')->name('departure.store');
 
 });
 

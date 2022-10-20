@@ -36,11 +36,9 @@
         $('#email').on('keyup', function (e) {
 					getMoreUsers();
         });
-        
         $('#mobile').on('keyup', function (e) {
 					getMoreUsers();
 				});
-      
       function getMoreUsers(page) {
 
           var name = $('#name').val();
