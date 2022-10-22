@@ -11,6 +11,15 @@
           <h3>Leave data</h3>
       </div>
       </div>
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
       <button class="btn btn-primary" id="add" data-toggle="modal" data-target="#leave">Add Leave</button>
       <div class="modal fade attn-model" id="leave" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -48,10 +57,7 @@
                         <label class="form-label" for="form3Example1">Reason</label>
                         <textarea name="reason" class="form-control" id="reason" cols="30" rows="1"></textarea>
                       </div>
-                      <div class="col-md-4">
-                        <label class="form-label " for="form3Example1">Approval</label>
-                        <input type="checkbox" value="" class="form-control" name="approved" id="approved">
-                      </div>
+                     
                     </div>
                 </div>
             </div>
@@ -93,20 +99,7 @@
           <th style="width: 10%">Action</th>
         </thead>
         <tbody>
-         @php
-             $i=1;
-         @endphp
-          {{-- @foreach ($datas as $data)
-            <tr>
-                <td>{{$i++}}</td>
-                <td>{{$data->name}} </td>
-                <td>{{$data->in_time}}</td>
-                <td>{{$data->out_time}}</td>
-                <td>{{$data->overtime}}</td>
-                <td>{{$data->attn_type}} </td>
-                <td><a href=""><i class="far fa-edit"></i></a> <a href=""><i class="fas fa-trash-alt"></i></a></td>
-            </tr> 
-          @endforeach --}}
+          @include('front.pages.leave.leave_list')
         </tbody>
       </table>
     </div>
@@ -139,7 +132,6 @@
       var leaveType = $('#leaveType').val();
       var reason = $('#reason').val();
       var approved = $('#approved').val();
-
       $.ajax({
               method:'POST',
               dataType:'JSON',
@@ -150,7 +142,7 @@
                 }
                 
         })
-
+      $("#leave").modal('hide');
     })
  
        

@@ -69,16 +69,12 @@ class EmployeeController extends Controller
            base_path() . '/public/front/assets/images/offer', $offer
        );
        $employee->offer = $offer;
-
-       
-
        $joining_letter = $request->name . '.' . 
        $request->file('joining_letter')->getClientOriginalExtension();
        $request->file('joining_letter')->move(
            base_path() . '/public/front/assets/images/joining_letter', $joining_letter
        );
        $employee->joining_letter = $joining_letter;
-
        $other = $request->name . '.' . 
        $request->file('other')->getClientOriginalExtension();
        $request->file('other')->move(
@@ -102,12 +98,8 @@ class EmployeeController extends Controller
        $employee->bank_name = $request->bank_name;
        $employee->branch_name = $request->branch;
        $employee->save();
-
        $user->name = $request->name;
-
-      
-            $user->username = 'Staff';
-        
+       $user->username = 'Staff';
        $user->email = $request->email;
        $user->role_id = $request->role;
        $user->password = Hash::make($request->password);
@@ -125,9 +117,7 @@ class EmployeeController extends Controller
         if($request->ajax()) {
             
             $list = Employee::getEmployees($name, $email, $mobile);
-            // return response()->json($name);
-            
-                return view('front.pages.employee.employee_table', compact('list'))->render();
+            return view('front.pages.employee.employee_table', compact('list'))->render();
         }
     }
 

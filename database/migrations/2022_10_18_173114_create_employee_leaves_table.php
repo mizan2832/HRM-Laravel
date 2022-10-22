@@ -20,7 +20,6 @@ class CreateEmployeeLeavesTable extends Migration
             $table->date('from');
             $table->date('to');
             $table->string('leave_type');
-            $table->boolean('approved');
             $table->timestamps();
         });
     }
