@@ -1,20 +1,20 @@
-{{-- @php
+@php
 $i = 1;
 @endphp
-@foreach ($list as $item)
+@foreach ($empleaves as $li)
 
 <tr>
 <td>{{ $i++ }}</td>
-<td>{{ $item->name }}</td>
-<td>{{ $item->department }}</td>
-<td>{{ $item->email }}</td>
-<td>{{ $item->total_salary }}</td>
-<td>{{ $item->phone1 }}</td>
+<td>{{ $li->emp_id }}</td>
+<td>{{ $li->reason }}</td>
+<td>{{ $li->from }}</td>
+<td>{{ $li->to }}</td>
+<td>{{ $li->leave_type }}</td>
 <td>
-<a href="{{ route('employee.edit',$item->id) }}"><i class="far fa-edit"></i></a>
+<a href=""><i class="far fa-edit"></i></a>
 <a href="#"><i class="fas fa-trash-alt"></i></a>
-<a href="{{ route('emp.details',$item->id) }}"><i class="fab fa-dashcube"></i></a>
+<a href=""><i class="fab fa-dashcube"></i></a>
 
 </td>
 </tr>
-@endforeach --}}
+@endforeach

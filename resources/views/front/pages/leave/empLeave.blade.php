@@ -143,6 +143,7 @@
                 
         })
       $("#leave").modal('hide');
+      $('#tbody').load(document.URL +  ' #tbody');
     })
  
        

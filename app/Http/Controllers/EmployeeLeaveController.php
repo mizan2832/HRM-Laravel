@@ -9,7 +9,8 @@ class EmployeeLeaveController extends Controller
 {
     public function index() {
         $leave = Leave::all();
-        return view('front.pages.leave.empLeave')->withLeaves($leave);
+        $empleaves = EmployeeLeave::all();
+        return view('front.pages.leave.empLeave')->withLeaves($leave)->withempleaves($empleaves);
     }
 
     public function store(Request $request)
@@ -21,6 +22,15 @@ class EmployeeLeaveController extends Controller
             'leaveType' => 'required',
             'reason' => 'required',
         ]);
-        return response()->json($request);
+
+        $empleaves = new EmployeeLeave;
+        $empleaves->emp_id = $request->emp_id;
+        $empleaves->reason = $request->reason;
+        $empleaves->from = $request->from;
+        $empleaves->to = $request->to;
+        $empleaves->leave_type = $request->leaveType;
+        $empleaves->save();
+
+        return view('front.pages.leave.leave_list', compact('empleaves'))->render();
     }
 }
