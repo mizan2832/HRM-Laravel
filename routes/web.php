@@ -55,7 +55,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::resource('unit','UnitController');
     Route::resource('leave','LeaveController');
     Route::get('emp/leave','EmployeeLeaveController@index')->name('departure.emp');
-    Route::post('emp/leave','EmployeeLeaveController@store')->name('departure.store');
+    Route::post('/emp/leave','EmployeeLeaveController@store')->name('departure.store');
 
 });
 

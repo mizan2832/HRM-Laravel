@@ -13,6 +13,6 @@ class EmployeeLeaveController extends Controller
 
     public function store(Request $request)
     {
-       dd($request);
+        return response()->json($request);
     }
 }

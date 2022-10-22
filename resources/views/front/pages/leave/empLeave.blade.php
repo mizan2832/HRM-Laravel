@@ -124,22 +124,38 @@
 @push('js')
 <script>
 
-  jQuery(function($) {
+
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
       }
+
     });
 
     $('#save').click(function(){
       var emp_id = $('#emp_id').val();
-      alert(emp_id);
-   
+      var from = $('#from').val();
+      var to = $('#to').val();
+      var leaveType = $('#leaveType').val();
+      var reason = $('#reason').val();
+      var approved = $('#approved').val();
+
+      $.ajax({
+              method:'POST',
+              dataType:'JSON',
+              url : '/emp/leave', 
+              data : {"_token": $('#token').val(),emp_id:emp_id,from:from,to:to,leaveType:leaveType,reason:reason,approved:approved},
+              success:function(data){  
+                    console.log(data);
+                }
+                
+        })
+
     })
  
        
 
-  })
+
 </script>
  
 @endpush
