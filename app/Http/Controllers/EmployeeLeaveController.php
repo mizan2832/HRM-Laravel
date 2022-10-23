@@ -9,7 +9,7 @@ class EmployeeLeaveController extends Controller
 {
     public function index() {
         $leave = Leave::all();
-        $empleaves = EmployeeLeave::all();
+        $empleaves = EmployeeLeave::paginate(2);
         return view('front.pages.leave.empLeave')->withLeaves($leave)->withempleaves($empleaves);
     }
 
@@ -31,6 +31,10 @@ class EmployeeLeaveController extends Controller
         $empleaves->leave_type = $request->leaveType;
         $empleaves->save();
 
-        return view('front.pages.leave.leave_list', compact('empleaves'))->render();
+        if($request->ajax()) {
+            $empleaves = EmployeeLeave::paginate(2);
+            return view('front.pages.leave.leave_list', compact('empleaves'))->render();
+        }
+
     }
 }

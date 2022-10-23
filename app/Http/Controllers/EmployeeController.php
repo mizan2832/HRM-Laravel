@@ -113,9 +113,8 @@ class EmployeeController extends Controller
         $name = $request->name;
         $email = $request->email;
         $mobile = $request->mobile;
-
+        
         if($request->ajax()) {
-            
             $list = Employee::getEmployees($name, $email, $mobile);
             return view('front.pages.employee.employee_table', compact('list'))->render();
         }

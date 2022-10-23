@@ -87,27 +87,13 @@
         <input type="text">
       </div>
     </div>
-    <div class="attn-table pt-2">
-      <table style="width: 100%" class="table table-hover table-responsive table-bordered">
-        <thead>
-          <th style="width: 5%">SI</th>
-          <th style="width:20%">Employee Name</th>
-          <th style="width: 10%">From</th>
-          <th style="width: 10%">To</th>
-          <th style="width: 10%">Leave type</th>
-          <th style="width: 10%">Reason</th>
-          <th style="width: 10%">Action</th>
-        </thead>
-        <tbody>
-          @include('front.pages.leave.leave_list')
-        </tbody>
+    
+    <div id="leave_data">
+      @include('front.pages.leave.leave_list')
+    </div>
+        
       </table>
     </div>
-    <div class="container mt-2">
-            <p style="float: left;">Showing 1 to 3 of 10 entities</p>
-            <div class="paginate" style="float: right;">
-            </div>
-      </div>
       <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
     </div>
   </div>
@@ -133,17 +119,16 @@
       var reason = $('#reason').val();
       var approved = $('#approved').val();
       $.ajax({
-              method:'POST',
-              dataType:'JSON',
+              type:'POST',
               url : '/emp/leave', 
               data : {"_token": $('#token').val(),emp_id:emp_id,from:from,to:to,leaveType:leaveType,reason:reason,approved:approved},
               success:function(data){  
-                    console.log(data);
+                    $('#leave_data').html(data);
+                    // console.log(html(data));
                 }
                 
         })
       $("#leave").modal('hide');
-      $('#tbody').load(document.URL +  ' #tbody');
     })
  
        
