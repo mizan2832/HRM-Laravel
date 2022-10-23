@@ -54,8 +54,9 @@ Route::group(['middleware' => 'admin'], function()
     Route::delete('role/delete/{id}','RoleController@destroy')->name('role.destroy');
     Route::resource('unit','UnitController');
     Route::resource('leave','LeaveController');
-    Route::get('emp/leave','EmployeeLeaveController@index')->name('departure.emp');
+    Route::get('/emp/leave','EmployeeLeaveController@index')->name('departure.emp');
     Route::post('/emp/leave','EmployeeLeaveController@store')->name('departure.store');
+    Route::get('/pagination','EmployeeLeaveController@leavePagination')->name('employees.leave');
 
 });
 

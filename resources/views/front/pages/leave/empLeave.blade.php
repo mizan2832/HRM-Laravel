@@ -65,7 +65,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" id="save" class="btn btn-primary">Save</button>
-              
               </div>
           
           </div>
@@ -91,7 +90,6 @@
     <div id="leave_data">
       @include('front.pages.leave.leave_list')
     </div>
-        
       </table>
     </div>
       <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
@@ -102,14 +100,18 @@
 @endsection
 @push('js')
 <script>
-
-
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
       }
-
     });
+
+    $(document).on('click', '.pagination a', function(event) {
+         event.preventDefault();
+         var page = $(this).attr('href').split('page=')[1];
+         getMoreLeaves(page);
+    });
+   
 
     $('#save').click(function(){
       var emp_id = $('#emp_id').val();
@@ -124,12 +126,21 @@
               data : {"_token": $('#token').val(),emp_id:emp_id,from:from,to:to,leaveType:leaveType,reason:reason,approved:approved},
               success:function(data){  
                     $('#leave_data').html(data);
-                    // console.log(html(data));
                 }
-                
         })
       $("#leave").modal('hide');
     })
+
+    function getMoreLeaves(page) {
+      $.ajax({
+              type:'GET',
+              url : "{{ route('employees.leave') }}" + "?page=" + page,
+              success:function(data){  
+                    $('#leave_data').html(data);
+                }
+        })
+        
+    }
  
        
 

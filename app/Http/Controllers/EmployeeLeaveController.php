@@ -37,4 +37,12 @@ class EmployeeLeaveController extends Controller
         }
 
     }
+
+    public function leavePagination(Request $request) {
+        
+        if($request->ajax()) {
+            $empleaves = EmployeeLeave::paginate(2);
+            return view('front.pages.leave.leave_list', compact('empleaves'))->render();
+        }
+    }
 }
