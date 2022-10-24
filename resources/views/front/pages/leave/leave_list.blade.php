@@ -12,7 +12,7 @@
 @foreach ($empleaves as $li)
 
 <tr>
-<td>{{ $li->emp_id }}</td>
+<td>{{$li->name}} ({{ $li->emp_id }})</td>
 <td>{{ $li->from }}</td>
 <td>{{ $li->to }}</td>
 <td>{{ $li->leave_type }}</td>

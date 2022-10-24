@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Leave;
 use App\EmployeeLeave;
+use DB;
 class EmployeeLeaveController extends Controller
 {
     public function index() {
         $leave = Leave::all();
-        $empleaves = EmployeeLeave::paginate(2);
+        $empleaves = DB::table('employee_leaves')
+        ->join('employees','employees.employee_id','=','employee_leaves.emp_id')
+        ->select('employee_leaves.*','employees.name')->paginate(2);
         return view('front.pages.leave.empLeave')->withLeaves($leave)->withempleaves($empleaves);
     }
 
@@ -32,7 +35,11 @@ class EmployeeLeaveController extends Controller
         $empleaves->save();
 
         if($request->ajax()) {
-            $empleaves = EmployeeLeave::paginate(2);
+
+            $empleaves = DB::table('employee_leaves')
+            ->join('employees','employees.employee_id','=','employee_leaves.emp_id')
+            ->select('employee_leaves.*','employees.name')->paginate(2);
+            
             return view('front.pages.leave.leave_list', compact('empleaves'))->render();
         }
 
@@ -41,7 +48,9 @@ class EmployeeLeaveController extends Controller
     public function leavePagination(Request $request) {
         
         if($request->ajax()) {
-            $empleaves = EmployeeLeave::paginate(2);
+            $empleaves = DB::table('employee_leaves')
+            ->join('employees','employees.employee_id','=','employee_leaves.emp_id')
+            ->select('employee_leaves.*','employees.name')->paginate(2);
             return view('front.pages.leave.leave_list', compact('empleaves'))->render();
         }
     }

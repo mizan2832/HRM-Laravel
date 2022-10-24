@@ -112,7 +112,6 @@
          getMoreLeaves(page);
     });
    
-
     $('#save').click(function(){
       var emp_id = $('#emp_id').val();
       var from = $('#from').val();
