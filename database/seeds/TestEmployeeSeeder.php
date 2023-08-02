@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,7 @@ class TestEmployeeSeeder extends Seeder
         $faker = \Faker\Factory::create();
         for($i=0; $i<=20; $i++){
             DB::table('testEmployees')->insert(
-                [ 
+                [
                     "name" => $faker->name(),
                     "email"=> $faker->email(),
                     "designation"=> $faker->randomElement(["op", "admin","manager"]),
@@ -26,6 +27,6 @@ class TestEmployeeSeeder extends Seeder
             );
 
         }
-     
+
     }
 }

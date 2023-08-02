@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Seeder;
 
 class UserInfoSeeder extends Seeder
@@ -17,7 +18,7 @@ class UserInfoSeeder extends Seeder
         //     'email'	   => 'admin@gmail.com',
         //     'role_id'  =>  1,
         //     'password' =>  bcrypt('12345678'),
-            
+
         // ]);
         // DB::table('users')->insert([
         //     'name' 	   => 'Mizanur Rahman',
@@ -25,7 +26,7 @@ class UserInfoSeeder extends Seeder
         //     'role_id'  =>  2,
         //     'email'	   => 'superadmin@gmail.com',
         //     'password' =>  bcrypt('12345678'),
-            
+
         // ]);
         // DB::table('users')->insert([
         //     'name' 	   => 'Farjana',
@@ -33,7 +34,7 @@ class UserInfoSeeder extends Seeder
         //     'role_id'  =>  3,
         //     'email'	   => 'manager@gmail.com',
         //     'password' =>  bcrypt('12345678'),
-            
+
         // ]);
         DB::table('users')->insert([
             'name' 	   => 'Mizan',
@@ -41,7 +42,7 @@ class UserInfoSeeder extends Seeder
             'role_id'  =>  4,
             'email'	   => 'staff@gmail.com',
             'password' =>  bcrypt('12345678'),
-            
+
         ]);
     }
 }
