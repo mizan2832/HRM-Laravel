@@ -12,11 +12,10 @@ use DB;
 use Auth;
 class EmployeeController extends Controller
 {
-  
+
     public function index()
     {
        $list = Employee::paginate(7);
-       
        return view('front.pages.employee.employee_list')->withList($list);
     }
 
@@ -48,7 +47,7 @@ class EmployeeController extends Controller
        $employee->zip_code = $request->zip_code;
        $employee->meritial_status = $request->meritial_status;
 
-       $profile_picture = $request->name . '.' . 
+       $profile_picture = $request->name . '.' .
        $request->file('photo')->getClientOriginalExtension();
 
        $request->file('photo')->move(
@@ -56,26 +55,26 @@ class EmployeeController extends Controller
        );
        $employee->profile_picture = $profile_picture;
 
-       $resume = $request->name . '.' . 
+       $resume = $request->name . '.' .
        $request->file('resume')->getClientOriginalExtension();
        $request->file('resume')->move(
            base_path() . '/public/front/assets/images/resume', $resume
        );
        $employee->resume = $resume;
 
-       $offer = $request->name . '.' . 
+       $offer = $request->name . '.' .
        $request->file('offer')->getClientOriginalExtension();
        $request->file('offer')->move(
            base_path() . '/public/front/assets/images/offer', $offer
        );
        $employee->offer = $offer;
-       $joining_letter = $request->name . '.' . 
+       $joining_letter = $request->name . '.' .
        $request->file('joining_letter')->getClientOriginalExtension();
        $request->file('joining_letter')->move(
            base_path() . '/public/front/assets/images/joining_letter', $joining_letter
        );
        $employee->joining_letter = $joining_letter;
-       $other = $request->name . '.' . 
+       $other = $request->name . '.' .
        $request->file('other')->getClientOriginalExtension();
        $request->file('other')->move(
            base_path() . '/public/front/assets/images/other', $other
@@ -104,7 +103,7 @@ class EmployeeController extends Controller
        $user->role_id = $request->role;
        $user->password = Hash::make($request->password);
        $user->save();
-     
+
        return redirect()->route('employee.index');
 
     }
@@ -113,7 +112,7 @@ class EmployeeController extends Controller
         $name = $request->name;
         $email = $request->email;
         $mobile = $request->mobile;
-        
+
         if($request->ajax()) {
             $list = Employee::getEmployees($name, $email, $mobile);
             return view('front.pages.employee.employee_table', compact('list'))->render();
@@ -122,7 +121,7 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        
+
     }
 
     /**
@@ -133,7 +132,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        
+
     }
 
     /**
@@ -159,5 +158,5 @@ class EmployeeController extends Controller
         //
     }
 
-  
+
 }

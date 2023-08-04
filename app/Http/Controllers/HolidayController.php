@@ -14,11 +14,12 @@ class HolidayController extends Controller
            $holidays = DB::table("holidays")->get();
            return view('front.pages.holiday.index')->withHolidays($holidays);
     }
-    
+
     public function store(Request $request){
         $holiday = new Holiday;
         $holiday->name = $request->holiday_name;
-        $holiday->date = $request->date;
+        $holiday->from = $request->from;
+        $holiday->to = $request->to;
         $holiday->save();
         return response()->json($holiday);
     }
@@ -31,8 +32,9 @@ class HolidayController extends Controller
 
     public function update(Request $request){
         $holiday = Holiday::find($request->id);
-        $holiday->name= $request->holiday_name;
-        $holiday->date= $request->date;
+        $holiday->name = $request->holiday_name;
+        $holiday->from = $request->from;
+        $holiday->to = $request->to;
         $holiday->save();
         return response()->json(array(
                 'holiday' => $holiday,

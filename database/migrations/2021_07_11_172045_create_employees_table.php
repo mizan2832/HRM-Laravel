@@ -52,7 +52,6 @@ class CreateEmployeesTable extends Migration
             $table->string('account_number');
             $table->string('bank_name');
             $table->string('branch_name');
-            
             $table->timestamps();
         });
     }
