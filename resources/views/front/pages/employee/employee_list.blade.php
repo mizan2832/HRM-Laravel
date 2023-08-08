@@ -34,11 +34,11 @@
         });
 
         $('#email').on('keyup', function (e) {
-					getMoreUsers();
+		  getMoreUsers();
         });
         $('#mobile').on('keyup', function (e) {
-					getMoreUsers();
-				});
+			getMoreUsers();
+		});
       function getMoreUsers(page) {
 
           var name = $('#name').val();
@@ -60,7 +60,7 @@
           }
 
 
-        
+
     </script>
 @endpush
 

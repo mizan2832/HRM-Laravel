@@ -5,8 +5,8 @@
         <div id="sidebar-menu">
 
             <ul>
-                
-                
+
+
                 @if (Auth::user()->role->name == 'Admin')
                 <li class="submenu">
                     <a class="active" href="index.html">
@@ -71,7 +71,7 @@
                         <span> Sections </span>
                     </a>
                 </li>
-                
+
                 <li class="submenu">
                     <a id="tables" href="#">
                         <i class="fas fa-strikethrough"></i>

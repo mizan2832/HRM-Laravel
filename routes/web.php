@@ -46,6 +46,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::post('attendance/store/csv',[DailyAttendanceController::class,'storeCsv'])->name('attendance.csv');
     Route::get('holiday',[HolidayController::class,'index'])->name('holiday');
     Route::post('/holiday/store',[HolidayController::class,'store']);
+    Route::get('/holiday/list',[HolidayController::class,'list']);
     Route::get('holiday/edit/{id}',[HolidayController::class,'edit']);
     Route::post('holiday/update/{id}',[HolidayController::class,'update']);
     Route::delete('holiday/delete/{id}',[HolidayController::class,'delete']);
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('/emp/leave',[EmployeeLeaveController::class,'index'])->name('departure.emp');
     Route::post('/emp/leave',[EmployeeLeaveController::class,'store'])->name('departure.store');
     Route::get('/pagination',[EmployeeLeaveController::class,'leavePagination'])->name('employees.leave');
+
 
 });
 

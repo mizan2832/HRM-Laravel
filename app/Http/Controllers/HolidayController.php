@@ -9,12 +9,15 @@ class HolidayController extends Controller
 {
     public function index(Request $request)
     {
-        //    $year = date("y");
-        //    $month = date("m");
            $holidays = DB::table("holidays")->get();
            return view('front.pages.holiday.index')->withHolidays($holidays);
     }
 
+    public function list() {
+        $holidays = DB::table("holidays")->get();
+        return response()->json($holiday);
+
+    }
     public function store(Request $request){
         $holiday = new Holiday;
         $holiday->name = $request->holiday_name;

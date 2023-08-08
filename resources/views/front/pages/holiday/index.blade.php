@@ -115,6 +115,22 @@
             }
             });
         });
+  function showAllHolidays()
+  {
+    url = "/holiday/list";
+
+    $.ajax({
+                method:'GET',
+                dataType:'JSON',
+                url : url,
+                success:function(response){
+                  console.log(response);
+
+            }
+        })
+
+
+  }
 
   $("#add").click(function(e){
     e.preventDefault();
@@ -136,32 +152,28 @@
           url: url,
           data:data,
           success:function(data){
-                if(data.update=='update'){
-                  const holi_name = document.querySelector(`.holi_name-${data.holiday.id}`);
-                  holi_name.textContent = data.holiday.name;
-                  const holi_date_from = document.querySelector(`".holi_date_from-${data.holiday.id}"`);
-                  holi_date_from.textContent = data.holiday.from;
-                  const holi_date_to = document.querySelector(`".holi_date_to-${data.holiday.id}"`);
-                  holi_date_to.textContent = data.holiday.to;
-
-                }
-                else{
-                    var name = data.name;
-                    var from = data.from;
-                    var to = data.to;
-                    var data = "<tr>";
-                       data += "<td class='holi_name-"+data.id+"'>"+name+"</td>";
-                       data += "<td class='holi_date_from-"+data.id+"'>"+from+"</td>";
-                       data += "<td class='holi_date_to-"+data.id+"'>"+to+"</td>";
-                       data += "<td> <a href='javascript:void(0)'  class='edit_holiday' data-id='"+data.id+"'><i class='far fa-edit'></i></a> <a href='javascript:void(0)' class='delete-holiday' data-id='"+data.id+ "'>  <i class='fas fa-trash-alt'></i></a></td></tr>";
+              d_val = data;
 
 
-                     $(".holiday_t tbody").append(data);
+                    showAllHolidays();
+
+                    // var name = d_val.name;
+                    // var from = d_val.from;
+                    // var to = d_val.to;
+                    // var tr = "<tr>";
+                    //     tr += "<td class='holi_name-"+d_val.id+"'>"+name+"</td>";
+                    //     tr += "<td class='holi_date_from-"+d_val.id+"'>"+from+"</td>";
+                    //     tr += "<td class='holi_date_to-"+d_val.id+"'>"+to+"</td>";
+                    //     tr += "<td> <a href='javascript:void(0)'  class='edit_holiday' data-id='"+d_val.id+"'><i class='far fa-edit'></i></a> <a href='javascript:void(0)' class='delete-holiday' data-id='"+d_val.id+ "'>  <i class='fas fa-trash-alt'></i></a></td></tr>";
+
+                    //     console.log(tr);
+
+                    //  $(".holiday_t tbody").append(tr);
                      $("#holiday_name").val("");
                      $("#from").val("");
                      $("#to").val("");
 
-                }
+
 
               }
           })
@@ -172,6 +184,7 @@
     $("#add").text('Update');
     $("#add").attr("id","update");
     var id = $(this).attr('data-id');
+    console.log(id);
     $("#update_id").val(id);
     $.ajax({
                 method:'GET',
@@ -191,17 +204,17 @@
       $(".delete-holiday").click(function(){
         var id = $(this).attr('data-id');
         var ro = $(".data-id-"+id);
-        console.log(ro);
-        // $.ajax({
-        //         method:'DELETE',
-        //         dataType:'JSON',
-        //         data : {"_token": $('#token').val(),id:id},
-        //         url : '/holiday/delete/'+id,
-        //         success:function(data){
-        //           $(".data-id-"+id).remove();
+        console.log(id);
+        $.ajax({
+                method:'DELETE',
+                dataType:'JSON',
+                data : {"_token": $('#token').val(),id:id},
+                url : '/holiday/delete/'+id,
+                success:function(data){
+                  window.reload();
 
-        //     }
-        // })
+            }
+        })
       });
 
 
