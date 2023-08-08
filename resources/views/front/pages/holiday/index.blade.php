@@ -85,6 +85,12 @@
 @push('js')
 <script>
 
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
 
         let startYear = 1800;
         let endYear = new Date().getFullYear();
@@ -117,18 +123,19 @@
         });
   function showAllHolidays()
   {
-    url = "/holiday/list";
-
     $.ajax({
-                method:'GET',
+                method:"GET",
                 dataType:'JSON',
-                url : url,
+                url: "{{ route('holiday.list') }}",
                 success:function(response){
-                  console.log(response);
+
+                  for (let index = 0; index < response.length; index++) {
+                    const element = array[index];
+
+                  }
 
             }
         })
-
 
   }
 

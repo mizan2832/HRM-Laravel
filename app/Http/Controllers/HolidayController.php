@@ -15,7 +15,7 @@ class HolidayController extends Controller
 
     public function list() {
         $holidays = DB::table("holidays")->get();
-        return response()->json($holiday);
+        return response()->json($holidays);
 
     }
     public function store(Request $request){

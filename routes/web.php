@@ -46,7 +46,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::post('attendance/store/csv',[DailyAttendanceController::class,'storeCsv'])->name('attendance.csv');
     Route::get('holiday',[HolidayController::class,'index'])->name('holiday');
     Route::post('/holiday/store',[HolidayController::class,'store']);
-    Route::get('/holiday/list',[HolidayController::class,'list']);
+    Route::get('holiday/list',[HolidayController::class,'list'])->name('holiday.list');
     Route::get('holiday/edit/{id}',[HolidayController::class,'edit']);
     Route::post('holiday/update/{id}',[HolidayController::class,'update']);
     Route::delete('holiday/delete/{id}',[HolidayController::class,'delete']);
