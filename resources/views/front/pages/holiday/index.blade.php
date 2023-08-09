@@ -34,7 +34,7 @@
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="table_body">
                        @foreach ($holidays as $day)
                         <tr>
                            <td class="holi_name-{{$day->id}}">{{$day->name}}</td>
@@ -127,13 +127,23 @@
                 method:"GET",
                 dataType:'JSON',
                 url: "{{ route('holiday.list') }}",
-                success:function(response){
 
-                  for (let index = 0; index < response.length; index++) {
-                    const element = array[index];
+                success:function(data){
+                    $(".table_body").html("");
+                    for (let i = 0; i < data.length; i++) {
+                            let editbtn = " <a href='javascript:void(0)'  class='edit_holiday' ";
+                               editbtn += " data-id="  +data[i].id+ "><i class='far fa-edit'></i></a>";
+                            let deletebtn = " <a href='javascript:void(0)'  class='delete_holiday' " ;
+                               deletebtn += " data-id="  +data[i].id+ "><i class='fas fa-trash-alt'></i></a>";
+                            let holidayRow = "<tr>";
+                                holidayRow += "<td>" + data[i].name + "<td>";
+                                holidayRow += "<td>" + data[i].from + "<td>";
+                                holidayRow += "<td>" + data[i].to + "<td>";
+                                holidayRow += "<td>" + editbtn + deletebtn  + "<td>";
+                                holidayRow += "</tr>";
+                                $('.table_body').append(holidayRow);
 
-                  }
-
+                            }
             }
         })
 
@@ -159,28 +169,10 @@
           url: url,
           data:data,
           success:function(data){
-              d_val = data;
-
-
                     showAllHolidays();
-
-                    // var name = d_val.name;
-                    // var from = d_val.from;
-                    // var to = d_val.to;
-                    // var tr = "<tr>";
-                    //     tr += "<td class='holi_name-"+d_val.id+"'>"+name+"</td>";
-                    //     tr += "<td class='holi_date_from-"+d_val.id+"'>"+from+"</td>";
-                    //     tr += "<td class='holi_date_to-"+d_val.id+"'>"+to+"</td>";
-                    //     tr += "<td> <a href='javascript:void(0)'  class='edit_holiday' data-id='"+d_val.id+"'><i class='far fa-edit'></i></a> <a href='javascript:void(0)' class='delete-holiday' data-id='"+d_val.id+ "'>  <i class='fas fa-trash-alt'></i></a></td></tr>";
-
-                    //     console.log(tr);
-
-                    //  $(".holiday_t tbody").append(tr);
                      $("#holiday_name").val("");
                      $("#from").val("");
                      $("#to").val("");
-
-
 
               }
           })
@@ -210,7 +202,6 @@
 
       $(".delete-holiday").click(function(){
         var id = $(this).attr('data-id');
-        var ro = $(".data-id-"+id);
         console.log(id);
         $.ajax({
                 method:'DELETE',
