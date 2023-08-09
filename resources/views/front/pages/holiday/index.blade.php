@@ -140,6 +140,7 @@
                                 holidayRow += "<td>" + data[i].from + "</td>";
                                 holidayRow += "<td>" + data[i].to + "</td>";
                                 holidayRow += "<td>" + editbtn + deletebtn  + "</td>";
+                                
                                 holidayRow += "</tr>";
                                 $('.holiday_t tbody').append(holidayRow);
 
