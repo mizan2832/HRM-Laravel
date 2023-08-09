@@ -30,7 +30,8 @@
                         <thead>
                           <tr>
                             <th>Holiday Name</th>
-                            <th>Date</th>
+                            <th>From</th>
+                            <th>To</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -40,7 +41,7 @@
                            <td class="holi_name-{{$day->id}}">{{$day->name}}</td>
                            <td class="holi_date-{{$day->id}}">{{$day->from}}</td>
                            <td class="holi_date-{{$day->id}}">{{$day->to}}</td>
-                           <td><a href="javascript:void(0)"  class="edit_holiday" data-id="{{ $day->id }}"><i class="far fa-edit"></i></a> <a href="javascript:void(0)" class='delete-holiday' data-id="{{ $day->id }}">  <i class="fas fa-trash-alt"></i></a> </td>
+                           <td><button  onclick='editHoliday({{ $day->id }})'  data-id="{{ $day->id }}"><i class="far fa-edit"></i></button> <button onclick='deleteHoliday({{ $day->id }})' data-id="{{ $day->id }}">  <i class="fas fa-trash-alt"></i></button> </td>
                         </tr>
                        @endforeach
                         </tbody>
@@ -91,7 +92,6 @@
             }
         });
 
-
         let startYear = 1800;
         let endYear = new Date().getFullYear();
         let months = ["January","February","March","April","Jun","July","Augest","September","October","Novermber","December"];
@@ -129,22 +129,22 @@
                 url: "{{ route('holiday.list') }}",
 
                 success:function(data){
-                    $(".table_body").html("");
+                    $(".holiday_t tbody").html("");
                     for (let i = 0; i < data.length; i++) {
-                            let editbtn = " <a href='javascript:void(0)'  class='edit_holiday' ";
-                               editbtn += " data-id="  +data[i].id+ "><i class='far fa-edit'></i></a>";
-                            let deletebtn = " <a href='javascript:void(0)'  class='delete_holiday' " ;
-                               deletebtn += " data-id="  +data[i].id+ "><i class='fas fa-trash-alt'></i></a>";
+                            let editbtn = " <button";
+                               editbtn += " data-id="  +data[i].id+ " onclick='editHoliday("+data[i].id+")' ><i class='far fa-edit'></i></button>";
+                            let deletebtn = " <button class='delete_holiday' " ;
+                               deletebtn += " data-id="  +data[i].id+ " onclick='deleteHoliday("+data[i].id+")' ><i class='fas fa-trash-alt'></i></button>";
                             let holidayRow = "<tr>";
-                                holidayRow += "<td>" + data[i].name + "<td>";
-                                holidayRow += "<td>" + data[i].from + "<td>";
-                                holidayRow += "<td>" + data[i].to + "<td>";
-                                holidayRow += "<td>" + editbtn + deletebtn  + "<td>";
+                                holidayRow += "<td>" + data[i].name + "</td>";
+                                holidayRow += "<td>" + data[i].from + "</td>";
+                                holidayRow += "<td>" + data[i].to + "</td>";
+                                holidayRow += "<td>" + editbtn + deletebtn  + "</td>";
                                 holidayRow += "</tr>";
-                                $('.table_body').append(holidayRow);
+                                $('.holiday_t tbody').append(holidayRow);
 
                             }
-            }
+                         }
         })
 
   }
@@ -177,43 +177,38 @@
               }
           })
   });
-
-  $(".edit_holiday").click(function(e){
-    e.preventDefault();
-    $("#add").text('Update');
-    $("#add").attr("id","update");
-    var id = $(this).attr('data-id');
-    console.log(id);
-    $("#update_id").val(id);
-    $.ajax({
-                method:'GET',
-                dataType:'JSON',
-                data : {data:id},
-                url : '/holiday/edit/'+id,
-                success:function(data){
-                    $('#holiday_name').val(data.name);
-                    $('#from').val(data.from);
-                    $('#to').val(data.to);
-                    // console.log(data);
-            }
-        })
-
-  });
-
-      $(".delete-holiday").click(function(){
-        var id = $(this).attr('data-id');
+    function editHoliday(id){
+        $("#add").text('Update');
+        $("#add").attr("id","update");
         console.log(id);
+        $("#update_id").val(id);
         $.ajax({
+                    method:'GET',
+                    dataType:'JSON',
+                    data : {data:id},
+                    url : '/holiday/edit/'+id,
+                    success:function(data){
+                        $('#holiday_name').val(data.name);
+                        $('#from').val(data.from);
+                        $('#to').val(data.to);
+                        // console.log(data);
+                }
+            })
+
+    }
+
+ function deleteHoliday(id){
+    $.ajax({
                 method:'DELETE',
                 dataType:'JSON',
                 data : {"_token": $('#token').val(),id:id},
                 url : '/holiday/delete/'+id,
                 success:function(data){
-                  window.reload();
-
+                    showAllHolidays();
             }
         })
-      });
+ }
+
 
 
 
