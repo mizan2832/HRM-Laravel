@@ -97,12 +97,6 @@ class EmployeeController extends Controller
        $employee->bank_name = $request->bank_name;
        $employee->branch_name = $request->branch;
        $employee->save();
-       $user->name = $request->name;
-       $user->username = 'Staff';
-       $user->email = $request->email;
-       $user->role_id = $request->role;
-       $user->password = Hash::make($request->password);
-       $user->save();
 
        return redirect()->route('employee.index');
 

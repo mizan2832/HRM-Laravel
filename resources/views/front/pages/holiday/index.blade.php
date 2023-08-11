@@ -13,6 +13,8 @@
         display: none;
     }
   </style>
+  <link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @endpush
 
 @section('content')
@@ -86,16 +88,16 @@
 @push('js')
 <script>
 
+
+
     $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         let startYear = 1800;
         let endYear = new Date().getFullYear();
         let months = ["January","February","March","April","Jun","July","Augest","September","October","Novermber","December"];
-
         for (i = endYear; i > startYear; i--)
         {
           $('#year').append($('<option />').val(i).html(i));
@@ -103,10 +105,9 @@
         for (let index = 0; index < months.length; index++) {
           $('#month').append($('<option />').val(index).html(months[index]));
         }
-
         $("#search").click(function(){
           let year = $("#year").val();
-          let month = $("#month").val();
+        let month = $("#month").val();
         });
 
 
@@ -127,7 +128,6 @@
                 method:"GET",
                 dataType:'JSON',
                 url: "{{ route('holiday.list') }}",
-
                 success:function(data){
                     $(".holiday_t tbody").html("");
                     for (let i = 0; i < data.length; i++) {
@@ -140,11 +140,12 @@
                                 holidayRow += "<td>" + data[i].from + "</td>";
                                 holidayRow += "<td>" + data[i].to + "</td>";
                                 holidayRow += "<td>" + editbtn + deletebtn  + "</td>";
-                                
+
                                 holidayRow += "</tr>";
                                 $('.holiday_t tbody').append(holidayRow);
 
                             }
+
                          }
         })
 
@@ -181,7 +182,6 @@
     function editHoliday(id){
         $("#add").text('Update');
         $("#add").attr("id","update");
-        console.log(id);
         $("#update_id").val(id);
         $.ajax({
                     method:'GET',
@@ -192,7 +192,8 @@
                         $('#holiday_name').val(data.name);
                         $('#from').val(data.from);
                         $('#to').val(data.to);
-                        // console.log(data);
+
+
                 }
             })
 
@@ -206,6 +207,7 @@
                 url : '/holiday/delete/'+id,
                 success:function(data){
                     showAllHolidays();
+                  
             }
         })
  }

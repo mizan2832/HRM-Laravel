@@ -33,6 +33,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="mother_name" class="col-sm-3 col-form-label">Mother N.</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" value="{{ old('mother_name') }}" name="mother_name" class="form-control "
+                                        data-parsley-required-message="Mother name is required.
+                                    " data-parsley-required="true" id="mother_name" >
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="gender" class="col-sm-3 col-form-label">Gender</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" data-parsley-required-message="Gender is required.
@@ -55,19 +64,11 @@
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="phone1" value="{{ old('phone1') }}" name="phone1"
                                         data-parsley-type="number"  data-parsley-required="true"
-                                        data-parsley-required-message="Phone number is required." 
+                                        data-parsley-required-message="Phone number is required."
                                         >
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="phone2" class="col-sm-3 col-form-label">Phone 2</label>
-                                <div class="col-sm-9">
-                                    <input type="text" data-parsley-type="number" 
-                                         data-parsley-required="true" class="form-control" id="phone2"
-                                        value="{{ old('phone2') }}" name="phone2" data-parsley-required-message="Phone number is required.
-                                    " data-parsley-required="true" >
-                                </div>
-                            </div>
+
                             <div class="form-group row">
                                 <label for="local_address" class="col-sm-3 col-form-label">Local Address</label>
                                 <div class="col-sm-9">
@@ -91,6 +92,15 @@
                                 <div class="col-sm-9">
                                     <input type="text" data-parsley-required-message="Nationality is required.
                                     " data-parsley-required="true" class="form-control" id="nationality" value="{{ old('nationality') }}" name="nationality"
+                                        >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nid_number" data-parsley-required="true"
+                                    class="col-sm-3 col-form-label">NID Number</label>
+                                <div class="col-sm-9">
+                                    <input type="text" data-parsley-required-message="nid_number is required.
+                                    " data-parsley-required="true" class="form-control" id="nid_number" value="{{ old('nid_number') }}" name="nid_number"
                                         >
                                 </div>
                             </div>
@@ -193,49 +203,7 @@
 
                 </div>
                 <div class="col-md-6 col-sm-6">
-                    <div class="card per-del">
-                        <div class="card-header" style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">
-                            Account Login
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-3 col-form-label">Email</label>
-                                <div class="col-sm-9">
-                                    <input type="email" value="{{ old('email') }}" name="email" data-parsley-required-message="Email is required.
-                            "  data-parsley-type="email" class="form-control" id="email"
-                                        >
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="role" class="col-sm-3 col-form-label">Role</label>
-                                <div class="col-sm-9">
-                                    <select value="{{ old('role') }}" name="role"
-                              id="role" class="form-control">
-                              @foreach ($roles as $role)
-                                  <option value="{{$role->id}}">{{$role->name}}</option>
-                              @endforeach
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-sm-3 col-form-label">Password</label>
-                                <div class="col-sm-9">
-                                    <input type="password" id="pass" 
-                                        data-parsley-required-message="Please enter password" value="{{ old('password') }}" name="password"
-                                        class="form-control" id="passwordCheck" >
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-sm-3 col-form-label">Confirm Password</label>
-                                <div class="col-sm-9">
-                                    <input type="password" value="{{ old('password_confirmation') }}" name="password_confirmation" class="form-control" id="password"
-                                        data-parsley-required-message="Please re-enter your new password."
-                                        >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="card per-del mt-2 ">
                         <div class="card-header" style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">
                             Employee Details
@@ -247,7 +215,7 @@
                                     <input type="text" value="{{ old('employee_id') }}" name="employee_id" class="form-control" id="employee_id"
                                          placeholder="Auto Gengerated">
                                 </div>
-                            </div>
+                             </div>
                             <div class="form-group row">
                                 <label for="department" class="col-sm-3 col-form-label">Department</label>
                                 <div class="col-sm-9">
@@ -257,6 +225,51 @@
                                         <option value="2">Store</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="line" class="col-sm-3 col-form-label">Line</label>
+                                <div class="col-sm-9">
+                                    <select value="{{ old('line') }}" name="line" id="line"  class="form-control">
+                                        <option>Select a line</option>
+                                        <option value="a">A</option>
+                                        <option value="b">B</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="grade" class="col-sm-3 col-form-label">Grade</label>
+                                <div class="col-sm-9">
+                                    <select value="{{ old('grade') }}" name="grade" id="grade"  class="form-control">
+                                        <option>Select Grade</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="designation" class="col-sm-3 col-form-label">Designation</label>
+                                <div class="col-sm-9">
+                                    <select value="{{ old('designation') }}" name="designation" id="designation"  class="form-control">
+                                        <option>Select Designation</option>
+                                        <option value="op">Operator</option>
+                                        <option value="pack">packing man</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="blood_group" class="col-sm-3 col-form-label">Blood Group</label>
+                                <div class="col-sm-9">
+                                    <select value="{{ old('blood_group') }}" name="blood_group" id="blood_group"  class="form-control">
+                                        <option>Select Group</option>
+                                        <option value="a">A+</option>
+                                        <option value="b+">B+</option>
+                                        <option value="b-">B-</option>
+                                    </select>
+                                </div>
+
                             </div>
                             <div class="form-group row">
                                 <label for="joining_date" class="col-sm-3 col-form-label">Date of joining</label>
@@ -336,73 +349,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Food Allowance</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input type="number" ata-parsley-required-message="HR is required.
+                               " data-parsley-required="true" min=0 oninput="validity.valid||(value='');" value="{{ old('food_allowance') }}" name="food_allowance"
+                                            class="food_allowance form-control">
+                                    </div>
+                                </div>
+                            </div>
 
 
                         </div>
                     </div>
-                    <div class="card per-del">
-                        <div class="card-header">
-                            Deduction
-                        </div>
-                        <div class="card-body wrapper">
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Tax</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        <input type="number" value="{{ old('tax') }}" name="tax" class="minus_amount form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Absent Fee</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        <input type="number" value="{{ old('absent') }}" name="absent" class="minus_amount form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">
-                                    <pre></pre>Meal Cost
-                                </label>
-                                <div class="col-sm-9">
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        <input type="number" value="{{ old('meal') }}" name="meal" class="minus_amount
-                                 form-control">
-                                    </div>
-                                </div>
-                            </div>
 
-
-
-                        </div>
-                    </div>
-                    <div class="card per-del">
-                        <div class="card-body dedu">
-
-                            <div class="form-group row">
-                                <label for="total_salary" class="col-sm-3 col-form-label">Total Salary</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        <input type="text" value="{{ old('total_salary') }}" name="total_salary" class="form-control total_salary">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                     <div class="card per-del mt-2">
                         <div class="card-header" style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">
                             Bank Account Details
@@ -432,11 +396,42 @@
                                         >
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="card per-del mt-2">
+                        <div class="card-header" style="background-color: #5C6BC0;color:#ffffff;font-size:1.2em">
+                            Nominee Details
+                        </div>
+                        <div class="card-body">
                             <div class="form-group row">
-                                <label for="Branch" class="col-sm-3 col-form-label">Branch</label>
+                                <label for="nominee name" class="col-sm-3 col-form-label">Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" ata-parsley-required-message="Branch is required.
-                            " data-parsley-required="true" class="form-control" id="branch" value="{{ old('branch') }}" name="branch"
+                                    <input type="text" ata-parsley-required-message="Nominee Name is required.
+                            " data-parsley-required="true" class="form-control" id="nominee_name" value="{{ old('nominee_name') }}" name="nominee_name"
+                                        >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="mobile number" class="col-sm-3 col-form-label">Number</label>
+                                <div class="col-sm-9">
+                                    <input type="text" ata-parsley-required-message="Mobile Number is required.
+                            " data-parsley-required="true" class="form-control" id="mobile_number" value="{{ old('mobile_number') }}" name="mobile_number"
+                                        >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="relation" class="col-sm-3 col-form-label">Relation</label>
+                                <div class="col-sm-9">
+                                    <input type="text" ata-parsley-required-message="Relation is required.
+                            " data-parsley-required="true" class="form-control" id="relation" value="{{ old('relation') }}" name="relation"
+                                        >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nid_copy" class="col-sm-3 col-form-label">Nid</label>
+                                <div class="col-sm-9">
+                                    <input type="file"  class="form-control" id="nid_copy" value="{{ old('nid_copy') }}" name="nid_copy"
                                         >
                                 </div>
                             </div>
@@ -450,90 +445,7 @@
     </div>
 @endsection
 @push('js')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var maxField = 10; //Input fields increment limitation
-            var addButton = $('.add_button'); //Add button selector
-            var wrapper = $('.wrapper');
-            var x = 0; //Initial field counter is 1
-            var x = 1; //Initial field counter is 1
-            var wrapper = $('.wrapper');
-            //Once add button is clicked
 
-            $(addButton).click(function() {
-                //Check maximum number of input fields
-                if (x < maxField) {
-                    x++; //Increment field counter
-                    $(wrapper).append(
-                        '<div class="form-group rem row"><select name="salary[]" ' +
-                        'class="col-sm-4 ml-2"  id="' + x + '">' +
-                        '<option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text"' +
-                         'name="amount[]" class="form-control amount"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="remove" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'
-
-                    ); //Add field html
-                }
-                sumIt();
-            });
-
-            //Once remove button is clicked
-            $(wrapper).on('click', '.remove', function(e) {
-                $(this).parents('.rem').remove(); //Remove field html
-                x--; //Decrement field counter
-                sumIt();
-            });
-            var y = 1; //Initial field counter is 1
-
-            $('.add_deduction').click(function() {
-                if (y < maxField) {
-                    y++; //Increment field counter
-                    $('.dedu').append(
-                        '<div class="form-group deduct row"><select name=' +
-                        '"deduct_type' + y +
-                        '" class="col-sm-4 ml-2" id=""><option value="hr">House</option><option value="hr">Transportation</option> <option value="hr">Telephone</option></select><div class="col-sm-4"><div class="input-group input-group-sm"><div class="input-group-prepend"><span class="input-group-text">$</span>  </div><input type="text" ' +
-                        '  name="deduct_amount' + y +
-                        '" class="minus_amount form-control"> </div></div><div class="col-sm-2"> <button href="javascript:void(0);" class="deduction" title="Add field"><i class="fas fa-minus"></i></button> </div></div>'
-                        );
-
-                }
-            });
-            $('.dedu').on('click', '.deduction', function(e) {
-                $(this).parents('.deduct').remove(); //Remove field html
-                x--; //Decrement field counter                 
-            });
-        });
-        $(document).ready(function() {
-            $(document).on("keyup", ".amount", calculateSum);
-            $(document).on("keyup", ".minus_amount", calculateSum);
-            $(document).on("click", ".deduction", calculateSum);
-            $(document).on("click", ".remove", calculateSum);
-        });
-
-        function calculateSum() {
-
-            var sum = 0;
-            var deduction = 0;
-            $(".amount").each(function() {
-
-                if (!isNaN(this.value) && this.value.length != 0) {
-                    sum += parseFloat(this.value);
-                }
-
-            });
-            $(".minus_amount").each(function() {
-
-                if (!isNaN(this.value) && this.value.length != 0) {
-                    deduction += parseFloat(this.value);
-                }
-
-            });
-            sum = sum - deduction;
-            $(".total_salary").val(sum.toFixed(2));
-        }
-        $(document).ready(function() {
-
-            $('#validate_form').parsley();
-        });
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.3.4/parsley.min.js"></script>
 
 

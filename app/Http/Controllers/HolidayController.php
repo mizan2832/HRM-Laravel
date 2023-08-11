@@ -42,6 +42,7 @@ class HolidayController extends Controller
         return response()->json(array(
                 'holiday' => $holiday,
                 'update' => $request->update,
+                ''
       ));
 
     }
